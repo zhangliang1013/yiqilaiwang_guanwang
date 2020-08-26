@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <link rel="stylesheet" href="./lib/assets/styles/normalize.min.css" />
+    <link href="./lib/external/sweet-alert/css/sweet-alert.min.css" rel="stylesheet" type="text/css" />
+    <link href="./lib/external/toastr/css/toastr.min.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="./lib/assets/styles/beastBase.css" />
+    <link type="text/css" rel="stylesheet" href="./lib/styles/beastCommon.css">
+    <link type="text/css" rel="stylesheet" href="./lib/styles/zcbRemark.css">
+    <title>关于我们</title>
+    <style>
+        .bhjsBanner {
+            width: 100%;
+            /* height: 110px; */
+            /* background-color: #BACFD6; */
+            /* background-image: url(./lib/assets/images/gsl/home-bg.png); */
+            background-size: cover;
+            background-position: center 56%;
+            border-radius: 8px;
+            -webkit-border-radius: 8px;
+            /* margin-bottom: 10px; */
+            position: relative;
+            text-align: center;
+        }
+        
+        .bhjsBanner .tl-logo {
+            height: 72px;
+            width: auto;
+            margin: 15px auto 5px;
+            left: 50%;
+            text-align: center;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-page-head">
+        <div class="app-page-head-hd">
+            <div class="app-page-head-btn">
+                <div class="btn-icon-back" id="page-back-btn" role="button">
+                    <img src="./lib/images/back.png" alt="">
+                </div>
+                <div class="btn-icon-close" id="page-close-btn" role="button">
+                    <img src="./lib/images/close.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="app-page-head-bd">
+            <div class="app-page-head-title" id="pageTitle">
+                关于我们
+            </div>
+        </div>
+    </div>
+
+    <div class="p-contain clearfix">
+        <section class="col-xs-12 nav-tab">
+
+            <div class="col-xs-4 active" data-tab="#bhjsPanel">
+                <span>本委介绍</span>
+            </div>
+
+            <div class="col-xs-4" data-tab="#jgxxPanel">
+                <span>机构信息</span>
+            </div>
+
+            <div class="col-xs-4" data-tab="#lxwmPanel">
+                <span>联系我们</span>
+            </div>
+        </section>
+
+        <section class="nav-tab-content" id="showContain">
+            <script id="tplContain" type='text/ractive'>
+            {{# detail}}
+            {{#if intro}}
+            <!-- 本委介绍 -->
+            <section class="nav-tab-panel active" id="bhjsPanel">
+                <section class="col-xs-12 list-box">
+                    <div class="col-xs-12 b-body pt0">
+                        <div class="bhjsBanner">
+                            <img class="tl-logo" src="./lib/assets/images/zcb/LOGO@3x.png" alt="工商联" />
+                        </div>
+                        <div id="bhjsContent" class="p10" style="font-size: 14px;line-height: 26px;">
+                            <p class="pb15" style="text-indent:0.8em;">{{{intro}}}</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            {{/if}} 
+            <!-- 机构信息 -->
+            <section class="nav-tab-panel" id="jgxxPanel">
+                <section class="col-xs-12 list-box">
+                    <div class="col-xs-12 b-body p10" style="background:#fff">
+                        <div class="bhjsBanner">
+                            <img class="tl-logo" style="margin-top:5px" src="./lib/assets/images/zcb/LOGO@3x.png" alt="工商联" />
+                        </div>
+                        <div id="bhjsContent" class="p10" style="font-size: 15px;line-height: 26px;text-align: center;color:#2168EB;font-weight:500;">
+                            <p class="pb20" data-jump-url="./zcbLeader.html" data-url-params="orgId={{orgId}}"><span>机构领导</span> <img style="width: auto;height: 13px;margin: 0px 2px;" src="./lib/assets/images/icon/i-arrow-r.png" alt=""></p>
+                            <p class="pb20" data-jump-url="./zcbDepartment.html" data-url-params="orgId={{orgId}}&detail={{deptList}}&index=0"><span>仲裁发展处</span> <img style="width: auto;height: 13px;margin: 0px 2px;" src="./lib/assets/images/icon/i-arrow-r.png" alt=""></p>
+                            <p class="pb20" data-jump-url="./zcbDepartment.html" data-url-params="orgId={{orgId}}&detail={{deptList}}&index=1"><span>涉外仲裁处</span> <img style="width: auto;height: 13px;margin: 0px 2px;" src="./lib/assets/images/icon/i-arrow-r.png" alt=""></p>
+                            <p class="pb20" data-jump-url="./zcbDepartment.html" data-url-params="orgId={{orgId}}&detail={{deptList}}&index=2"><span>仲裁二处</span> <img style="width: auto;height: 13px;margin: 0px 2px;" src="./lib/assets/images/icon/i-arrow-r.png" alt=""></p>
+                            <p class="pb20" data-jump-url="./zcbDepartment.html" data-url-params="orgId={{orgId}}&detail={{deptList}}&index=3"><span>仲裁一处</span> <img style="width: auto;height: 13px;margin: 0px 2px;" src="./lib/assets/images/icon/i-arrow-r.png" alt=""></p>
+                            <p class="pb20" data-jump-url="./zcbDepartment.html" data-url-params="orgId={{orgId}}&detail={{deptList}}&index=4"><span>秘书处</span> <img style="width: auto;height: 13px;margin: 0px 2px;" src="./lib/assets/images/icon/i-arrow-r.png" alt=""></p>
+                            <p class="pb20" data-jump-url="./zcbDepartment.html" data-url-params="orgId={{orgId}}&detail={{deptList}}&index=5"><span>案件处理处</span> <img style="width: auto;height: 13px;margin: 0px 2px;" src="./lib/assets/images/icon/i-arrow-r.png" alt=""></p>
+                            <p class="" data-jump-url="./zcbDepartment.html" data-url-params="orgId={{orgId}}&detail={{deptList}}&index=6"><span>青岛仲裁院委会办公室</span> <img style="width: auto;height: 13px;margin: 0px 2px;" src="./lib/assets/images/icon/i-arrow-r.png" alt=""></p>
+                        </div>
+                    </div>    
+                </section>
+            </section>
+            {{#if intro}}
+            <!-- 联系我们 -->
+            <section class="nav-tab-panel" id="lxwmPanel">
+                <section class="col-xs-12 list-box">
+                    <div class="col-xs-12 b-body pt0" style="background:#F8F9FA">
+                        <div id="bhjsContent" class="p10" style="font-size: 14px;line-height: 26px;background:#fff">
+                            <p>{{{contactUs}}}</p>
+                        </div>
+                    </div>
+                </section>
+            </section>
+            {{/if}} 
+            {{/detail}}
+            </script>
+        </section>
+
+
+    </div>
+
+    <!-- <script id="tplContain" type='text/ractive'> -->
+    <!-- {{# detail}} -->
+    <!-- 领导班子 -->
+    <!-- <section class="nav-tab-panel" id="ldbzPanel">
+            <section class="col-xs-12 list-box">
+                <div class="col-xs-12 b-body">
+                    {{#each chairman}}
+                    <div class="col-xs-12 list-item">
+                        <div class="col-xs-5 item-pic-box">
+                            <div class="item-pic" style="background-image: url('{{photo}}');"></div>
+                        </div>
+                        <div class="col-xs-7 item-msg">
+                            <div class="item-tl-row">
+                                <span class="item-tl">{{name}}</span>
+                                <span class="item-subtl text-gray">|</span>
+                                <span class="item-subtl">{{position&&position[0]?position[0]:''}}</span>
+                            </div>
+                            <div class="item-rmk">
+                                {{entityName}}
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+
+                </div>
+            </section>
+        </section> -->
+    <!-- 本会介绍 -->
+    <!-- <section class="nav-tab-panel active" id="bhjsPanel">
+            <section class="col-xs-12 list-box">
+                <div class="col-xs-12 b-body pt0">
+                    <div class="bhjsBanner">
+                        <img class="tl-logo" src="./lib/assets/images/gsl/LOGO@3x.png" alt="工商联" />
+
+                    </div>
+                    <div id="bhjsContent" class="p10" style="font-size: 13px;line-height: 26px;">
+                        {{{intro}}}
+                    </div>
+                </div>
+            </section>
+        </section> -->
+    <!-- 工商联章程 -->
+    <!-- <section class="nav-tab-panel" id="gslzcPanel">
+            <section class="col-xs-12 list-box">
+                <div class="col-xs-12 b-body p10">
+                    <p class="text-center f18 fwb mb20 mt10">中国工商业联合会章程</p>
+                    <p>{{{rule}}}</p>
+                </div>
+            </section>
+        </section>
+        {{/detail}} -->
+    <!-- </script> -->
+
+    <script src="./lib/external/jquery1.11.1.min.js"></script>
+    <script src="./lib/external/ractive.min.js"></script>
+    <script src="./lib/external/sweet-alert/sweet-alert.min.js" type="text/javascript"></script>
+    <script src="./lib/external/toastr/toastr.min.js" type="text/javascript"></script>
+
+    <script src="./lib/utils/beastTools.js" type="text/javascript"></script>
+    <script src="./lib/js/beastBase.js"></script>
+    <!-- <script src="./lib/external/fastclick.js" type="text/javascript"></script> -->
+    <!-- <script src="./lib/external/jquery.history.js" type="text/javascript"></script> -->
+
+    <!-- <script src="./lib/external/swiper-3.3.1/swiper-3.3.1.jquery.min.js" type="text/javascript"></script> -->
+
+    <script type="text/javascript" src="./lib/js/zcbRemark.js"></script>
+</body>
+
+</html>

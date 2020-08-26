@@ -1,0 +1,96 @@
+<link rel="stylesheet" type="text/css" href="../lib/mobile/mobileDist/styles/myPoint.css"></st>
+<script type="text/javascript" src="../lib/mobile/mobileDist/js/myPoint.js?v=1235"></script>
+
+<div class="myPoint_content clearfix page_wrapper">
+
+    <div class="header ">
+        <div class="back pull-left back-fa his-back" role="button"><i class="fa fa-angle-left"></i></div>
+        <div class="title-text">我的积分</div>
+    </div>
+
+    <section class="content clearfix page_body">
+
+        <div class="col-xs-12 text-center point-header">
+
+            <div class="clearfix pt20 pb15 total-header">
+                <div class="col-xs-6 money-contain">
+                    <p class=" pb10"> 共获取积分</p>
+                    <div class="">
+                        <span id="money" bt-data-bind="totalPoint">0</span>
+                    </div>
+                </div>
+                <div class="col-xs-6 pre-com-contain" style="opacity: 0.8;">
+                    <p class=" pb10"> 剩余积分</p>
+                    <div class="wallet-money">
+                        <span id="pre_com" bt-data-bind="point">0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="p5 text-center my-point text-gray dis-no" style="border-bottom: 1px solid #ddd">
+                当前共有 <span class="text-danger" bt-data-bind="totalPoint">0</span> 积分将于 <span class="text-danger" bt-data-bind="point_expire_time"></span> 过期
+            </div>
+            <div class="col-xs-12 pb10 pt10">
+                <div class="row-20 user-nav-text">
+                    <div class="user-msg ">
+                        <div class="user-unmber">
+                            <span class="f16 fwb text-info" bt-data-bind="order_point">0</span>
+                        </div>
+                        <div class="user-state">结单积分</div>
+                    </div>
+                </div>
+                <div class="row-20 user-nav-text">
+                    <div class="user-msg ">
+                        <div class="user-unmber">
+                            <span class="f16 fwb text-primary" bt-data-bind="comment_point">0</span>
+                        </div>
+                        <div class="user-state">评论积分</div>
+                    </div>
+                </div>
+                <div class="row-20">
+                    <div class="user-msg ">
+                        <div class="user-unmber">
+                            <span class="f16 fwb text-danger" bt-data-bind="activity_point">0</span>
+                        </div>
+                        <div class="user-state">活动积分</div>
+                    </div>
+                </div>
+
+                <div class="row-20 user-nav-text">
+                    <div class="user-msg ">
+                        <div class="user-unmber">
+                            <span class="f16 fwb text-success" bt-data-bind="rmd_point">0</span>
+                        </div>
+                        <div class="user-state">推荐积分</div>
+                    </div>
+
+                </div>
+                <div class="row-20 user-nav-text">
+                    <div class="user-msg bd0">
+                        <div class="user-unmber">
+                            <span class="f16 fwb text-active" bt-data-bind="sign_point">0</span>
+                        </div>
+                        <div class="user-state">签到积分</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 grouo-nav mt10">
+            <div class="col-xs-12 right-arrow">
+                <div class="col-xs-2 left-ico pl20">
+                    <i class="fa fa-list-alt text-black"></i>
+                </div>
+                <a class="col-xs-10 right-menu pl5 bdb1" href="javascript:;"
+                   role="button" data-to-url="pointDetails" data-tl="积分明细">积分明细</a>
+            </div>
+            <div class="col-xs-12 right-arrow">
+                <div class="col-xs-2 left-ico pl20">
+                    <i class="fa fa-hdd-o text-danger"></i>
+                </div>
+                <a class="col-xs-10 right-menu pl5" href="javascript:;"
+                   role="button" data-to-url="integrateExchange" data-tl="积分兑换">积分兑换</a>
+            </div>
+        </div>
+    </section>
+</div>

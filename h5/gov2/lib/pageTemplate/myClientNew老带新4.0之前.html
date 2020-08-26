@@ -1,0 +1,68 @@
+<link type="text/css" rel="stylesheet" href="../lib/mobile/mobileDist/styles/myClientNew.css?v=190401" />
+
+<div class="myClient_contain page_wrapper clearfix">
+    <!--<div class="back pull-left back-fa his-back text-white" role="button">-->
+    <!--<img src="../lib/assets/images/myClient/back.png" alt="">-->
+    <!--&lt;!&ndash;<i class="fa fa-angle-left"></i>&ndash;&gt;-->
+    <!--</div>-->
+    <div class="clearfix" id="myClientShow">
+        <div class="pt20 pb20 empty-contain">
+            <div class="empty-tip">加载中...</div>
+        </div>
+    </div>
+
+    <script id="myClientTpl" type="text/ractive">
+    {{#dataObj}}
+    <div class="mc-up" style="background-image: url('../lib/assets/images/myClient/up-bg.png')">
+        <img src="{{photo}}" alt="" class="photo-img">
+        <p class="p-tip">累计已获得优惠券</p>
+        <p class="p-money"><span class="money">
+        {{parseFloat(total_amount) ? parseFloat(total_amount).toFixed(2):'0.00'}}
+        </span><span class="unit">元</span></p>
+    </div>
+    <ul class="col-xs-12 mc-tab">
+        <li class="col-xs-4 active">
+            <a role="button" href="javascript:;" on-click="changeType:1">
+                <span class="tip">已获得奖励(份)</span>
+                <span class="num">{{get_award_count ? get_award_count:0}}</span>
+            </a>
+        </li>
+        <li class="col-xs-4">
+            <a role="button" href="javascript:;" on-click="changeType:2">
+                <span class="tip">奖励在路上(份)</span>
+                <span class="num">{{awarding_count ? awarding_count:0}}</span>
+            </a>
+        </li>
+        <li class="col-xs-4">
+            <a role="button" href="javascript:;" on-click="changeType:3">
+                <span class="tip">推荐失败(份)</span>
+                <span class="num">{{recmd_failure_count ? recmd_failure_count:0}}</span>
+            </a>
+        </li>
+    </ul>
+    <section class="clients-list col-xs-12" id="myClientShow">
+        {{#each dataList:i}}
+            <div class="client-item col-xs-12">
+                <div class="col-xs-6">
+                    <div class="name">{{name}} {{moreTxt?moreTxt:''}}</div>
+                    <div class="datetime">{{formatTime(add_time)}}</div>
+                </div>
+                <div class="col-xs-6 text-right">{{value ? value+'元优惠券':''}}</div>
+            </div> 
+        {{/each}}
+        {{^dataList}}
+            <div class="text-gray pt20 text-center f20">
+                ╮(╯▽╰)╭
+                <div class="pt5"> 暂无数据</div>
+            </div>
+        {{/dataList}}
+    </section>
+    {{/dataObj}}
+    <div class="mc-footer text-center">
+        <a href="recommendNew.html" role="button" class="my-con-btn my-btn-primary fwb mr30">返回主页面</a>
+        <a data-to-url="myCoupon" data-tl="我的优惠券" role="button" class="my-con-btn my-btn-primary fwb">我的优惠券</a>
+    </div>
+  </script>
+</div>
+
+<script src="/lib/mobile/mobileDist/js/myClientNew.js?v=190401" type="text/javascript"></script>

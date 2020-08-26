@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style type="text/css">
+    .toapp{
+      width:100%;
+      height:50px;
+      line-height:50px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="toapp" onclick="toApp(0,'f4fe7bd2d16311ea813300163e063254')">去活动1</div>
+  <div class="toapp" onclick="toApp(3,'e459383e5c2f11ea813300163e063254')">去通知2</div>
+  <div class="toapp" onclick="toApp(4,'dc81d1e7bc2d11ea813300163e063254')">去党建2</div>
+  <div class="toapp" onclick="toApp(9,'1e7f95712b7e11ea954800163e063254')">去名片</div>
+  <div class="toapp" onclick="toApp(10,'5e975a6c46e0fb0001dd9b21')">去政策</div>
+  <div class="toapp" onclick="toApp(11,'5e972a2446e0fb0001dd9b1f')">去商机</div>
+  <div class="toapp" onclick="toApp(13,'e2c8142bdaf311ea813300163e063254')">去帖子</div>
+  <div class="toapp" onclick="toApp(15,'e8a842f5ca7011ea813300163e063254')">去政府通知2</div>
+  <div class="toapp" onclick="toApp(6,'309d548ccdf611e98e5b00163e063254',1)">去商会主页（浙江商会）</div>
+  <!-- <div class="toapp" onclick="toApp(6,'5e88d1cf6b0366dd9cf01e50',4)">工商联</div> -->
+  <!-- <div class="toapp" onclick="toApp(6,'5cda93bc8a8811ea813300163e063254',8)">去仲裁办</div> -->
+  <div class="toapp" onclick="toApp(6,'6f728df9dab511ea813300163e063254',9)">去联盟</div>
+  <div class="toapp" onclick="toApp(6,'695c4df8c71411ea813300163e063254',12)">去圈子</div>
+  <div class="toapp" onclick="toApp(16,'b3ed9bdeb68411ea813300163e063254')">去调查问卷</div>
+  
+  <script type="text/javascript">
+
+    var phone = '';
+    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) { //判断iPhone|iPad|iPod|iOS
+      phone = 'ios';
+    } else if (/(Android)/i.test(navigator.userAgent)) {  //判断Android
+      phone = 'Android';
+    } else { //pc
+    };
+
+    function toApp(jumpType,serviceId,type){
+      type = type || 0;
+      if(phone == 'ios'){
+        alert(`https://app.yiqilaiwang.com/pageJump?jumpType=${jumpType}&serviceId=${serviceId}&type=${type}&orgId=${jumpType==16?'309d548ccdf611e98e5b00163e063254':''}&content=${jumpType==9?'siid':''}`)
+        window.location.href = `https://app.yiqilaiwang.com/pageJump?jumpType=${jumpType}&serviceId=${serviceId}&type=${type}&orgId=${jumpType==16?'309d548ccdf611e98e5b00163e063254':''}&content=${jumpType==9?'siid':''}`
+      }else if(phone == 'Android'){
+        alert(`pushscheme://com.yilaiwang.huaweipush/deeplink?jumpType=${jumpType}&serviceId=${serviceId}&type=${type}orgId=${jumpType==16?'309d548ccdf611e98e5b00163e063254':''}&content=${jumpType==9?'siid':''}`)
+        window.location.href = `pushscheme://com.yilaiwang.huaweipush/deeplink?jumpType=${jumpType}&serviceId=${serviceId}&type=${type}orgId=${jumpType==16?'309d548ccdf611e98e5b00163e063254':''}&content=${jumpType==9?'siid':''}`
+
+        
+        // alert('安卓')
+        // if(jumpType ==0){
+        //   window.location.href = `yiqilaiwang://www.yiqilaiwang.com/AtvDetail?id=${serviceId}`
+        // }
+        // if(jumpType ==1 || jumpType ==3|| jumpType ==4){
+        //   window.location.href = `yiqilaiwang://www.yiqilaiwang.com/NoticeDetail?id=${serviceId}`
+        // }
+        // if(jumpType ==9){
+        //   window.location.href = `yiqilaiwang://www.yiqilaiwang.com/FriendVisitingCard?id=${serviceId}&name=slid`
+        // }
+        // if(jumpType ==10){
+        //   window.location.href = `yiqilaiwang://www.yiqilaiwang.com/PolicyDetail?id=${serviceId}&type=1600`
+        // }
+        // if(jumpType ==11){
+        //   window.location.href = `yiqilaiwang://www.yiqilaiwang.com/OrgOpportunityDetail?id=${serviceId}`
+        // }
+        // if(jumpType ==13){
+        //   window.location.href = `yiqilaiwang://www.yiqilaiwang.com/PostDetail?id=${serviceId}`
+        // }
+        // if(jumpType ==15){
+        //   window.location.href = `yiqilaiwang://www.yiqilaiwang.com/NoticeDetail?id=${serviceId}`
+        // }
+        // if(jumpType ==6 && (type == 1 || type == 2 || type == 3) ){
+        //   window.location.href = `yiqilaiwang://www.yiqilaiwang.com/OrgDetail?id=${serviceId}`
+        // }
+        // if(jumpType ==6 && (type == 9 || type == 10) ){
+        //   window.location.href = `yiqilaiwang://www.yiqilaiwang.com/LeagueDetail?id=${serviceId}`
+        // }
+        // if(jumpType ==6 && type == 12 ){
+        //   window.location.href = `yiqilaiwang://www.yiqilaiwang.com/CircleHomeDetail?id=${serviceId}`
+        // }
+        // if(jumpType ==16){
+        //   window.location.href = `yiqilaiwang://www.yiqilaiwang.com/InquiryCouponDetail?id=${serviceId}&orgId=309d548ccdf611e98e5b00163e063254`
+        // }
+      
+      }else{
+
+      }
+   
+    }
+  </script>
+</body>
+</html>

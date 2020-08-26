@@ -1,0 +1,31 @@
+<link type="text/css" rel="stylesheet" href="../lib/mobile/mobileDist/styles/addressList.css">
+<div class="addressList_contain">
+
+    <section class="changeAddr">
+        <div class="addrList" id="addrListShow">
+
+        </div>
+        <div class="tip-contain">
+            <div class="tip-txt"><i class="fa fa-info-circle"></i> 需要新增或者修改地址，
+                <a role="button" href="tel:96917" class="text-primary" style="text-decoration: underline">请联系喜威客服</a></div>
+        </div>
+        <script id="addrListTpl" type='text/ractive'>
+            {{#each tableList:i}}
+                <div class="addr {{HID == CURID ? 'confirmAddr':''}}" data-id={{HID}} data-ind={{i}}>
+                    <p class="info">
+                        <span class="info-name">{{CUSTOMERDESC}}</span>
+                        <span class="info-number ml10">{{OFFICETEL}}</span>
+                    </p>
+                    <p class="address">{{ADDRESS1_0}}</p>
+                </div>
+            {{/each}}
+
+            </script>
+
+    </section>
+
+    <div class="shade"></div>
+
+</div>
+
+<script type="text/javascript" src="../lib/mobile/mobileDist/js/addressList.js"></script>

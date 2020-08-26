@@ -1,0 +1,33 @@
+<link type="text/css" rel="stylesheet" href="../lib/mobile/mobileDist/styles/myAddresses.css">
+<div class="myAddress_contain page_wrapper clearfix">
+    <div class="header">
+        <div class="back pull-left back-fa his-back" role="button"><i class="fa fa-angle-left"></i></div>
+        <div class="title-text car_name" bt-data-bind="name">我的地址</div>
+    </div>
+    <div class="addresses-list bg-white-light pb50" id="myAddrShow">
+
+    </div>
+    <script id="myAddrTpl" type='text/ractive'>
+        {{#each dataList:i}}
+        <section class="address p20 bg-white" data-id={{HID}}>
+
+            <div class="personal-info pb30">
+                <div class="name col-xs-3">{{CUSTOMERDESC}}</div>
+                <div class="number col-xs-5">{{OFFICETEL}}</div>
+                <div role='button' class="default-address col-xs-4 text-right
+                {{isDefault == 1 ? ' selected-default-address':''}}"
+                on-click="setDefault:{{this}}" data-ind={{i}}>
+                    <i class="fa {{isDefault == 1 ? ' fa-circle':'fa-circle-thin'}}"></i> 默认地址
+                </div>
+            </div>
+            <div class="address-info text-gray">{{ADDRESS1_0}}</div>
+
+        </section>
+        {{/each}}
+        <div class="tip-contain">
+            <div class="pb20">需要新增或者修改地址，请联系喜威客服。</div>
+            <a role="button" href="tel:{{contact?contact:'96917'}}" class="onekeyCall orange">一键拨号</a>
+        </div>
+        </script>
+</div>
+<script type="text/javascript" src="../lib/mobile/mobileDist/js/myAddress.js?v=111"></script>

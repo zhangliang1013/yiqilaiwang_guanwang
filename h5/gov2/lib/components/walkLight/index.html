@@ -1,0 +1,162 @@
+<style>
+
+    /* 走马灯 */
+    .__noticeDiv {
+        height: 40px;
+        position: relative;
+        background: #fff;
+        color: #ff781d;
+    }
+
+    .__noticeDiv .icon-lb {
+        position: absolute;
+        width: auto;
+        height: 16px;
+        left: 16px;
+        top: 12px;
+    }
+
+    .__noticeDiv .swiper-container {
+        height: 40px;
+    }
+
+    .__noticeDiv .swiper-slide {
+        padding: 0 80px;
+        height: 40px;
+        line-height: 40px;
+    }
+
+    .__noticeDiv .swiper-slide > div {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 40px;
+    }
+
+    /* 走马灯 end */
+</style>
+<div class="__noticeDiv">
+    <div class="swiper-container">
+        <div class="swiper-wrapper __noticeCarousel">
+        </div>
+    </div>
+    <img src="../lib/assets/images/rcm40/icon-lb.png" class="icon-lb"/>
+</div>
+<script>
+    window.C_WalkLight = {
+        ajaxUrl: {
+            listUrl: '/user_marketing/lastAward'
+        },
+        swiper: null,
+        init: function (options) {
+            var $this = this;
+            var ajaxUrl = this.ajaxUrl.listUrl;
+            var ajaxData = {};
+            var swiperId;
+            var swiperWrapId;
+
+            if (options) {
+
+                if (options.container && $(options.container) && $(options.container).length > 0) {
+                    var tmpId = options.container.substr(1);
+                    swiperId = tmpId + '__swiper';
+                    swiperWrapId = tmpId + '__swiperWrap';
+                    $(options.container).find('.swiper-container').attr('id', swiperId);
+                    $(options.container).find('.__noticeCarousel').attr('id', swiperWrapId);
+
+                } else {
+                    console.error('__walkLight 走马灯缺少 options.container, 或者 $(' + options.container + ') 不存在');
+                    return false;
+                }
+
+                if (options.listUrl) {
+                    ajaxUrl = options.listUrl;
+                }
+
+                if (options.ajaxData) {
+                    ajaxData = options.ajaxData;
+                }
+
+            } else {
+                console.error('__walkLight 走马灯缺少 options');
+                return false;
+            }
+
+            window.beastBase.ajaxGo(ajaxUrl, ajaxData, 'GET', function (rsp) {
+                console.log('sdfs')
+
+                if (0 == rsp.errcode && rsp.data) {
+                    var data = rsp.data;
+                    // couponList: user_id nickname value
+                    // pointList: user_id nickname amount
+                    // applyList nickname
+
+                    var html = "";
+
+                    if (data.couponList) {
+                        var arr = data.couponList;
+
+                        for (var i in arr) {
+                            var item = arr[i];
+
+                            if (item) {
+                                html +=
+                                    '<div class="swiper-slide" role="button"><div>' +
+                                    (item.nickname || item.user_id) + '获得' + item.value + '元优惠券' +
+                                    "</div></div>";
+                            }
+                        }
+                    }
+                    if (data.pointList) {
+                        var arr = data.pointList;
+
+                        for (var i in arr) {
+                            var item = arr[i];
+
+                            if (item) {
+                                html +=
+                                    '<div class="swiper-slide" role="button"><div>' +
+                                    (item.nickname || item.user_id) + '获得' + item.amount + '积分' +
+                                    "</div></div>";
+                            }
+                        }
+                    }
+                    if (data.applyList) {
+                        var arr = data.applyList;
+
+                        for (var i in arr) {
+                            var item = arr[i];
+
+                            if (item) {
+                                html +=
+                                    '<div class="swiper-slide" role="button"><div>' +
+                                    (item.nickname) + '提交了开户申请' +
+                                    "</div></div>";
+                            }
+                        }
+                    }
+
+
+                    $(options.container).css({display: "block"});
+                    $("#" + swiperWrapId).html(html);
+
+                    $this.swiper = new Swiper("#" + swiperId, {
+                        autoplay: 5000,
+                        direction: "vertical",
+                        loop: true,
+                        // 如果需要分页器
+                        // pagination: "#indexSwiperPg",
+                        // autoheight: true
+                    });
+
+                } else {
+                    window.beastBase.alertMsg(rsp.errmsg, "", "warning");
+                }
+            });
+        },
+        // getRandomKey: function () {
+        //     // return Math.floor(+new Date() - Math.random() * 100000);
+        //     return (Math.random() * 10000000).toString(16).substr(0, 4) + '-' + (new Date()).getTime() + '-' + Math.random().toString().substr(2, 5);
+        // }
+    }
+</script>

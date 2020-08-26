@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <link rel="stylesheet" href="./lib/assets/styles/normalize.min.css" />
+    <link href="./lib/external/sweet-alert/css/sweet-alert.min.css" rel="stylesheet" type="text/css" />
+    <link href="./lib/external/toastr/css/toastr.min.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="./lib/assets/styles/beastBase.css" />
+    <link type="text/css" rel="stylesheet" href="./lib/styles/beastCommon.css">
+
+    <!-- 轮播器插件 -->
+    <link type="text/css" rel="stylesheet" href="./lib/external/swiper-3.3.1/swiper-3.3.1.min.css">
+
+    <link type="text/css" rel="stylesheet" href="./lib/styles/shServiceDetail.css">
+    <title></title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+<div class="app-page-head bdb">
+    <div class="app-page-head-hd">
+        <div class="app-page-head-btn">
+            <div class="btn-icon-back" id="page-back-btn" role="button">
+                <img src="./lib/images/back.png" alt="">
+            </div>
+            <div class="btn-icon-close" id="page-close-btn" role="button">
+                <img src="./lib/images/close.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="app-page-head-bd">
+        <div class="app-page-head-title" id="pageTitle">
+
+        </div>
+    </div>
+    <!-- <div class="app-page-head-ft">
+<div class="app-page-head-btn">
+    <div class="btn-icon-more" id="page-more-btn" role="button">
+        <img src="./lib/images/more.png" alt="">
+    </div>
+</div>
+<div class="page-mask" id="page-mask-click"></div>
+<div class="page-mask-menu">
+    <div class="page-head-ft-menus">
+        <div class="triangle-up "></div>
+        <div class="ft-menu brb" id="#page-back-home" role="button">首页</div>
+        <div class="ft-menu" id="#page-share-btn" role="button">分享</div>
+    </div>
+</div>
+</div> -->
+</div>
+
+<!-- <div class="loading-contain" style="display: block;">
+    <img src="./lib/styles/loading-bubbles.svg" fill="blue">
+    <div class="loading-tip">加载中 ...</div>
+</div> -->
+
+<div class="clearfix container" >
+    <div class="article bg-white">
+        <div class="detail-tl">关于落实推荐商协会在政策发布落实环节的重要作用的指挥</div>
+        <div class="detail-nav clearfix">
+            <img src="./lib/images/folder.png" alt="">
+            <div class="p-txt">
+                <a class="name">青岛市商务局</a>
+                <div class="date">5月2号 13：30</div>
+            </div>
+        </div>
+        <div class="detail-content">
+            <p>
+                由于法国政府此前公布的医院确诊病例和养老院等社会医疗机构确诊病例存在重复统计，法国的累计病例减少至14.7万多例。根据法国政府最新公布的信息，该国确诊病例超过10万例，这一数字包括养老院等社会医疗机构的确诊病例；社会医疗机构中还有3.8万多例“可能病例”，一些媒体和机构将这一数字也记入法国的总病例数。法国的“戴高乐”号航母已有1081人新冠病毒检测结果呈阳性。
+            </p>
+            <p>
+                伊朗的累计确诊病例超过8万例，累计死亡病例超过5000例，不过伊朗近期疫情增长速度逐渐放慢，近5日的单日新增死亡病例均在100例以下。
+            </p>
+<!--            <p>-->
+<!--                土耳其、俄罗斯、巴西等国的疫情发展较快，三国的累计确诊病例分别超过7.8万例、3.6万例和3.4万例。-->
+<!--            </p>-->
+<!--            <p>-->
+<!--                韩国较前一日仅新增18例确诊病例，这是58天以来韩国单日新增确诊病例数首次降至20例以下。-->
+<!--            </p>-->
+<!--            <p>-->
+<!--                据新华社报道，截至当地时间4月17日，拉美地区的累计确诊病例接近9万例，中东地区确诊病例超过20万例。世卫组织总干事谭德塞当地时间17日表示，过去一周非洲报告的确诊病例增加了51%，死亡病例增加了60%。由于非洲各国缺少新冠病毒检测试剂盒，实际病例数可能比报告的要高。-->
+<!--            </p>-->
+       </div>
+    </div>
+    <div class="p-contain mt10">
+        <section class="col-xs-12 nav-tab">
+            <div class="col-xs-6 active" data-tab="#bhjsPanel">
+                <span>评论<label>10</label></span>
+            </div>
+            <div class="col-xs-6" data-tab="#gslzcPanel">
+                <span>阅读<label>15</label></span>
+            </div>
+        </section>
+        <section class="nav-tab-content" id="showContain">
+            <section class="nav-tab-panel clearfix p10 active" id="bhjsPanel">
+                <div class="uc-list clearfix">
+
+                    <div class="uc-item col-xs-12">
+                        <div class="col-xs-1 text-right ">
+                            <div class="user">
+                                <span class="logo"><img src="./lib/images/huiyuan.png" alt="logo"></span>
+                            </div>
+                        </div>
+                        <div class="col-xs-11 pl15">
+                            <div class="col-xs-12 mb5">
+                                <div class="col-xs-10 p-title f14">张三</div>
+                                <div class="col-xs-2 pl15">
+                                    <div class="mini-more">
+                                        <img src="./lib/images/delete.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 text-left text-black">现在的机器人是逻辑程序，算法叠加，没有任何之主思维</div>
+                            <div class="col-xs-12 text-left pt5 pb5">
+                                <span class="f12 text-gray">2020-04-15 17:00</span>
+                                <span class="ml10 f12 text-black">2回复</span>
+                            </div>
+                            <div class="col-xs-12 reply-box">
+                                <div class="col-xs-12 reply-list">
+                                    <div class="col-xs-12 reply-item">
+                                        <span class="ry-name f13">林俊杰</span>
+                                        <span class="text-black f13">回复</span>
+                                        <span class="text-black f13">：</span>
+                                        <span class="ryc text-black f13">现在的机器人是逻辑程序现在的机器人是逻辑程序现在的机器人是逻辑程序</span>
+                                    </div>
+                                    <div class="col-xs-12 reply-item">
+                                        <span class="ry-name f13">Jack</span>
+                                        <span class="text-black f13">回复</span>
+                                        <span class="ry-name f13">林俊杰</span>
+                                        <span class="text-black f13">：</span>
+                                        <span class="ryc text-black f13">现在的机器人是逻辑程序现在的机器人是逻辑程序现在的机器人是逻辑程序</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="uc-item col-xs-12">
+                        <div class="col-xs-1 text-right ">
+                            <div class="user">
+                                <span class="logo"><img src="./lib/images/huiyuan.png" alt="logo"></span>
+                            </div>
+                        </div>
+                        <div class="col-xs-11 pl15">
+                            <div class="col-xs-12 mb5">
+                                <div class="col-xs-10 p-title f14">张三</div>
+                                <div class="col-xs-2 pl15">
+                                    <div class="mini-more">
+                                        <img src="./lib/images/delete.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 text-left text-black">现在的机器人是逻辑程序，算法叠加，没有任何之主思维</div>
+                            <div class="col-xs-12 text-left pt5 pb5">
+                                <span class="f12 text-gray">2020-04-15 17:00</span>
+                                <span class="ml10 f12 text-black">2回复</span>
+                            </div>
+                            <div class="col-xs-12 reply-box">
+                                <div class="col-xs-12 reply-list">
+                                    <div class="col-xs-12 reply-item">
+                                        <span class="ry-name f13">林俊杰</span>
+                                        <span class="text-black f13">回复</span>
+                                        <span class="text-black f13">：</span>
+                                        <span class="ryc text-black f13">现在的机器人是逻辑程序现在的机器人是逻辑程序现在的机器人是逻辑程序</span>
+                                    </div>
+                                    <div class="col-xs-12 reply-item">
+                                        <span class="ry-name f13">Jack</span>
+                                        <span class="text-black f13">回复</span>
+                                        <span class="ry-name f13">林俊杰</span>
+                                        <span class="text-black f13">：</span>
+                                        <span class="ryc text-black f13">现在的机器人是逻辑程序现在的机器人是逻辑程序现在的机器人是逻辑程序</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 mt10">
+                                    <div class="col-xs-12 reply-more f13">查看全部200条评论 ></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="nav-tab-panel clearfix p10" id="gslzcPanel">
+                <div class="r-list col-xs-12 clearfix">
+                    <div class="r-item col-xs-12">
+                        <div class="col-xs-6">
+                            <div class="detail-r-user clearfix">
+                                <img src="./lib/images/folder.png" alt="">
+                                <div class="p-txt">
+                                    <a class="name">张三</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 r-time text-gray text-right">
+                            12:23
+                        </div>
+                    </div>
+
+                    <div class="r-item col-xs-12">
+                        <div class="col-xs-6">
+                            <div class="detail-r-user clearfix">
+                                <img src="./lib/images/folder.png" alt="">
+                                <div class="p-txt">
+                                    <a class="name">李四</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 r-time text-gray text-right">
+                            12:23
+                        </div>
+                    </div>
+
+                    <div class="r-item col-xs-12">
+                        <div class="col-xs-6">
+                            <div class="detail-r-user clearfix">
+                                <img src="./lib/images/folder.png" alt="">
+                                <div class="p-txt">
+                                    <a class="name">赵五</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 r-time text-gray text-right">
+                            12:23
+                        </div>
+                    </div>
+
+                    <div class="r-item col-xs-12">
+                        <div class="col-xs-6">
+                            <div class="detail-r-user clearfix">
+                                <img src="./lib/images/folder.png" alt="">
+                                <div class="p-txt">
+                                    <a class="name">王六</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 r-time text-gray text-right">
+                            12:23
+                        </div>
+                    </div>
+                </div>
+                <div class="text-gray f12 pt10 pb10 pl10">766位游客查看过这篇内容</div>
+            </section>
+        </section>
+    </div>
+    <div class="page-fixed-footer">
+       <div class="footer-rc col-xs-12 p10">
+            <div class="col-xs-8">
+                <div class="rc-input col-xs-12 clearfix">
+                    <span class="it-icon col-xs-2 ">
+                        <img src="./lib/images/write.png" alt="">
+                    </span>
+                    <div class="it-write  col-xs-10">
+                       <input placeholder="写评论..." type="text" name="c" id="c" >
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="col-xs-12">
+                    <div class="col-xs-6 text-center">
+                        <div class="c-icon">
+                            <img src="./lib/images/comment.png" alt="">
+                        </div>
+                        <div class="c-dec f12">评论</div>
+                    </div>
+                    <div class="col-xs-6 text-center">
+                        <div class="c-icon">
+                            <img src="./lib/images/share.png" alt="">
+                        </div>
+                        <div class="c-dec f12">分享</div>
+                    </div>
+                </div>
+            </div>
+       </div>
+    </div>
+</div>
+
+<script id='containTpl' type='text/ractive'>
+        <div class="p-contain clearfix">
+            {{#details}}
+            <div class="detail-tl">{{title}}</div>
+            <div class="detail-nav clearfix">
+                <img src="{{orgUrl}}" alt="">
+                <div class="p-txt">
+                    <a class="name">{{orgName}}</a>
+                    <div class="date">{{createdDateStr}}</div>
+                </div>
+            </div>
+            <div class="detail-content">{{{content}}}</div>
+            {{#if attachments && attachments.length > 0}}}
+            <div class="doc-list col-xs-12">
+                {{#each attachments:i}}
+                <div class="col-xs-12 doc-item">
+                    <img src="./lib/assets/images/icon/i-doc.png" alt="">
+                    <span class="doc-tl">{{name}}.{{type}}</span>
+                    <button class="btn btn-link doc-act" data-download="{{url}}">下载</button>
+                </div>
+                {{/each}}
+            </div>
+            {{/if}} {{/details}}
+        </div>
+        {{^details}}
+        <div class="empty-data ">
+            <div class="empty-icon">
+                <img src="./lib/images/empty.png" alt="暂无记录">
+            </div>
+            <div class="empty-desc">
+                资讯信息不存在
+            </div>
+        </div>
+        {{/details}}
+    </script>
+<script src="./lib/external/jquery1.11.1.min.js"></script>
+<script src="./lib/external/ractive.js"></script>
+<script src="./lib/external/sweet-alert/sweet-alert.min.js" type="text/javascript"></script>
+<script src="./lib/external/toastr/toastr.min.js" type="text/javascript"></script>
+<script src="./lib/utils/beastTools.js" type="text/javascript"></script>
+<script src="./lib/js/beastBase.js"></script>
+<script src="./lib/external/fastclick.js" type="text/javascript"></script>
+<script src="./lib/external/swiper-3.3.1/swiper-3.3.1.jquery.min.js" type="text/javascript"></script>
+<!--<script type="text/javascript" src="./lib/js/infoDetail.js"></script>-->
+</body>
+
+</html>

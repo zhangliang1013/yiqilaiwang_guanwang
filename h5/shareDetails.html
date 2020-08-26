@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="divport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+  <link rel="stylesheet" href="./lib/css/shareDetails.css?t=2020122"/>
+  <link rel="stylesheet" href="./lib/css/clear.css?t=2020120"/>
+  <link rel="shortcut icon" href="./lib/image/shareDetails/h5fxtb@2x.png" type="image/x-icon" />
+  <title>一起来往-赋能组织，活力共赢</title>
+  <script type="text/javascript" src="./lib/commonJs/common.js"></script>
+  <script type="text/javascript" src="./lib/commonJs/vue.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+  <script>document.write('<script type="text/javascript" src="./lib/js/shareDetails.js?t=' + new Date().getTime() + '"><\/script>')</script>
+</head>
+<body>
+  <div class="shareDetails" id="index" v-cloak>
+    <!-- 顶部 -->
+    <div class="sd-title" v-show="upload">
+        <div class="sd-title-left">
+            <img src='./lib/image/shareDetails/xxtz2@2x.png' alt="" class="sd-title-left-delete" @click="upload=false">
+            <div class="sd-title-left-sign">
+                <img src="./lib/image/shareDetails/h5fxtb@2x.png" alt="" class="sd-title-left-sign-logo">
+                <div class="sd-title-left-sign-p">
+                    <p>一起来往</p>
+                    <p>赋能组织，活力共赢</p>
+                </div>
+            </div>
+        </div>
+        <a class="sd-title-right" href="https://www.yiqilaiwang.com/h5openapp2/app.html">下载APP</a>
+    </div>
+    <!-- 资讯/政策 -->
+    <div class="content" v-show="detail && type == 1 && detail.recommendStatus !=2 || type.length == 4 && detail " :style="{marginTop:(upload ? '':'0')}">
+        <h3 class="h3" id="text" v-cloak>{{type.length == 4?detail.title:detail.newsDigest}}</h3>
+        <div class='c-top'>
+            <img v-if='detail.orgMessageType==2 && type == 1' class='c-t-left' :src='detail.orgUrl'/>
+            <img v-if='detail.orgMessageType==1 && type == 1' class='c-t-left' :src='detail.avatarUrl'/>
+            <img v-if='type.length ==4' class='c-t-left' :src='detail.orgUrl' @click='copy'/>
+            <div class='c-t-right'>
+                <div class='c-t-r-name'>
+                    <div v-if='detail.orgMessageType==2 && type == 1 || type.length == 4' v-cloak>{{detail.orgName}}</div>
+                    <div v-if='detail.orgMessageType==1 && type == 1' v-cloak>{{type.length == 4?detail.orgName:detail.userName}}</div>
+                    <img v-if="detail.authStatus==2 && detail.orgMessageType==2&&type==1 || type.length == 4&&detail.authStatus==2" src='./lib/image/shareDetails/v.png'/>
+                </div>
+                <span class="comeOrg" v-show='detail.orgMessageType && type.length!=4'>
+                    <span class="comeOrg-txt" v-cloak>{{detail.orgMessageType==1 ? '来自：':'发布人：'}}</span>
+                    <img class="comeOrg-img" :src="detail.orgMessageType==1 ?  detail.orgUrl : detail.avatarUrl"/>
+                    <span class="comeOrg-name" v-cloak>{{detail.orgMessageType==1 ? detail.orgName : detail.userName}}</span>
+                    <img v-if="detail.authStatus==2 && detail.orgMessageType==1" class="comeOrg-v" src='./lib/image/shareDetails/v.png'>
+                </span>
+                <div class='c-t-r-time' v-cloak>{{type.length == 4?(detail.createdDateStr?detail.createdDateStr.substring(5,17):''):detail.createTime}}</div>
+            </div>
+        </div>
+        <div class="c-content" v-html="detail.content">
+        </div>
+        <div class="c-file" v-if="type==1">
+            <a 
+                :href="item.fileUrl" 
+                class='c-f-item' 
+                v-for="(item,index) in detail.fileCollection" 
+                :key='index'>
+                <img src='./lib/image/shareDetails/file.png'/>
+                <div v-cloak>文档 {{item.file}}</div>
+            </a>
+        </div>
+        <div class="c-file" v-if="type.length ==4">
+          <a 
+              :href="item.url" 
+              class='c-f-item' 
+              v-for="(item,index) in detail.attachments" 
+              v-if="item.name.indexOf('txt') == -1"
+              :key='index'>
+              <img src='./lib/image/shareDetails/file.png'/>
+              <div v-cloak>文档 {{item.name}}</div>
+          </a>
+          <div 
+              class='c-f-item' 
+              v-for="(item,index) in detail.attachments" 
+              v-if="item.name.indexOf('txt') != -1"
+              :key='index'>
+              <img src='./lib/image/shareDetails/file.png'/>
+              <div v-cloak>文档 {{item.name}}</div>
+          </div>
+      </div>
+    </div>
+    <!-- 活动 -->
+    <div class="content" v-show="detail && type == 0 && detail.recommendStatus !=2" :style="{marginTop:(upload ? '':'0')}">
+        <div class='content-top'>
+            <div class='top-text'>
+              <img class='bg' :src='detail.actPoster'/>
+              <div class='signup-img-box'>
+                <div v-for= '(item,index) in participantList' class='signup-img-boxs' v-if='index < 11' :key='index'>
+                  <img class='signup-img' :src='item.avatarUrl'/>
+                </div>
+                <div class='signup-img-boxs' v-if='participantList && participantList.length >= 12'>
+                  <img class='signup-img' src='./lib/image/shareDetails/dian.png'/>
+                </div>
+              </div>
+            </div>
+            <div class='items-box'>
+              <div class='topic-txt' v-cloak>{{detail.topic}}</div>
+              <div class='items'>
+                <div class='user-avatar-box'>
+                  <div class='user-avatar'>
+                    <img v-if='detail.orgActType ==1' class='name-top' :src='detail.createUrl' />
+                    <img v-if='detail.orgActType==2 && detail.actClass==2' class='name-top' :src='detail.orgUrl'/>
+                    <div class='name-box'>
+                      <div v-if='detail.orgActType==1' class='n-name' v-cloak>{{detail.createName}}</div>
+                      <div style="display: flex;align-items: center;" v-if='detail.orgActType==2 && detail.actClass==2'>
+                        <div v-if='detail.orgActType==2 && detail.actClass==2' class='n-name' v-cloak>{{detail.orgName}}</div>
+                        <img v-if="detail.authStatus==2" class="comeOrg-v1" src='./lib/image/shareDetails/v.png'/>
+                      </div>
+                      <div class='name-time' v-cloak>{{detail.createTime}}发起了活动</div>
+                    </div>
+                    <div>
+                      <div class='limit-box' v-if='!isexaminept && !isexamineorg && !isexamineorg1 && !isexaminept1 && detail.status==0'>
+                        <p class='limit-txt'>报名中</p>
+                      </div>
+                      <div class='limit-box limit-box1' v-if='!isexamineorg1 && !isexaminept1 && detail.status==1'>
+                        <p class='limit-txt'>已开始</p>
+                      </div>
+                      <div class='limit-box' v-if='!isexaminept &&!isexamineorg &&!isexamineorg1 && !isexaminept1 && detail.status==4'>
+                        <p class='limit-txt'>报名已截止</p>
+                      </div>
+                      <div class='limit-box limit-box2' v-if='!isexamineorg1 && !isexaminept1 && detail.status==2'>
+                        <p class='limit-txt'>已结束</p>
+                      </div>
+                      <div class='limit-box limit-box2' v-if='!isexamineorg1 && !isexaminept1 && detail.status==3'>
+                        <p class='limit-txt'>已取消</p>
+                      </div>
+                      <div class='limit-box limit-box3' v-if='isexamineorg1 || isexaminept1'>
+                        <p class='limit-txt'>已拒绝</p>
+                      </div>
+                      <div class='limit-box limit-box3' v-if='isexamineorg'>
+                        <p class='limit-txt'>组织审核中</p>
+                      </div>
+                      <div class='limit-box limit-box3' v-if='isexaminept'>
+                        <p class='limit-txt'>平台审核中</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-if='detail.actClass==2' style="display: flex;align-items: center;">
+                    <span class="comeOrg">
+                      <span v-if='detail.orgActType==1' class="comeOrg-txt">来自：</span>
+                      <span v-if='detail.orgActType==2' class="comeOrg-txt">发起人：</span>
+                      <img v-if='detail.orgActType==1' class="comeOrg-img" :src="detail.orgUrl"/>
+                      <img v-if='detail.orgActType==2' class="comeOrg-img" :src="detail.createUrl"/>
+                      <span v-if='detail.orgActType==1' class="comeOrg-name" v-cloak>{{detail.orgName}}</span>
+                      <span v-if='detail.orgActType==2' class="comeOrg-name" v-cloak>{{detail.createName}}</span>
+                      <img v-if="detail.authStatus==2 && detail.orgActType==1" class="comeOrg-v" src='./lib/image/shareDetails/v.png'/>
+                    </span>
+                  </div>
+                </div>
+        
+                <div class='pt-bd-con'>
+                  <div class='txt-box'>
+                    <div class='item-img-box'>
+                      <img class='item-img' src='./lib/image/shareDetails/time1.png' />
+                    </div>
+                    <p class='timeLabel'>开始时间</p>
+                    <p class='txt' v-cloak>{{detail.actStartTime}}</p>
+                  </div>
+                  <div class='txt-box'>
+                    <div class='item-img-box'>
+                      <img class='item-img' src='./lib/image/shareDetails/time2.png' />
+                    </div>
+                    <p class='timeLabel'>结束时间</p>
+                    <p class='txt' v-cloak>{{detail.actEndTime}}</p>
+                  </div>
+                  <div class='txt-box'>
+                    <div class='item-img-box'>
+                      <img class='item-img' src='./lib/image/shareDetails/map.png' />
+                    </div>
+                    <p class='label'>地点</p>
+                    <p v-if="detail.actAddress != '' " class='maptxt' v-cloak>{{detail.actAddress}}</p>
+                    <p v-if="detail.actAddress == '' " class='txt'>待定</p>
+                    <img v-if="detail.actAddress != '' && detail.actAddress != '待定'" class='map-img' src='./lib/image/shareDetails/map2.png'/>
+                  </div>
+                  <div class='txt-box'>
+                    <div class='item-img-box'>
+                      <img class='item-img' src='./lib/image/shareDetails/mony.png' />
+                    </div>
+                    <p class='label'>费用</p>
+                    <p v-if="detail.chooseConsume==6" class='txt'>无</p>
+                    <p v-if="detail.chooseConsume==5" class='txt'>公益捐款</p>
+                    <p v-if="detail.chooseConsume==7" class='txt'>自愿交费</p>
+                    <p v-if="detail.chooseConsume==4" class='txt'>礼金</p>
+                    <p v-if="detail.chooseConsume==8" class='txt'>会费</p>
+                    <p v-if="detail.chooseConsume==3" class='txt'>免费</p>
+                    <p v-if="detail.chooseConsume==2" class='txt' v-cloak>{{detail.payer}}请客</p>
+                    <p v-if="detail.chooseConsume==1" class='txt' v-cloak>{{detail.perCapita}}元</p>
+                  </div>
+                  <div class='txt-box'>
+                    <div class='item-img-box'>
+                      <img class='item-img' src='./lib/image/shareDetails/ybm.png' />
+                    </div>
+                    <p class='renyuansx' v-if='detail.perUpperLimit>0' v-cloak>人员上限{{detail.perUpperLimit}}人 已报名{{detail.number}}人</p>
+                    <p v-if='detail.perUpperLimit <= 0' class='timeLabelzuzhi'>已报名</p>
+                    <p v-if='detail.perUpperLimit <= 0' class='txt' v-cloak>{{detail.number}}人</p>
+                  </div>
+                  <div class='txt-box' v-if='detail.actEndTime != detail.applyEndTime'>
+                    <div class='item-img-box'>
+                      <image class='item-img' src='./lib/image/shareDetails/jztime.png' />
+                    </div>
+                    <p class='timeLabelphone'>报名截止时间</p>
+                    <p class='txt' v-cloak>{{detail.applyEndTime}}</p>
+                  </div>
+                  <div class='txt-box' v-if='detail.telphone'>
+                    <div class='item-img-box'>
+                        <image class='item-img' src='./lib/image/shareDetails/phone2.png' />
+                    </div>
+                    <p class='timeLabelphone'>发起人联系电话</p>
+                    <a class='txt-telphone' :href="'tel://' + detail.telphone" v-cloak>{{detail.telphone}}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="explain">
+          <div class='explain-title'>活动说明</div>
+          <!-- <template v-for='(item,index) in detail.contents' :key='index'>
+              <p  class="contenttxt" v-if='item.contentType==0' v-html="item.content"></p>
+              <img class="explainimg" v-if='item.contentType==1' :src="item.content" />
+          </template> -->
+          <p  class="contenttxt" v-html="detail.activityProcess"></p>
+          <div class='introduction-txt' v-if='detail && !detail.activityProcess'>
+              <!-- <div class="contenttxt" v-if='detail.activityProcess' v-cloak>{{detail.activityProcess}}</div> -->
+            <p class="introduction-none">暂无介绍内容...</p>
+          </div>
+        </div>
+    </div>
+    <!-- 二维码识别 -->
+    <div class="sd-bottom" v-show="detail && type == 0 && detail.recommendStatus !=2">
+      <div class="sd-bottom-title">
+        <p>来一起来往，赋能组织活力共赢</p>
+        <p>长按识别二维码，立即报名精彩活动</p>
+        <div class="color"></div>
+      </div>
+      <img :src="detail.orUrl" alt="" class="sd-bottom-code">
+    </div>
+    <div class="nothing" :style="{marginTop:(upload ? '':'0')}" v-show="!detail || detail.recommendStatus ==2">
+      <div>
+        <img :src="nothingImg" alt="">
+        <p v-show="detail&&detail.recommendStatus ==2">此内容已被平台下架</p>
+      </div>
+    </div>
+    <!-- <input id="input" type="text" value=""  style="position: absolute;top: 0;left: 0;opacity: 0;z-index: -10;"/> -->
+  </div>
+</body>
+</html>

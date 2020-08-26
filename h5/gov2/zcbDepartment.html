@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <link rel="stylesheet" href="./lib/assets/styles/normalize.min.css" />
+    <link href="./lib/external/sweet-alert/css/sweet-alert.min.css" rel="stylesheet" type="text/css" />
+    <link href="./lib/external/toastr/css/toastr.min.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="./lib/assets/styles/beastBase.css" />
+    <link type="text/css" rel="stylesheet" href="./lib/styles/beastCommon.css">
+
+    <!-- 轮播器插件 -->
+    <link type="text/css" rel="stylesheet" href="./lib/external/swiper-3.3.1/swiper-3.3.1.min.css">
+
+    <link type="text/css" rel="stylesheet" href="./lib/styles/zcbDepartment.css">
+    <title></title>
+</head>
+
+<body>
+    <div class="app-page-head trans">
+        <div class="app-page-head-hd">
+            <div class="app-page-head-btn">
+                <div class="btn-icon-back" id="page-back-btn" role="button">
+                    <img src="./lib/images/back.png" alt="">
+                </div>
+                <div class="btn-icon-close" id="page-close-btn" role="button">
+                    <img src="./lib/images/close.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="app-page-head-bd">
+            <div class="app-page-head-title" id="pageTitle">
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="p-contain clearfix" id="showContain">
+
+    </div>
+
+    <script id="tplContain" type='text/ractive'>
+        {{# detail}}
+        <div class="col-xs-12 home-bg">
+            <div class="col-xs-12 home-tl">
+                <div class="tl-logo">{{name}}</div>
+                <div class="tl-title">办公时间：{{officeHour}}</div>
+                <div class="info top">
+                    <div class="item">
+                        <img class="fl" src="./lib/assets/images/zcb/zcbb123@3x.png" alt="">
+                        <span class="fl">电话：</span>
+                        {{#if telephone}}
+                        <span class="fl">{{telephone}}</span><span style="color:#2A82FB;margin-left:4px">(办公)</span>
+                        {{/if}}
+                        {{#if complaints}}
+                        <span class="fl" style="margin-left:20px">{{complaints}}</span><span style="color:#2A82FB;margin-left:4px">(投诉)</span>
+                        {{/if}} 
+                    </div>
+                    <div class="item clear">
+                        <img class="fl" src="./lib/assets/images/zcb/zcbb125@3x.png" alt="">
+                        <span class="fl">传真：</span>
+                        <span class="fl">{{fax}}</span>
+                    </div>
+                    <div class="item clear">
+                        <img class="fl" src="./lib/assets/images/zcb/zcbb124@3x.png" alt="">
+                        <span class="fl">网址：</span>
+                        <span class="fl">{{web}}</span>
+                    </div>
+                    <div class="item clear">
+                        <img class="fl" src="./lib/assets/images/zcb/zcbb122@3x.png" alt="">
+                        <span class="fl">邮箱：</span>
+                        <span class="fl">{{email}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 info address">
+            <div class="item clear">
+                <img class="fl" src="./lib/assets/images/zcb/zcbb126@3x.png" alt="">
+                <span class="fl">办公地址：{{address}}</span>
+            </div>
+        </div>
+        <div class="func">
+            <div class="func-item">
+                <img src="./lib/assets/images/zcb/zcbb127@2x.png" alt="">
+                {{#if detail.function}}
+                <p>{{detail.function}}</p>
+                {{/if}} 
+            </div>
+        </div>
+        {{/detail}}
+        {{#if !detail}}
+        <div style="display:flex;justify-content: center;align-items: center;min-height:615px">
+            暂无信息
+        </div>
+        {{/if}}
+    </script>
+
+    <script src="./lib/external/jquery1.11.1.min.js"></script>
+    <script src="./lib/external/ractive.min.js"></script>
+    <script src="./lib/external/sweet-alert/sweet-alert.min.js" type="text/javascript"></script>
+    <script src="./lib/external/toastr/toastr.min.js" type="text/javascript"></script>
+
+    <script src="./lib/utils/beastTools.js" type="text/javascript"></script>
+    <script src="./lib/js/beastBase.js"></script>
+    <script src="./lib/external/fastclick.js" type="text/javascript"></script>
+    
+    <script src="./lib/external/swiper-3.3.1/swiper-3.3.1.jquery.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="./lib/js/zcbDepartment.js"></script>
+    <script type="text/javascript">
+    /*var phoneStateStr="";
+    function phoneState(){
+        // 判断 机型
+        if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) { //判断iPhone|iPad|iPod|iOS
+          return phoneState = 'ios';
+        } else if (/(Android)/i.test(navigator.userAgent)) {  //判断Android
+          return phoneState = 'Android';
+        } else { 
+        //pc
+        return "";
+        }
+    }
+    function share() {
+        alert(0);
+        var phoneStateStr = phoneState();
+        // js调用app
+        if (phoneStateStr == 'Android') {
+            alert(1);
+            window.android.shareSet('13','123','https://www.yiqilaiwang.com','1');
+            alert(2);
+        } else if (phoneStateStr == 'ios') {
+            window.webkit.messageHandlers.shareSet.postMessage(['13','123','https://www.yiqilaiwang.com','1']);
+        }
+    }
+    share();
+    */
+    </script>
+</body>
+
+</html>

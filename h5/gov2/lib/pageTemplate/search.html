@@ -1,0 +1,57 @@
+<link href="../lib/mobile/mobileDist/styles/search.css" rel="stylesheet" type="text/css"/>
+<div class=" page_wrapper">
+
+    <div class="search-msg-input col-xs-12">
+        <div class="back pull-left back-fa his-back" role="button"><i class="fa fa-angle-left"></i></div>
+        <div class="input-search">
+            <i class="fa fa-search"></i><input class="search" placeholder="我在找..." id="keyword-search"
+                                               name="keyword-search" value=""/>
+        </div>
+    </div>
+    <div class="search-m hot-search col-xs-12">
+        <div class="search-tip col-xs-12">热门搜索</div>
+        <div class="hot-keyword col-xs-12">
+            <a class="keyword" href="javascript:;">
+                清洁汽15KG
+            </a>
+            <a class="keyword" href="javascript:;">
+                超能气15KG
+            </a>
+            <a class="keyword" href="javascript:;">
+                高能气
+            </a>
+        </div>
+    </div>
+    <div class="search-m history-search col-xs-12">
+        <div class="search-tip col-xs-12">历史搜索<a href="javascript:;" id="clearSearch">清空</a></div>
+        <div class="history-keyword col-xs-12" id="hotKeywordList">
+            <a class="keyword" href="javascript:;">
+                清洁汽15KG
+            </a>
+            <a class="keyword" href="javascript:;">
+                高能气
+            </a>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#keyword-search').focus();
+        $('body').delegate('#clearSearch', 'click', function () {
+//                    document.cookie = 'test=ll';
+            $('#hotKeywordList').html('<div class="text-center p10 text-gray f14">无搜索历史</div>');
+        });
+
+        /*商品名称数据框中按下enter键*/
+        $('body').delegate('#keyword-search', 'keyup', function (event) {
+            if (event.keyCode == "13") {
+                /*回车执行查询*/
+                window.history.back();
+            }
+        });
+        $('body').on('click', '.keyword', function() {
+            window.history.back();
+        })
+    });
+</script>

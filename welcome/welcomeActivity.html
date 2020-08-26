@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="divport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=0.5"/>
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="../h5/lib/css/clear.css?t=2020120"/>
+	<link rel="stylesheet" href="./welcome.css?t=2020127"/>
+	<link rel="shortcut icon" href="../h5/lib/image/shareActivity/h5fxtb@2x.png" type="image/x-icon" />
+	<title>一起来往-赋能组织，活力共赢</title>
+	<script type="text/javascript" src="../h5/lib/commonJs/common.js"></script>
+	<script type="text/javascript" src="../h5/lib/commonJs/vue.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+	<script type="text/javascript" src="../h5/lib/commonJs/layer_mobile/layer.js"></script>
+	<script>document.write('<script type="text/javascript" src="./welcome.js?t=' + new Date().getTime() + '"><\/script>')</script>
+</head>
+<body>
+	<div class="shareActivity" id="index" v-cloak>
+		<div class="welcome">
+			<div class="bg">
+				<div class="top">
+					<img src="./zy.png" alt="" class="logo">
+					<div class="orgName">
+						<h5>胶东经济圈商协会联盟</h5>
+						<h6>主办：青岛市政府</h6>
+					</div>
+				</div>
+				<div class="intro">胶东联盟圈成立大会简介胶东联盟圈成立大会简介胶东联盟圈成立大会简介胶东联盟圈成立大会简介胶东联盟圈成立大会简介</div>
+			</div>
+			<div class="wel-btn" @click='apply'><span :style="{background:layer == 0 ?'red':'#dddddd'}">立即参与</span></div>
+		</div>
+		<div class="bottom">
+			<div class="title">
+				<div class="left">
+					<img src="./zy.png" alt="">
+					<span>一起来往</span>
+				</div>
+				<div class="right-load" @click='toApp'>下载APP</div>
+			</div>
+			<div class="intro">一起来往平台的简介</div>
+		</div>
+		<!-- 绑定手机号 -->
+		<div class="layer" v-if="layer==3">
+			<div class="mask"></div>
+			<div class="layer-content">
+				<div class="close" @touchend="tolayer(0)"><img src="../h5/lib/image/shareActivity/xxtz2@2x.png" alt=""></div>
+				<div class="info">
+					<h3>请绑定手机号</h3>
+					<!-- <input type="text" placeholder="姓名" v-model='formdate.name'> -->
+					<div class="verification-code">
+						<input type="text" placeholder="手机号" v-model='formdate.telphone' maxlength="11">
+						<div class="code" @touchend="getCode">{{isGetting?time+'s':'获取验证码'}}</div>
+					</div>
+					<input type="text" style="z-index:1000" placeholder="验证码" class="verification-code"  v-model='formdate.verificationCode' maxlength="6">
+					<div class="btn" @touchend='bindTel'>立即绑定</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- 成功 -->
+		<div class="layer" v-if="layer==2">
+			<div class="mask"></div>
+			<div class="layer-content" style="width:100%">
+				<img src="./zy.png" alt="" style="width: 100%;height: 900px;">
+				<!-- <div class="close" @click="tolayer(0)"><img src="../h5/lib/image/shareActivity/xxtz2@2x.png" alt=""></div> -->
+				<!-- <div class="info">
+					<div style="position:relative">
+						<img class="info-code" src="https://www.yiqilaiwang.com/img/wx_qrcode.7b48a346.png" alt="">
+					</div>
+					<h3 style="margin:20px 0">报名成功</h3>
+					<h4>扫码关注公众号获取更多信息～</h4>
+				</div> -->
+			</div>
+		</div>
+		<!-- <div class="nothing" :style="{marginTop:(upload ? '':'0')}" v-show="!detail || detail.recommendStatus ==2">
+			<div>
+				<img :src="nothingImg" alt="">
+				<p v-show="detail&&detail.recommendStatus ==2">此内容已被平台下架</p>
+			</div>
+		</div> -->
+
+		<div class="barrage_area" v-if="layer==4">
+			<!-- 弹幕 -->
+			<div class="dmGroup" v-for="(item,index) in dmData" :key="index"
+				v-bind:style="{top:item.top +'%',animationName:'dmAnimation',animationDuration:item.time + 's',animationTimingFunction:'linear',animationDelay:index*3+'s',animationIterationCount:'infinite',animationPlayState:'running'}">
+				<div class="dmItem">
+					<div class="dm">
+						<div class="avatarBox">
+							<img :src="item.avatarUrl" class="avatar" />
+						</div>
+						<span class="dm-content">{{ item.nickName }} 刚刚发来贺电!</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

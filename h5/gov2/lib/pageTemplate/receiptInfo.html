@@ -1,0 +1,65 @@
+<link type="text/css" rel="stylesheet" href="../lib/mobile/mobileDist/styles/receiptInfo.css">
+<div class="receiptInfo_contain page_wrapper clearfix ps-r">
+    <div class="header orange">
+        <div class="back pull-left back-fa his-back" role="button"><i class="fa fa-angle-left"></i></div>
+        <div class="title-text car_name" bt-data-bind="name">发票信息</div>
+    </div>
+
+    <section class="p10 bg-white invoice-title mb15">
+        <h4 class="text-gray pb10 f16 text-dark">发票抬头</h4>
+        <div class="info-input ps-r">
+            <input type="text"
+                   placeholder="请输入个人身份证号/单位名称,必填"
+                   data-type="title"
+                   class="invoice-title-s p15 f12 invoice-title-input invoice-title-c needsclick"
+                   autocomplete="off">
+
+            <div class="history-info-title bg-white ps-a pl20 history-info" id="invoice-title-input">
+                <!--<p class="info bdb1 pt10 pb10 f18 text-gray">小明</p>-->
+                <!--<p class="info bdb1 pt10 pb10 f18 text-gray">广州某某公司</p>-->
+            </div>
+        </div>
+        <h4 class="text-gray pb10 pt5 f16 text-dark">纳税人识别号</h4>
+        <div class="info-input ps-r">
+            <input type="text"
+                   placeholder="请输入纳税人识别号,非必填"
+                   data-type="no"
+                   class="invoice-no-s p15 f12 invoice-title-input invoice-no-c needsclick"
+                   autocomplete="off">
+
+            <div class="history-info-no bg-white ps-a pl20 history-info" id="invoice-no-input">
+                <!--<p class="info bdb1 pt10 pb10 f18 text-gray">小明</p>-->
+                <!--<p class="info bdb1 pt10 pb10 f18 text-gray">广州某某公司</p>-->
+            </div>
+        </div>
+
+        <h4 class="text-gray pb10 pt5 f16 text-dark">电子邮箱</h4>
+        <div class="info-input ps-r">
+            <input type="text"
+                   placeholder="请输入电子邮箱"
+                   data-type="email"
+                   class="invoice-email-s p15 f12 invoice-title-input invoice-email-c needsclick"
+                   autocomplete="off">
+
+            <div class="history-info-email bg-white ps-a pl20 history-info" id="invoice-email-input">
+                <!--<p class="info bdb1 pt10 pb10 f18 text-gray">小明</p>-->
+                <!--<p class="info bdb1 pt10 pb10 f18 text-gray">广州某某公司</p>-->
+            </div>
+        </div>
+    </section>
+
+    <section class="p10 bg-white invoice-content mb15">
+        <h4 class="text-gray pb10 f16 text-dark">发票内容</h4>
+        <div class="p15 text-gray">
+            <span class="content pr30 orange"><i class="fa fa-check-circle f20 pr10"></i><span class="detail f16">明细</span></span>
+            <span class="content pr30"><i class="fa fa-check-circle f20 pr10"></i><span class="f16 no-invoice">不开发票</span></span>
+        </div>
+    </section>
+
+    <p class="confirm pl15 pr15 ps-a"><button type="button" class="mt10 p10 f16 orange-bg btn fwb">确定</button></p>
+
+    <div class="history-info-shade dis-no"></div>
+</div>
+
+
+<script type="text/javascript" src="../lib/mobile/mobileDist/js/receiptInfo.js?v=0.00001"></script>

@@ -1,0 +1,128 @@
+.card-box{
+    background-color: #ffffff;
+    padding: 0 20px;
+}
+.card-box .card-head{
+    padding: 10px 0;
+}
+.card-box .card-head .card-head-title{
+    font-size: 18px;
+    color: #000000;
+    /*font-weight: bold;*/
+}
+
+.card-box .card-body{
+    padding: 10px 0;
+}
+
+.card-box .card-footer{}
+
+.card-box.mgt{
+    margin-top: 5px;
+}
+
+.menus-comp{
+    display: flex;
+    flex-direction: row;
+}
+.menus-comp .menus-comp-item{
+    flex: 1;
+    display: block;
+    padding: 5px 0;
+}
+.menus-comp-item .menus-comp-item-icon{
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+.menus-comp-item-icon img{
+    width: 100%;
+    display: inline-block;
+}
+.menus-comp-item .menus-comp-item-desc{
+    margin-top: 5px;
+    text-align: center;
+    color: #1B1B1B;
+    font-size: 14px;
+
+}
+
+.policys{
+    width: 100%;
+}
+.policy{
+    display: block;
+    box-shadow: 0px 1px 3px #cecece;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    /*border: 1px solid #c8c7cc;*/
+}
+.policy .policy-head{
+    position: relative;
+    padding: 10px;
+}
+.policy-head .policy-head-title{
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 16px;
+    color: #000000;
+    /*height: 68px;*/
+}
+.policy-head .hot{
+    position: absolute;
+    width: 20%;
+    left: -15px;
+    top: -15px;
+}
+.policy-head .hot img{
+    width: 100%;
+}
+.policy .policy-footer{
+    position: relative;
+    width: 100%;
+    padding:10px;
+    display: flex;
+    flex-direction: row;
+}
+.policy-footer div.user{
+    flex: 1;
+    line-height: 20px;
+    height: 20px;
+    color: #456AA7;
+}
+.policy-footer div.user .logo{
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    overflow: hidden;
+    border-radius: 50%;
+    float: left;
+    margin-right: 5px;
+}
+div.user .logo img{
+    width: 100%;
+    height: 100%;
+}
+.policy-footer div.datetime{
+    width: 30%;
+    text-align: right;
+    color: #9B9B9B;
+    height: 20px;
+    line-height: 20px;
+    font-size: 13px;
+}
+
+.policy .policy-footer:after{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 1px;
+    content: '';
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: #dedede;
+}

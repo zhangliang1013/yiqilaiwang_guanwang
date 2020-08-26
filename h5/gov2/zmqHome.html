@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <link rel="stylesheet" href="./lib/assets/styles/normalize.min.css" />
+    <link href="./lib/external/sweet-alert/css/sweet-alert.min.css" rel="stylesheet" type="text/css" />
+    <link href="./lib/external/toastr/css/toastr.min.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="./lib/assets/styles/beastBase.css" />
+    <link type="text/css" rel="stylesheet" href="./lib/styles/beastCommon.css">
+
+    <!-- 轮播器插件 -->
+    <link type="text/css" rel="stylesheet" href="./lib/external/swiper-3.3.1/swiper-3.3.1.min.css">
+
+    <link type="text/css" rel="stylesheet" href="./lib/styles/gslHome.css">
+    <link type="text/css" rel="stylesheet" href="./lib/styles/zmqHome.css">
+    <title>青岛自贸区</title>
+</head>
+
+<body>
+    <div class="app-page-head trans">
+        <div class="app-page-head-hd">
+            <div class="app-page-head-btn">
+                <div class="btn-icon-back" id="page-back-btn" role="button">
+                    <img src="./lib/assets/images/icon/i-arrow-l-w.png" alt="">
+                </div>
+                <div class="btn-icon-close" id="page-close-btn" role="button">
+                    <img src="./lib/assets/images/icon/i-x-w.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="app-page-head-bd">
+            <div class="app-page-head-title" id="pageTitle" style="color: #fff;">
+                青岛市自贸区
+            </div>
+        </div>
+        <!-- <div class="app-page-head-ft">
+    <div class="app-page-head-btn">
+        <div class="btn-icon-more" id="page-more-btn" role="button">
+            <img src="./lib/images/more.png" alt="">
+        </div>
+    </div>
+    <div class="page-mask" id="page-mask-click"></div>
+    <div class="page-mask-menu">
+        <div class="page-head-ft-menus">
+            <div class="triangle-up "></div>
+            <div class="ft-menu brb" id="#page-back-home" role="button">首页</div>
+            <div class="ft-menu" id="#page-share-btn" role="button">分享</div>
+        </div>
+    </div>
+</div> -->
+    </div>
+
+    <!-- <div class="loading-contain" style="display: block;">
+        <img src="./lib/styles/loading-bubbles.svg" fill="blue">
+        <div class="loading-tip">加载中 ...</div>
+    </div> -->
+
+    <div class="p-contain clearfix" id="showContain">
+    </div>
+
+    <script id="tplContain" type='text/ractive'>
+
+        {{#detail}}
+        <div class="col-xs-12 home-bg"></div>
+        <div class="col-xs-12 home-tl">
+            <img class="tl-logo" src="./lib/assets/images/zmq/编组 3@3x.png" alt="自贸区" />
+        </div>
+        <section class="col-xs-12 nav-box mb10">
+            <div class="col-xs-20" role="button" data-jump-url="./infoList.html" data-url-params="type=1201&tb=1201&orgId={{orgId}}">
+                <img src="./lib/assets/images/icon/i-zjzmq.png" alt="">
+                <span>走进自贸区</span>
+            </div>
+
+            <div class="col-xs-20" role="button" data-jump-url="./infoList.html" data-url-params="type=1202&tb=1202&orgId={{orgId}}">
+                <img src="./lib/assets/images/icon/i-zwgk.png" alt="">
+                <span>政务公开</span>
+            </div>
+
+            <div class="col-xs-20" role="button" data-jump-url="./infoList.html" data-url-params="type=1203&tb=1203&orgId={{orgId}}">
+                <img src="./lib/assets/images/icon/i-zjzs.png" alt="">
+                <span>中介招商</span>
+            </div>
+
+            <div class="col-xs-20" role="button" data-jump-url="./infoList.html" data-url-params="type=1204&tb=1204&orgId={{orgId}}">
+                <img src="./lib/assets/images/icon/i-zcfg.png" alt="">
+                <span>政策法规</span>
+            </div>
+
+            <div class="col-xs-20" role="button" data-jump-url="./infoList.html" data-url-params="type=1205&tb=1205&orgId={{orgId}}">
+                <img src="./lib/assets/images/icon/i-qyfc.png" alt="">
+                <span>企业风采</span>
+            </div>
+        </section>
+        {{#if walk && walk.length > 0}}
+        <section class="col-xs-12 list-box">
+            <div class="col-xs-12 b-head">
+                <div class="col-xs-6 h-tl fwb">走进自贸区</div>
+                <div class="col-xs-6 h-extra text-right">
+                    <a class="btn btn-link" href="./infoList.html?type=1201&tb=1201&orgId={{orgId}}">
+                        <span class="btn-txt">查看更多</span>
+                        <img class="btn-r" src="./lib/assets/images/icon/i-arrow-r.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-12 b-body">
+
+                {{#each walk}}
+                <div class="col-xs-12 list-item" role="button" data-jump-url="./infoDetail.html" data-url-params="id={{id}}&type=1201">
+                    <div class="col-xs-7">
+                        <div class="item-tl">{{title}}</div>
+                        <div class="item-rmk">
+                            {{createdDateStr}}
+                        </div>
+                    </div>
+                    <div class="col-xs-5">
+                        <div class="item-pic" style="background-image: url('{{banner}}');"></div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}} {{#if open && open.length > 0}}
+        <section class="col-xs-12 list-box">
+            <div class="col-xs-12 b-head">
+                <div class="col-xs-6 h-tl fwb">政务公开</div>
+                <div class="col-xs-6 h-extra text-right">
+                    <a class="btn btn-link" href="./infoList.html?type=1202&tb=1202&orgId={{orgId}}">
+                        <span class="btn-txt">查看更多</span>
+                        <img class="btn-r" src="./lib/assets/images/icon/i-arrow-r.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-12 b-body">
+
+                {{#each open}}
+                <div class="col-xs-12 list-item" role="button" data-jump-url="./infoDetail.html" data-url-params="id={{id}}&type=1202">
+                    <div class="col-xs-7">
+                        <div class="item-tl">{{title}}</div>
+                        <div class="item-rmk">
+                            {{createdDateStr}}
+                        </div>
+                    </div>
+                    <div class="col-xs-5">
+                        <div class="item-pic" style="background-image: url('{{banner}}');"></div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}} {{#if intermediary && intermediary.length > 0}}
+        <section class="col-xs-12 list-box">
+            <div class="col-xs-12 b-head">
+                <div class="col-xs-6 h-tl fwb">中介招商</div>
+                <div class="col-xs-6 h-extra text-right">
+                    <a class="btn btn-link" href="./infoList.html?type=1203&tb=1203&orgId={{orgId}}">
+                        <span class="btn-txt">查看更多</span>
+                        <img class="btn-r" src="./lib/assets/images/icon/i-arrow-r.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-12 b-body">
+
+                {{#each intermediary}}
+                <div class="col-xs-12 list-item" role="button" data-jump-url="./infoDetail.html" data-url-params="id={{id}}&type=1203">
+                    <div class="col-xs-7">
+                        <div class="item-tl">{{title}}</div>
+                        <div class="item-rmk">
+                            {{createdDateStr}}
+                        </div>
+                    </div>
+                    <div class="col-xs-5">
+                        <div class="item-pic" style="background-image: url('{{banner}}');"></div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}} {{#if law && law.length > 0}}
+        <section class="col-xs-12 list-box">
+            <div class="col-xs-12 b-head">
+                <div class="col-xs-6 h-tl fwb">政策法规</div>
+                <div class="col-xs-6 h-extra text-right">
+                    <a class="btn btn-link" href="./infoList.html?type=1204&tb=1204&orgId={{orgId}}">
+                        <span class="btn-txt">查看更多</span>
+                        <img class="btn-r" src="./lib/assets/images/icon/i-arrow-r.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-12 b-body">
+
+                {{#each law}}
+                <div class="col-xs-12 list-item" role="button" data-jump-url="./infoDetail.html" data-url-params="id={{id}}&type=1204">
+                    <div class="col-xs-7">
+                        <div class="item-tl">{{title}}</div>
+                        <div class="item-rmk">
+                            {{createdDateStr}}
+                        </div>
+                    </div>
+                    <div class="col-xs-5">
+                        <div class="item-pic" style="background-image: url('{{banner}}');"></div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}} {{#if double && double.length > 0}}
+        <section class="col-xs-12 list-box">
+            <div class="col-xs-12 b-head">
+                <div class="col-xs-6 h-tl fwb">企业风采</div>
+                <div class="col-xs-6 h-extra text-right">
+                    <a class="btn btn-link" href="./infoList.html?type=1205&tb=1205&orgId={{orgId}}">
+                        <span class="btn-txt">查看更多</span>
+                        <img class="btn-r" src="./lib/assets/images/icon/i-arrow-r.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-12 b-body">
+
+                {{#each double}}
+                <div class="col-xs-12 list-item" role="button" data-jump-url="./infoDetail.html" data-url-params="id={{id}}&type=1205">
+                    <div class="col-xs-7">
+                        <div class="item-tl">{{title}}</div>
+                        <div class="item-rmk">
+                            {{createdDateStr}}
+                        </div>
+                    </div>
+                    <div class="col-xs-5">
+                        <div class="item-pic" style="background-image: url('{{banner}}');"></div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </section>
+        {{/if}}
+        <!-- <section class="p-footer">
+            <button class="btn btn-link">
+                <img class="btn-l" src="./lib/assets/images/icon/i-gz.png" alt="">
+                <span class="btn-txt">关注</span>
+            </button>
+        </section> -->
+        {{/detail}}
+    </script>
+
+    <script src="./lib/external/jquery1.11.1.min.js"></script>
+    <script src="./lib/external/ractive.min.js"></script>
+    <script src="./lib/external/sweet-alert/sweet-alert.min.js" type="text/javascript"></script>
+    <script src="./lib/external/toastr/toastr.min.js" type="text/javascript"></script>
+
+    <script src="./lib/utils/beastTools.js" type="text/javascript"></script>
+    <script src="./lib/js/beastBase.js"></script>
+    <script src="./lib/external/fastclick.js" type="text/javascript"></script>
+    <!-- <script src="./lib/external/jquery.history.js" type="text/javascript"></script> -->
+
+    <script src="./lib/external/swiper-3.3.1/swiper-3.3.1.jquery.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="./lib/js/zmqHome.js"></script>
+</body>
+
+</html>

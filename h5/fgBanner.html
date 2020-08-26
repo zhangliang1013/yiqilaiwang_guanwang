@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="divport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./lib/css/fgdk.css?t=2020127" />
+    <link rel="stylesheet" href="./lib/css/clear.css?t=?t=2020120"/>
+    <link rel="shortcut icon" href="./lib/image/fgBanner/h5fxtb@2x.png" type="image/x-icon" />
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <title>一起来往-赋能组织，活力共赢</title>
+    <script type="text/javascript" src="./lib/commonJs/common.js"></script>
+    <script type="text/javascript" src="./lib/commonJs/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script>document.write('<script type="text/javascript" src="./lib/js/fgBanner.js?t=' + new Date().getTime() + '"><\/script>')</script>
+   
+</head>
+
+<body>
+    <div class="checkSelf" id="index" v-cloak>
+        <!-- 顶部 -->
+        <div class="sd-title" v-show="upload">
+            <div class="sd-title-left">
+                <img src='./lib/image/fgBanner/xxtz2@2x.png' alt="" class="sd-title-left-delete" @click="upload=false">
+                <div class="sd-title-left-sign">
+                    <img src="./lib/image/fgBanner/h5fxtb@2x.png" alt="" class="sd-title-left-sign-logo">
+                    <div class="sd-title-left-sign-p">
+                        <p>一起来往</p>
+                        <p>赋能组织，活力共赢</p>
+                    </div>
+                </div>
+            </div>
+            <a class="sd-title-right" href="https://www.yiqilaiwang.com/h5openapp2/app.html">下载APP</a>
+        </div>
+        <!-- 海报 -->
+        <!-- v-show="detail && type == 0 && detail.recommendStatus !=2" -->
+        <div class="content" :style="{marginTop:(upload ? '':'0')}">
+            <img src="./lib/image/fgBanner/haibao1.png" style="width: 100%; height: 100%; display: block;" v-if="tableData.isOrg === '0'">
+            <img src="./lib/image/fgBanner/haibao.png" style="width: 100%; height: 100%; display: block;position: relative;" v-else>
+            <div class="cal-box" v-if="tableData.isOrg === '0'">
+                <div class="cal-title">
+                    <img :src="avatarUrl" alt="" class="title-arr">
+                    <div class="right">
+                        <li class="title-top">{{calName}}</li>
+                        <li class="title-bot">复工打卡第 <span>{{calendar.length}}</span>&nbsp;天</li>
+                    </div>
+                </div>
+                <div class="calendar">
+                    <el-calendar>
+                        <template
+                            slot="dateCell"
+                            slot-scope="{date, data}">
+                            <p>
+                                <span v-for="(item,index) in calendar" :key="index" v-if="item == data.day" class="calendar-has"></span>
+                                <span class="span">{{ data.day.split('-').slice(2).join('') }}</span>
+                                <span class="span" style="color:#ffffff" v-for="(item,index) in calendar" :key="index" v-if="item == data.day">{{ data.day.split('-').slice(2).join('') }}</span>
+                                <span class="point" v-for="(item,index) in calendar" :key="index"  v-if="item == data.day && dealCal(data.day)"></span>
+                            </p>
+                        </template>
+                    </el-calendar>
+                </div>
+            </div>
+            <!-- 遮罩层 -->
+            <div class="marker"></div>
+        </div>
+    </div>
+</body>
+
+</html>

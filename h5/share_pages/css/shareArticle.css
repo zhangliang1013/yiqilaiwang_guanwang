@@ -1,0 +1,158 @@
+html,body{
+    margin: 0px;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-size: 14px;
+    text-align: left;
+}
+div{
+    box-sizing: border-box;
+}
+.hide{
+    display: none;
+}
+.title{
+    width: 100%;
+    line-height: 1.5;
+    font-size: 20px;
+    font-weight: 800;
+    padding: 10px 15px;
+}
+.author{
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+    height: 40px;
+}
+.author img{
+    float: left;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+.author-info{
+    float: left;
+    padding-left: 15px;
+    height: 100%;
+}
+.author-name{
+    height: 25px;
+    line-height: 25px;
+    font-size: 14px;
+    color: rgb(87, 111, 153);
+}
+.pub-time{
+    height: 15px;
+    font-size: 12px;
+    color: rgb(182, 182, 182);
+}
+.article{
+    position: relative;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+}
+.article section{
+    width: 100%;
+    max-height: 300px;
+    overflow: hidden;
+    color: rgb(100,100,100);
+}
+.lg-cover{
+    position: absolute;
+    left: 0px;
+    bottom: -1px;
+    width: 100%;
+    height: 30px;
+    background: -webkit-linear-gradient(top,rgba(255,255,255,0),#fff);
+}
+.down-arrow{
+    width: 100%;
+    height: 30px;
+    background: url(../images/down-arrow.jpg) no-repeat;
+    background-position: 50% 0%;
+    background-size: auto 80%;
+}
+.open-btn{
+    margin-left: 10%;
+    width: 80%;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 20px;
+    background: rgb(33, 100, 235);
+    color: white;
+    text-align: center;
+}
+.read-cnt{
+    width: 100%;
+    height: 30px;
+    line-height: 40px;
+    font-size: 12px;
+    color: rgb(182, 182, 182);
+    text-align: center;
+}
+.article-list{
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%;
+    min-height: 100px;
+    border-top: 3px solid rgb(250,250,250);
+}
+.list-title{
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 18px;
+}
+.list-item{
+    padding-top: 10px;
+    width: 100%;
+    height: 80px;
+    border-bottom: 1px solid rgb(250,250,250);
+}
+.item-title{
+    float: left;
+    width: 68%;
+    height: 60px;
+    line-height: 20px;
+    color: rgb(100,100,100);
+    overflow: hidden;
+}
+.item-pic{
+    float: right;
+    width: 28%;
+    height: 60px;
+    background: url(../images/pic1.jpg) no-repeat;
+    background-size: 100% 100%;
+}
+.modal-layer{
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+}
+.dlg-open-app{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -175px;
+    margin-top: -75px;
+    padding-top: 55px;
+    width: 350px;
+    height: 150px;
+    background: white;
+    border-radius: 10px;
+}
+.close-dlg{
+    position: absolute;
+    left: 50%;
+    bottom: -50px;
+    margin-left: -15px;
+    width: 30px;
+    height: 30px;
+    background: url(../images/close.png) no-repeat;
+    border-radius: 15px;
+}

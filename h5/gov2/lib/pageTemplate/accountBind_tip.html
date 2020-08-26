@@ -1,0 +1,45 @@
+<link type="text/css" rel="stylesheet" href="../lib/mobile/mobileDist/styles/accountBind_tip.css">
+<style type="text/css">
+    #nb_icon_wrap{
+        display: none!important;
+    }
+</style>
+<div class="accountBind_fail_content clearfix">
+
+    <section class="bindAccountf fail bg-white">
+        <p class="text-center pt20">
+            <i class="iconfont orange tip-icon">&#xe61d;</i>
+        </p>
+        <h3 class="text-center fwb orange tip-tl">抱歉，绑定失败！</h3>
+        <h4 class="text-center tip-msg f14">请拨打<strong class="f16 fwb" id="contact_tip_show"> 96917 </strong>联系客服更新资料或开户</h4>
+        <p class="text-center pt15">
+            <a role="button" id="contact_tip" href="tel:96917" class="onekeyCall orange mr5">一键拨号</a>
+            <a role="button" id="contact_service" href="javascript:;" class="orange onekeyCall ml5">联系客服</a>
+        </p>
+        <div class="pt15 f16 text-gray text-center">- 或者 -</div>
+        <p class="text-center p10 pb20">
+            <button role="button" class="act-btn pl20 pr20 f16 pt5 pb5 applyBindBtn">申请开户</button>
+        </p>
+    </section>
+
+    <div class="shade"></div>
+
+</div>
+<script>
+//    var autoKey = '536209b690d10aaeb6895ed4cb936705';
+    //window.serviceKey
+    var autoKey =  window.serviceKey[window.beastBase.getFirstHostName()];
+    $(function(){
+        $('#contact_service').on('click',function(e){
+            e.preventDefault();
+            $('#nb_icon_wrap .nb-icon-wrap-base').click();
+        });
+    });
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?"+autoKey;
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>

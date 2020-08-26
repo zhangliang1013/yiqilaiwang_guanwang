@@ -1,0 +1,60 @@
+<div class="app-page-head">
+    <div class="app-page-head-hd">
+        <div class="app-page-head-btn">
+            <div class="btn-icon-back" id="page-back-btn" role="button">
+                <img src="./lib/images/back.png" alt="">
+            </div>
+            <div class="btn-icon-close" id="page-close-btn" role="button">
+                <img src="./lib/images/close.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="app-page-head-bd">
+        <div class="app-page-head-title">
+            青岛市工商联
+        </div>
+    </div>
+    <!-- <div class="app-page-head-ft">
+        <div class="app-page-head-btn">
+            <div class="btn-icon-more" id="page-more-btn" role="button">
+                <img src="./lib/images/more.png" alt="">
+            </div>
+        </div>
+        <div class="page-mask" id="page-mask-click"></div>
+        <div class="page-mask-menu">
+            <div class="page-head-ft-menus">
+                <div class="triangle-up "></div>
+                <div class="ft-menu brb" id="#page-back-home" role="button">首页</div>
+                <div class="ft-menu" id="#page-share-btn" role="button">分享</div>
+            </div>
+        </div>
+    </div> -->
+</div>
+
+<script>
+
+    $(function () {
+        window.C_PageHead = function (options) {
+            var reObj = {};
+
+            if (options) {
+
+                if (options.container && $(options.container) && $(options.container).length > 0) {
+                    reObj.container = options.container;
+
+                } else {
+                    console.error('C_PageHead 缺少 options.container, 或者 $(' + options.container + ') 不存在');
+                    return false;
+                }
+
+            } else {
+                console.error('C_PageHead 缺少 options');
+                return false;
+            }
+
+            $(reObj.container).find('.app-page-head-title').text($.trim(options.title));
+
+            return reObj;
+        }
+    });
+</script>

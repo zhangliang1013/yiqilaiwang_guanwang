@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport"  content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+		<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+		<meta http-equiv="Expires" content="0">
+		<link rel="stylesheet" href="./css/sharePost.css?t=20200738"/>
+		<link rel="stylesheet" href="./css/swiper.min.css" />
+		<script type="text/javascript" src="../lib/commonJs/common.js"></script>
+		<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+		<script type="text/javascript" src="js/swiper.min.js"></script>
+		<script type="text/javascript" src="../lib/commonJs/vue.min.js"></script>
+		<script type="text/javascript" src="https://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+		<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+		<script type="text/javascript" src="js/openAPP.js?v=4"></script>
+		<script type="text/javascript" src="./js/layer_mobile/layer.js"></script>
+		<script>document.write('<script type="text/javascript" src="js/sharePost.js?t=' + new Date().getTime() + '"><\/script>')</script>
+		<title>一起来往 . 圈子 . 帖子</title>
+	</head>
+	<body>
+		<div class="hide body" id="index">
+			<div class="row"></div>
+			<div class="author clear">
+				<img src="./images/user.jpg">
+				<div class="author-info">
+					<div class="author-name" @click="toApp">
+						<div></div>
+						<div style="font-size: 12px;"></div>
+					</div>
+					<div class="pub-time">2020-06-01 15:30</div>
+				</div>
+			</div>
+			<div class="article" aid="0">
+				<section>
+					<p>...</p>
+				</section>
+				<div class="img-list hide clear">
+					<div class="video-box hide">
+						<img src="" class="img">
+						<img src="./images/play.png" alt="" class="play" @click="openVideo">
+					</div>
+					<div class="img-box fl hide">
+						<img src="">
+					</div>
+					<div class="img-box fl hide">
+						<img src="">
+					</div>
+					<div class="img-box fl hide">
+						<img src="">
+					</div>
+					<div class="img-box fl hide">
+						<img src="">
+					</div>
+					<div class="img-box fl hide">
+						<img src="">
+					</div>
+					<div class="img-box fl hide">
+						<img src="">
+					</div>
+					<div class="img-box fl hide">
+						<img src="">
+					</div>
+					<div class="img-box fl hide">
+						<img src="">
+					</div>
+					<div class="img-box fl hide">
+						<img src="">
+					</div>
+				</div>
+			</div>
+			<div class="c-banner" v-if='detail&& detail.activityId' @click='toActivity'>
+				<img :src="detail.act.actPoster" alt="" class="banner-bg">
+				<div class="enter-btn act-btn">参加活动</div>
+				<div class="banner-info">
+					<h3 class="banner-info-h3">{{detail.act.topic}}</h3>
+					<div class="banner-info-remark">
+						<div class="item" v-if="detail.act.actStartTime">
+							<img src="./images/sytj1.10@3x.png" alt="">
+							<span>{{detail.act.actStartTime}}</span>&nbsp;&nbsp;&nbsp;
+						</div>
+						<div class="item" v-if="detail.act.actAddress">
+							<img src="./images/sytj1.11@3x.png" alt="">
+							<span>{{detail.act.actAddress}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="fans-list">
+				<img class="fans-pic hide" src="images/u1.jpg">
+				<img class="fans-pic hide" src="images/u1.jpg">
+				<img class="fans-pic hide" src="images/u1.jpg">
+				<img class="fans-pic hide" src="images/u1.jpg">
+				<img class="fans-pic hide" src="images/u1.jpg">
+				<img class="fans-pic hide" src="images/u1.jpg">
+				<div class="agreed" v-if='isThumbs==1'>已赞</div>
+				<div class="cmt" @click='toApp'>0</div>
+				<div :class="[{'agree1': isThumbs}, 'agree']" @click='apply(1)'>0</div>
+			</div>
+			<div class="comments hide">
+				<div class="cmt-item hide">
+					<div class="cmt-user"></div>
+					<div class="cmt-img hide">
+						<img src="./images/hyzjj16@3x.png" alt="">
+						<span>查看图片</span>
+					</div>
+					<div class="cmt-text">...</div>
+				</div>
+				<div class="cmt-item hide">
+					<div class="cmt-user"></div>
+					<div class="cmt-img hide">
+						<img src="./images/hyzjj16@3x.png" alt="">
+						<span>查看图片</span>
+					</div>
+					<div class="cmt-text">...</div>
+				</div>
+				<div class="cmt-item hide">
+					<div class="cmt-user"></div>
+					<div class="cmt-img hide">
+						<img src="./images/hyzjj16@3x.png" alt="">
+						<span>查看图片</span>
+					</div>
+					<div class="cmt-text">...</div>
+				</div>
+				<div class="cmt-item hide more" @click='toApp'> 
+					<span class="cmt-user" style="max-width:50%;display: inline-block;vertical-align: middle;">查看更多评论...</span>
+					<img src="./images/rightb.png" alt="" style="display: inline-block;vertical-align: middle;height: 12px;">
+				</div>
+			</div>
+			<div class="row"></div>
+
+			<!-- 活动卡片 -->
+			<div class="org">
+				<img src="./images/user.jpg">
+				<div class="org-info">
+					<div class="org-name"></div>
+					<div class="mem-info"></div>
+				</div>
+				<div class="enter-btn" @click="apply(2)">{{isJoin==1?'进入':'加入'}}圈子</div>
+			</div>
+
+			<div class="row"></div>
+			<div class="row"></div>
+
+			<div class="open-btn" @click="toApp">打开APP阅读全文</div>
+			<div class="read-cnt">（已有1010人阅读）</div>
+			<br>
+			<div class="article-list">
+				<div class="list-title">热门推荐</div>
+				<div class="list-item hide" aid="1" @click='toApp'>
+					<div class="item-title">...</div>
+					<div class="item-pic"></div>
+				</div>
+			</div>
+			<p>&nbsp;</p>
+			<div class="modal-layer hide">
+				<div class="dlg-open-app">
+					<div class="close-dlg"></div>
+					<div class="open-btn" @click='toApp'>打开APP阅读全文</div>
+				</div>
+			</div>
+			<!-- 视频播放 -->
+			<div class="layer-video hide">
+				<div class="mask"></div>
+				<div class="layer-content">
+					<div class="close" @click="close"><img src="./images/xxtz2@2x.png" alt=""></div>
+					<div class="info">
+						<video id="video" 
+							autoplay src="" 
+							x5-video-player-type="h5-page" 
+							controlslist="nodownload nofullscreen" 
+							webkit-playsinline="true"
+							x-webkit-airplay="true"
+							playsinline="true" 
+							type='video/mp4'  
+							style="width:90%"  
+							controls></video>
+						<img src="" id="img" style="width:100%" alt="">
+					</div>
+				</div>
+			</div>
+
+			<!-- 绑定手机号 -->
+			<div class="layer" v-if="layer==3">
+				<div class="mask"></div>
+				<div class="layer-content">
+					<div class="close" @touchend="tolayer(0)"><img src="../lib/image/shareActivity/xxtz2@2x.png" alt=""></div>
+					<div class="info">
+						<h3>请绑定手机号</h3>
+						<div class="verification-code">
+							<input type="text" placeholder="手机号" v-model='formdate.telphone' maxlength="11">
+							<div class="code" @touchend="getCode">{{isGetting?time+'s':'获取验证码'}}</div>
+						</div>
+						<input type="text" style="z-index:1000" placeholder="验证码" class="verification-code"  v-model='formdate.verificationCode' maxlength="6">
+						<div class="btn" @touchend='bindTel'>绑定</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="layer" v-if="layer==4">
+				<div class="mask" @click="tolayer(0)"></div>
+					<div class="c-App-box">
+						<div class="c-title">您已成功加入了"{{orgName}}"，请打开一起来往APP和众位企业家一起热烈交流吧。</div>
+						<div class="c-App" @click='toApp();layer=0'>打开APP查看</div>
+					</div>
+			</div>
+		</div>
+	</body>
+</html>

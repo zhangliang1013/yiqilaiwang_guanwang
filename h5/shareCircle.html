@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="divport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=0.5"/>
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<link rel="stylesheet" href="./lib/css/shareCircle.css?t=2020127"/>
+	<link rel="stylesheet" href="./lib/css/clear.css?t=2020120"/>
+	<link rel="shortcut icon" href="./lib/image/h5fxtb@2x.png" type="image/x-icon" />
+	<title>一起来往·圈子</title>
+	<script type="text/javascript" src="./lib/commonJs/common.js"></script>
+	<script type="text/javascript" src="./lib/commonJs/vue.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+	<script type="text/javascript" src="./lib/commonJs/layer_mobile/layer.js"></script>
+	<script>document.write('<script type="text/javascript" src="./lib/js/shareCircle.js?t=' + new Date().getTime() + '"><\/script>')</script>
+</head>
+<body>
+	<div class="shareCircle" id="index" v-cloak>
+		<!-- 顶部 -->
+		<!-- <div class="sd-title" v-show="upload">
+			<div class="sd-title-left">
+					<img src='./lib/image/xxtz2@2x.png' alt="" class="sd-title-left-delete" @click="upload=false">
+					<div class="sd-title-left-sign">
+							<img src="./lib/image/shareDetails/h5fxtb@2x.png" alt="" class="sd-title-left-sign-logo">
+							<div class="sd-title-left-sign-p">
+									<p>一起来往</p>
+									<p>赋能组织，活力共赢</p>
+							</div>
+					</div>
+			</div>
+			<a class="sd-title-right" href="https://www.yiqilaiwang.com/h5openapp2/app.html">下载APP</a>
+		</div> -->
+		<!-- 圈子 -->
+		<!-- <div class="content" v-show="detail" :style="{marginTop:(upload ? '':'0')}"> -->
+		<div class="content" v-show="detail" :style="{marginTop:0}">	
+      <div class="c-banner">
+        <img :src="detail.coverUrl ? detail.coverUrl : detail.orgUrl" alt="" class="banner-bg">
+        <div class="banner-info">
+          <div class="banner-top clear">
+            <img class="fl" :src="detail.orgUrl" alt="">
+            <div class="fl banner-title">
+              <h5 class="ellipsis">{{detail.orgName}}</h5>
+              <h6 class="ellipsis">{{detail.orgIntroduce}}</h6>
+            </div>
+          </div>
+          <div class="banner-bot">
+            <div class="banner-bot-intro clear">
+              <div class="fl banner-bot-intro-l clear">
+                <img class="fl" :src="detail.avatarUrl" alt="">
+                <div class="right fl">
+                  <h5>{{detail.applyName}}</h5>
+                  <div class="circle">圈主</div>
+                </div>
+              </div>
+              <div class="fr banner-bot-intro-r">
+                <div class="banner-bot-intro-r-img">
+                  <img v-for="(item,index) in detail.userUrlList" :key="index" :src="item" alt="">
+                </div>
+                <span>成员{{detail.peopleNumber}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+	  </div>
+	  <div class="banner-bot-tag clear">
+		<span class="fl" v-for="(item,index) in detail.friendsLists" ::key="index" v-if='index<6' @click='tolayer(4)'>{{item}}</span>
+	  </div>
+	  <div v-if='detail.friendsLists && detail.friendsLists.length>6' class="tag-more" @click='tolayer(4)'>更多标签</div>
+      <div class="c-content"><span>{{detail.orgName}}</span>是在“一起来往”商务社交平台上开设的社交圈子，<span>{{detail.applyName}}</span>诚邀您莅临指导，与众位企业家一起共商盛举。</div>
+      <div class="c-more">
+        <!-- <img  class="c-more-content-more" src="./lib/image/shareCircle/zkkkk23kk@3x.png" alt="">
+        <a class="c-more-App" href="https://www.yiqilaiwang.com/h5openapp2/app.html" target='_blank'>打开APP查看</a>
+		<div class="c-more-read">（已有{{detail.browseCount}}人阅读）</div> -->
+		<div class="c-more-App" v-if='detail.isOrg==3' @click='apply'>立即加入</div>
+		<div class="c-more-App" style="background: #999999;color: #ffffff;" v-if='detail.isOrg!=3'>已加入</div>
+      </div>
+      
+			<div class="c-hot">
+				<h5>热门推荐</h5>
+				<div class="c-hot-item" v-for="(item,index) in recommend" @click='tolayer(4)'>
+					<img :src="item.orgUrl" alt="">
+					<div class="c-hot-item-right">
+						<h5>{{item.orgName}}</h5>
+						<h6>圈主 {{item.applyName}}</h6>
+						<!-- <h6>成员 {{item.applyName}}</h6>
+						<h6>帖子{{item.applyName}}</h6> -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="nothing" :style="{marginTop:(upload ? '':'0')}" v-show="!detail || detail.recommendStatus ==2">
+			<div>
+				<img :src="nothingImg" alt="">
+				<p v-show="detail&&detail.recommendStatus ==2">此内容已被平台下架</p>
+			</div>
+		</div>
+		<!-- 绑定手机号 -->
+		<div class="layer" v-if="layer==3">
+			<div class="mask"></div>
+			<div class="layer-content">
+				<div class="close" @click="tolayer(0)"><img src="./lib/image/shareActivity/xxtz2@2x.png" alt=""></div>
+				<div class="info">
+					<h3>请输入您的信息</h3>
+					<!-- <input type="text" placeholder="昵称" v-model='formdate.name'> -->
+					<div class="verification-code">
+						<input type="text" placeholder="手机号" v-model='formdate.telphone' maxlength="11">
+						<div class="code" @touchend="getCode">{{isGetting?time+'s':'获取验证码'}}</div>
+					</div>
+					<input type="text" style="z-index:1000" placeholder="验证码" class="verification-code"  v-model='formdate.verificationCode' maxlength="6">
+					<div class="btn" @click='bindTel'>加入圈子</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="layer" v-if="layer==4">
+			<div class="mask" @click="tolayer(0)"></div>
+				<div class="c-App-box">
+					<div v-if='istxt' class="c-title">您已成功加入了"{{detail.orgName}}"，请打开一起来往APP和众位企业家一起热烈交流吧。</div>
+					<div class="c-App" @click='toApp'>打开APP查看</div>
+				</div>
+		</div>
+	</div>
+</body>
+</html>

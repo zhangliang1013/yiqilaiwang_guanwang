@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <link rel="stylesheet" href="./lib/assets/styles/normalize.min.css" />
+    <link href="./lib/external/sweet-alert/css/sweet-alert.min.css" rel="stylesheet" type="text/css" />
+    <link href="./lib/external/toastr/css/toastr.min.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="./lib/assets/styles/beastBase.css" />
+    <link type="text/css" rel="stylesheet" href="./lib/styles/beastCommon.css">
+
+    <!-- 轮播器插件 -->
+    <link type="text/css" rel="stylesheet" href="./lib/external/swiper-3.3.1/swiper-3.3.1.min.css">
+
+    <link type="text/css" rel="stylesheet" href="./lib/styles/shIntro.css">
+    <title>商会介绍</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="app-page-head">
+        <div class="app-page-head-hd">
+            <div class="app-page-head-btn">
+                <div class="btn-icon-back" id="page-back-btn" role="button">
+                    <img src="./lib/images/back.png" alt="">
+                </div>
+                <div class="btn-icon-close" id="page-close-btn" role="button">
+                    <img src="./lib/images/close.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="app-page-head-bd">
+            <div class="app-page-head-title" id="pageTitle">
+                商会介绍
+            </div>
+        </div>
+        <!-- <div class="app-page-head-ft">
+    <div class="app-page-head-btn">
+        <div class="btn-icon-more" id="page-more-btn" role="button">
+            <img src="./lib/images/more.png" alt="">
+        </div>
+    </div>
+    <div class="page-mask" id="page-mask-click"></div>
+    <div class="page-mask-menu">
+        <div class="page-head-ft-menus">
+            <div class="triangle-up "></div>
+            <div class="ft-menu brb" id="#page-back-home" role="button">首页</div>
+            <div class="ft-menu" id="#page-share-btn" role="button">分享</div>
+        </div>
+    </div>
+</div> -->
+    </div>
+
+    <!-- <div class="loading-contain" style="display: block;">
+        <img src="./lib/styles/loading-bubbles.svg" fill="blue">
+        <div class="loading-tip">加载中 ...</div>
+    </div> -->
+
+    <div class="p-contain clearfix" id="showContain">
+        <section class="col-xs-12 nav-tab">
+            <div class="col-xs-20 active" data-tab="#jjPanel">
+                <span>简介</span>
+            </div>
+            <div class="col-xs-20" data-tab="#zcPanel">
+                <span>章程</span>
+            </div>
+            <div class="col-xs-20" data-tab="#zzjgPanel">
+                <span>组织机构</span>
+            </div>
+            <div class="col-xs-20" data-tab="#yzPanel">
+                <span>会长</span>
+            </div>
+            <div class="col-xs-20" data-tab="#hyfcPanel">
+                <span>会员风采</span>
+            </div>
+
+        </section>
+
+        <section class="nav-tab-content col-xs-12">
+            <!-- 简介 -->
+            <section class="nav-tab-panel active" id="jjPanel">
+                <div class="bg-white mb10" style="padding: 10px 20px;">简介简介简介简介</div>
+                <div class="bg-white" style="padding: 10px 20px;">
+                    <div class="f18 mb15">联系我们</div>
+                    <div class="contact-item">
+                        <img src="./lib/assets/images/icon/i-tel.png" alt="">
+                        <span>电话：</span>
+                        <a href="tel:0531-87106999">0531-87106999</a>
+                    </div>
+                    <div class="contact-item">
+                        <img src="./lib/assets/images/icon/i-print.png" alt="">
+                        <span>传真：</span>
+                        <span>0531-87106999</span>
+                    </div>
+                    <div class="contact-item">
+                        <img src="./lib/assets/images/icon/i-msg.png" alt="">
+                        <span>电子邮箱：</span>
+                        <span>xxxx@xx.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <img src="./lib/assets/images/icon/i-map.png" alt="">
+                        <span>地址：</span>
+                        <span>地址地址地址地址地址</span>
+                    </div>
+                </div>
+            </section>
+            <!-- 章程 -->
+            <section class="nav-tab-panel" id="zcPanel">
+            </section>
+            <!-- 组织机构 -->
+            <section class="nav-tab-panel" id="zzjgPanel">
+            </section>
+            <!-- 会长 -->
+            <section class="nav-tab-panel" id="yzPanel">
+                <div class="head-bg"></div>
+                <div class="head-info">
+                    <div class="head-avatar" style="background-image: url('./lib/assets/images/gsl/demo-pic3.png');"></div>
+                    <div class="head-name">张三丰</div>
+                    <div class="head-desc">汉族 | 1990-03-22 | 山东 青岛</div>
+                </div>
+                <div class="msg-info">
+                    <div class="info-box">
+                        <div class="info-head">
+                            <img src="./lib/assets/images/icon/i-xrzw.png" alt="">
+                            <span>现任职务</span>
+                        </div>
+                        <div class="info-p">描述描述描述描述描述描述描述描述描述描述描述</div>
+                        <div class="info-p">描述描述描述描述描述描述描述描述描述描述描述</div>
+                        <div class="info-p">描述描述描述描述描述描述描述描述描述描述描述</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-head">
+                            <img src="./lib/assets/images/icon/i-lrzw.png" alt="">
+                            <span>历任职务</span>
+                        </div>
+                        <div class="info-p">描述描述描述描述描述描述描述描述描述描述描述</div>
+                        <div class="info-p">描述描述描述描述描述描述描述描述描述描述描述</div>
+                        <div class="info-p">描述描述描述描述描述描述描述描述描述描述描述</div>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-head">
+                            <img src="./lib/assets/images/icon/i-zycj.png" alt="">
+                            <span>主要成就</span>
+                        </div>
+                        <div class="info-p">描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述</div>
+                    </div>
+                </div>
+            </section>
+            <!-- 会员风采 -->
+            <section class="nav-tab-panel" id="hyfcPanel">
+                <section class="col-xs-12 list-box">
+                    <div class="col-xs-12 b-body">
+                        <div class="col-xs-12 list-item">
+                            <div class="col-xs-5 item-pic-box">
+                                <div class="item-pic" style="background-image: url('./lib/assets/images/gsl/demo-pic3.png');"></div>
+                            </div>
+                            <div class="col-xs-7 item-msg">
+                                <div class="item-tl-row">
+                                    <span class="item-tl">孙行者</span>
+                                </div>
+                                <div class="item-rmk">
+                                    汉族 | 1990-03-22 | 山东 青岛
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 list-item">
+                            <div class="col-xs-5 item-pic-box">
+                                <div class="item-pic" style="background-image: url('./lib/assets/images/gsl/demo-pic3.png');"></div>
+                            </div>
+                            <div class="col-xs-7 item-msg">
+                                <div class="item-tl-row">
+                                    <span class="item-tl">孙行者</span>
+                                </div>
+                                <div class="item-rmk">
+                                    汉族 | 1990-03-22 | 山东 青岛
+                                </div>
+                            </div>
+                            <div class="col-xs-12 contact-more">
+                                <div class="contact-item col-xs-12">
+                                    <img src="./lib/assets/images/icon/i-xrzw-g.png" alt="">
+                                    <span>现任职务：</span>
+                                    <span>职务职务职务职务 - 董事长</span>
+                                </div>
+                                <div class="contact-item col-xs-12">
+                                    <img src="./lib/assets/images/icon/i-lrzf-g.png" alt="">
+                                    <span>历任职务职务：</span>
+                                    <span>职务职务职务职务 - 董事长</span>
+                                </div>
+                                <div class="contact-item col-xs-12">
+                                    <img class="p-img" src="./lib/assets/images/icon/i-zycj-g.png" alt="">
+                                    <div class="p-msg">
+                                        <span>主要成就：</span>
+                                        <span>主要成就主要成就主要成就主要成就主要成就主要成就主要成就主要成就主要成就主要成就主要成就主要成就</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </section>
+
+
+    </div>
+
+    <script src="./lib/external/jquery1.11.1.min.js"></script>
+    <script src="./lib/external/sweet-alert/sweet-alert.min.js" type="text/javascript"></script>
+    <script src="./lib/external/toastr/toastr.min.js" type="text/javascript"></script>
+
+    <script src="./lib/utils/beastTools.js" type="text/javascript"></script>
+    <script src="./lib/js/beastBase.js"></script>
+    <!-- <script src="./lib/external/fastclick.js" type="text/javascript"></script> -->
+    <!-- <script src="./lib/external/jquery.history.js" type="text/javascript"></script> -->
+
+    <script src="./lib/external/swiper-3.3.1/swiper-3.3.1.jquery.min.js" type="text/javascript"></script>
+
+    <!-- <script type="text/javascript" src="./lib/js/remarkHome.js"></script> -->
+</body>
+
+</html>

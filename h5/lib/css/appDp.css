@@ -1,0 +1,150 @@
+html,body,h1,h3,h2,h4,h5,h6,p,
+dl,dt,dd,ul,li,ol,th,td,tr,form,input,textarea,legend,
+select,fieldset,img,section,article,aside,header,nav,footer{
+	margin:0; 
+	padding:0;
+}
+html{
+  background:#F8F8FA;
+}
+html,body,#index{
+  min-height:100%;
+}
+#index{
+  /* padding:0.14rem 0 0.49rem; */
+}
+.clear:after{
+  content:"";
+  clear:both;
+  display:block;
+  height:0;
+  overflow:hidden;
+  visibility:hidden;
+}
+.fl{
+  float:left;
+}
+.fr{
+  float:right;
+}
+.height-map{
+  height:1000px;
+  width:auto
+}
+.height-map1{
+  /* height:520px; */
+}
+.height1{
+  height:700px;
+}
+.height2{
+  /* height:286px; */
+  display: flex;
+  justify-content: center;
+}
+.row {
+  /* margin-right: -15px;
+  margin-left: -15px; */
+  margin:auto;
+  padding:0 15px;
+}
+/* .padding{
+  padding:0 0.15rem;
+} */
+.col-md-4 {
+  width:auto;
+  /* float: left; */
+}
+.container-fluid {
+  padding-right: 6px;
+  padding-left: 6px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.container-fluid:after, .container-fluid:before{
+  display: table;
+  content: " ";
+}
+.col-md-12,.col-md-4{
+  position: relative;
+  min-height: 1px;
+  padding-right: 6px;
+  padding-left: 6px;
+}
+.col-md-12 {
+  width: auto;
+  /* float: left; */
+}
+.office-efficiency-index{font-family:PingFangSC-Semibold,PingFang SC;background-color:#22284A;background-size:cover;}
+.office-efficiency-index .col-info{height:700px;margin:10px 0px 40px 0px;border-radius:8px; background-color:rgba(15, 14, 62, 1);}
+.office-efficiency-index .col-info .content{height:100%;line-height:4rem;vertical-align:middle;padding-left:5px;padding-right:5px;}
+.title{
+  padding-top: 6px;
+  margin-left: 6px;
+  padding:6px 6px 0;
+}
+.title li{
+  color:#fff;
+  font-size:13px;
+  list-style: none;
+}
+
+.title li p{
+  height:22px;
+  line-height:22px;
+  font-size:13px;
+  font-family:PingFangSC-Medium,PingFang SC;
+  color:rgba(255,255,255,1);
+}
+.title li .title-left{
+  margin-left:70px;
+}
+.title li .circle{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#2168EB;
+  margin-top: 7px;
+  margin-right:4px;
+}
+.title li .icon{
+  width:auto;
+  height:11px;
+  margin-left:4px;
+  margin-top:7px;
+}
+/* 蒙层 */
+.body{
+  overflow: hidden;
+}
+.layer{
+  position: fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background:rgba(0,0,0,.7);
+  z-index:9999999;
+}
+.layer-box{
+  font-size:40px;
+  width:70%;
+}
+.layer-content{
+  background:#fff;
+  padding:60px 0;
+  border-bottom:1px solid #eee;
+  text-align: center;
+  border-radius: 20px 20px 0 0;
+}
+.layer-btn{
+  border-radius:  0 0 20px 20px;
+  background:#F2F2F2;
+  text-align: center;
+  padding:40px 0;
+  color:#40AFFE;
+}

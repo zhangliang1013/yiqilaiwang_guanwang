@@ -1,0 +1,14 @@
+.home-bg {
+    /* background: #fff;  */
+    background: #025594;
+}
+
+.home-tl .tl-logo {
+    height: 40px;
+}
+
+.swiper-box {
+    padding: 20px 0 10px;
+    margin: 0;
+    background: #fff;
+}

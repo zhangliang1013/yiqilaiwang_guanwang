@@ -1,0 +1,167 @@
+<link href="../lib/mobile/mobileDist/styles/myOrderList.css" rel="stylesheet"
+      type="text/css"/>
+<div class="page_wrapper">
+    <div class="header text-center page_header">
+
+        <div class="clearfix">
+            <div class="back pull-left back-fa his-back" data-back-to="./agentCenter.html"
+                 role="button">
+                <i class="fa fa-angle-left"></i>
+            </div>
+            <div class="title-text">我的订单</div>
+        </div>
+        <div class="act-item-contain clearfix bdb0" style="border-top:1px solid #ebe9e9">
+            <!--0未支付,1已支付,2已取消,3待退款,4异常结单,5已派工,6已退款-->
+            <div class=" text-center bill-status-search clearfix">
+                <div class="col-xs-20 status-item" data-type="0">
+                    <span class="">待付款</span>
+                </div>
+                <div class="col-xs-20 status-item" data-type="1">
+                    <span class="">待收货</span>
+                </div>
+
+                <div class="col-xs-20 status-item" data-type="2">
+                    <span class="">待退款</span>
+                </div>
+
+                <div class="col-xs-20 status-item" data-type="3">
+                    <span class="">已完成</span>
+                </div>
+
+                <div class="col-xs-20 status-item" data-type="5">
+                    <span class="">待评价</span>
+                </div>
+                <!-- <div class="col-xs-20 status-item" data-type="4">
+                    <span class="">已取消</span>
+                </div> -->
+            </div>
+        </div><!--act-item-contain end-->
+    </div>
+
+    <div class="content clearfix page_body" id="orderListPageBody" style="bottom:0;top:89px;">
+
+        <div class="item-list" id="orderListShow">
+            <div class="pt20 pb20 empty-contain">
+                <div class="empty-tip">加载中...</div>
+            </div>
+        </div>
+
+        <script id="orderListTpl" type='text/ractive'>
+            <div class="">
+            {{#each dataList:ind}}
+                <div class="bill-item-contain" data-ind="{{ind}}" data-id="{{id}}">
+
+                    <div class="item-title" role="button" on-click="orderDetail:{{this}}">
+                        <div class="col-xs-9">
+                            <div class=""><span class="text-gray f12">订单号：</span>{{number}}</div>
+                            <div class="text-gray f12 pt5">
+                                <span class="text-gray f12">下单时间：</span>
+                                {{formatTime(add_time)}}
+                            </div>
+                            {{#if dispatch_time>0}}
+                            <div class="text-gray f12 pt5">
+                                <span class="text-gray f12">配送时间：</span>
+                                {{formatTime(dispatch_time)}}
+                            </div>
+                            {{/if}}
+                        </div>
+
+                        <div class="right-msg orange">
+                            <div>
+                                {{#if status == 0 && pay_mode == 0 }}
+                                    已受理
+                                {{else }}
+
+                                    {{formatStatus(status)}}
+                                {{/if}}
+                            </div>
+                            <div class="f12 text-gray fwn">{{pay_mode == 0 ? '货到付款':'微信支付'}}</div>
+                        </div>
+                    </div>
+
+                    <div class="item-body" role="button"  on-click="orderDetail:{{this}}">
+
+                        {{#orderGoodsList:tInd}}
+                            {{#if tInd > 0}}
+                            <div class="goods-item clearfix">
+                                ...<span class="f14 pull-right">x{{quantity}}</span>
+                            </div>
+                            {{else }}
+                            <div class="goods-item clearfix">
+                                <div class="col-xs-3">
+                                    <div class="gd-img">
+                                        <img src="{{advpic}}" alt="" />
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-9 text-left f12 text-black000">
+                                    <div class="gd-name">{{name}}</div>
+                                    {{#if skubase_id > 0}}
+                                    <div class="comm-pnames col-xs-12">
+                                        {{#pnames}} <span class="dis-ib pr5"><span class="p-tip">{{parent_name}}：</span><span
+                                            class="p-txt">{{name}}</span></span> {{/pnames}}
+                                    </div>
+                                    {{/if}}
+                                    <div class="col-xs-12 pt5 pl5">
+
+                                        <div class="f12 text-right">
+                                            x <span class="f16 fwb">{{quantity}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--goods-item end-->
+                            {{/if}}
+                        {{/orderGoodsList}}
+
+                    </div>
+                    <!--item-body end-->
+
+                    <div class="item-footer col-xs-12">
+                        实付款: <span class="f14 text-active mr10">
+							￥<span class="text-active f16 fwb">{{total_real_amount}}</span>
+					        </span>
+
+                        <!--0未支付,1已支付,2已取消,3待退款,4异常结单,5已派工,6已退款,7正常接单-->
+
+                        {{#if isCanComment > 0}}
+                        <button class=" act-btn red pull-right ml10" on-click="commentOrder:{{this}}">我要评论</button>
+                        {{/if}}
+
+                        {{#if isCanCall > 0 }}
+                        <button class=" act-btn red pull-right ml10" on-click="pressOrder:{{this}}">我要催单</button>
+                        {{/if }}
+
+                        {{#if isCanCancel > 0 }}
+                        <button class=" act-btn  pull-right ml10" on-click="cancelOrder:{{this}}">取消订单</button>
+                        {{/if}}
+
+                        {{#if pay_mode==1 && status == 0 }}
+                        <button class=" act-btn orange pull-right ml10" on-click="payOrder:{{this}}">立即支付</button>
+                        {{/if}}
+
+                        {{#if isTake > 0 }}
+                        <button class=" act-btn orange pull-right ml10" on-click="orderOk:{{this}}">确认收货</button>
+                        {{/if}}
+                    </div>
+
+                </div>
+                <!--bill-item-contain end-->
+
+            {{/each}}
+
+            {{^dataList}}
+            <div class="text-gray pt20 text-center f20">
+                ╮(╯▽╰)╭
+                <div class="pt5"> 暂无订单</div>
+            </div>
+            {{/dataList}}
+            </div>
+
+        </script>
+    </div>
+
+</div>
+
+<script src="../lib/mobile/mobileDist/js/myOrderList.js" type="text/javascript"></script>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="divport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./lib/css/fgEcharts.css?t=2020122"/>
+  <title>一起来往-赋能组织，活力共赢</title>
+  <script type="text/javascript" src="./lib/commonJs/common.js"></script>
+  <script type="text/javascript" src="./lib/commonJs/vue.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./lib/commonJs/echarts.js"></script>
+  <script>document.write('<script type="text/javascript" src="./lib/js/fgEcharts.js?t=' + new Date().getTime() + '"><\/script>')</script>
+</head>
+<body>
+  <div id="index" v-cloak>
+    <div class="top" v-show="type ==1">
+      <div class="top-title">
+        <div class="top-title-l">{{status ==3 ?'本月动态数据总览': status !=2? '今日统计数据':'本周重点动态数据总览'}}</div>
+        <div class="top-title-r">
+          <div class="btn" @click="change(1)">{{status ==1? '查看本周':''}}{{status ==2 || status ==3? '查看本日':''}}</div>
+          <div class="btn" @click="change(2)">{{status ==1 || status ==2? '查看本月':''}}{{status ==3? '查看本周':''}}</div>
+        </div>
+      </div>
+      <div class="day" v-show="status == 1">
+        <div class="pie-box">
+          <div id="pie" style="width: 3.26rem;height:2.8rem;"></div>
+          <div class="pie-right" style="padding:0">
+            <div class="pie-title margin-left">
+              <div class="pie-icon" style="background: #333333;"></div>
+              <div class="pie-txt">已打卡(人)</div>
+              <div class="pie-num" style="color: #333333;" v-if="detail&&detail.todaySignPerson">{{detail.todaySignPerson || 0}}</div>
+            </div>
+            <div class="pie-title">
+              <div class="pie-icon"></div>
+              <div class="pie-txt">状态正常(人)</div>
+              <div class="pie-num" v-if="detail&&detail.todayNomalPerson">{{detail.todayNomalPerson || 0}}</div>
+            </div>
+            <div class="pie-title">
+              <div class="pie-icon" style="background: #F41818;"></div>
+              <div class="pie-txt">重点关注(人)</div>
+              <div class="pie-num" style="color: #F41818;">{{detail.todayFocusOnPerson || 0}}</div>
+            </div>
+            <div class="pie-title margin-left">
+              <div class="pie-icon" style="background: #cccccc;"></div>
+              <div class="pie-txt">未打卡(人)</div>
+              <div class="pie-num" style="color: #cccccc;">{{detail.flag ==1? detail.unsignPerson : detail.orgTotalPerson}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom">
+          <div class="num width">
+            <div class="num1"></div>
+            <div class="num-txt">复工人数(人) / 总人数（人）</div>
+            <div class="number">{{detail.todayResumptionPerson || 0}}&nbsp;<span style="color:#333333">/</span>&nbsp;<span style="color:#333333">{{detail.orgTotalPerson || 0}}</span></div>
+          </div>
+          <div class="num">
+            <div class="num1" style="background: #E062AE;"></div>
+            <div class="num-txt">复工率</div>
+            <div class="number" style="color: #E062AE;">{{detail.flag !=2 ? getPercent(detail.todayResumptionPerson,detail.orgTotalPerson):'0 %'}}</div>
+          </div>
+          <div class="num">
+            <div class="num1" style="background:#F0C610;"></div>
+            <div class="num-txt">请假/隔离(人)</div>
+            <div class="number" style="color:#F0C610;">{{detail.todayLeftIsolatePerson || 0}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="weeek" v-show="status == 2 || status == 3">
+        <div class="pie-right">
+          <div class="pie-title pie-title1">
+            <div class="pie-icon" style="background: #4CB3EF;"></div>
+            <div class="pie-txt pie-txt1">复工人数</div>
+            <div class="pie-num" style="color:#4CB3EF;">&nbsp;{{detail.resumptionWorkPerson || 0}}&nbsp;</div>
+            <div>人</div>
+          </div>
+          <div class="pie-title pie-title1">
+            <div class="pie-icon" style="background: #E062AE;"></div>
+            <div class="pie-txt pie-txt1">复工率</div>
+            <div class="pie-num" style="color: #E062AE;">&nbsp;{{detail.resumptionWorkRatio || 0}}&nbsp;</div>
+            <div>%</div>
+          </div>
+          <div class="pie-title pie-title1">
+            <div class="pie-icon" style="background: #F41818;"></div>
+            <div class="pie-txt pie-txt1">重点关注</div>
+            <div class="pie-num" style="color: #F41818;">&nbsp;{{detail.focusOnPersonTime || 0}}&nbsp;</div>
+            <div>人次</div>
+          </div>
+          <div class="pie-title pie-title1">
+            <div class="pie-icon" style="background: #F0C610;"></div>
+            <div class="pie-txt pie-txt1">请假/隔离</div>
+            <div class="pie-num" style="color: #F0C610;">&nbsp;{{detail.leftIsolatePersonTime || 0}}&nbsp;</div>
+            <div>人次</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="top" v-show="type == 2">
+      <div class="top-title">
+        <div class="top-title-l">今日动态数据总览</div>
+      </div>
+      <div class="weeek">
+        <div class="pie-right">
+          <div class="pie-title pie-title1">
+            <div class="pie-icon" style="background: #FF985A;"></div>
+            <div class="pie-txt pie-txt1">已上报组织</div>
+            <div class="pie-num" style="color:#FF985A;">&nbsp;{{detail.reportOrgNum || 0}}&nbsp;</div>
+            <div>个</div>
+          </div>
+          <div class="pie-title pie-title1">
+            <div class="pie-icon" style="background: #FF985A;"></div>
+            <div class="pie-txt pie-txt1">已上报</div>
+            <div class="pie-num" style="color:#FF985A;">&nbsp;{{detail.reportPerson || 0}}&nbsp;</div>
+            <div>人</div>
+          </div>
+          <div class="pie-title pie-title1 between">
+            <div class="pie-box">
+              <div class="pie-icon" style="background: #4CB3EF;"></div>
+              <div class="pie-txt pie-txt1">复工组织</div>
+              <div class="pie-num" style="color: #4CB3EF;">&nbsp;{{detail.resumptionWorkOrgNum || 0}}&nbsp;</div>
+              <div>个</div>
+            </div>
+            <div :class="[{ 'disabled': detail.resumptionWorkOrgNum == 0 }, 'right']" @click="jump(1,detail.resumptionWorkOrgNum)">
+              查看详情 >
+            </div>
+          </div>
+          <div class="pie-title pie-title1">
+            <div class="pie-icon" style="background: #E062AE;"></div>
+            <div class="pie-txt pie-txt1">平均复工率</div>
+            <div class="pie-num" style="color: #E062AE;">&nbsp;{{detail.averageResumptionWorkRatio || 0}}&nbsp;</div>
+            <div>%</div>
+          </div>
+          <div class="pie-title pie-title1 between">
+            <div class="pie-box">
+              <div class="pie-icon" style="background: #F41818;"></div>
+              <div class="pie-txt pie-txt1">重点关注组织</div>
+              <div class="pie-num" style="color: #F41818;">&nbsp;{{detail.focusOnOrgNum || 0}}&nbsp;</div>
+              <div>个</div>
+            </div>
+            <div :class="[{ 'disabled': detail.focusOnOrgNum == 0 }, 'right']" @click="jump(2,detail.focusOnOrgNum)">
+              查看详情 >
+            </div>
+          </div>
+          <div class="pie-title pie-title1 between">
+            <div class="pie-box">
+              <div class="pie-icon" style="background: #E062AE;"></div>
+              <div class="pie-txt pie-txt1">重点复工率低的组织</div>
+              <div class="pie-num" style="color: #E062AE;">&nbsp;{{detail.lowResumptionOrg || 0}}&nbsp;</div>
+              <div>个</div>
+            </div>
+            <div :class="[{ 'disabled': detail.lowResumptionOrg == 0 }, 'right']" @click="jump(3,detail.lowResumptionOrg)">
+              查看详情 >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bot">
+      <div class="top-title">
+        <div class="top-title-l" v-if="type==1">{{status == 1? '本周每日数据统计':status == 2?'较上周数据对比':'较上月数据对比'}}</div>
+        <div class="top-title-l" v-if="type==2">{{typeSeve?'7':'14'}}日数据统计对比</div>
+        <div class="top-title-r" v-if="type==2">
+          <div class="btn" style="margin-right:0" @click="changeOrg">{{typeSeve?'14':'7'}}日数据对比</div>
+        </div>
+      </div>
+      <!-- 1 -->
+      <!-- 普通组织标题 1-->
+      <div class="top-next" v-if="type==1">
+        <div class="span" :style="status == 1? '':'margin-left:2.17rem'" >{{status == 1? '每日复工人数':status == 2?'较上周复工人数对比':'较上月复工人数对比'}}</div>
+        <div class="span" :style="status == 1? '':'margin-left:0.78rem'"></div>
+        <div class="span">数量(人)</div>
+        <div class="bg" :style="status == 1?'': 'width:2.5rem;left:2.08rem'"></div>
+      </div>
+      <!-- 高级组织标题 1-->
+      <div class="top-next" v-else>
+        <div class="span" style="margin-left:2.73rem">上报组织数</div>
+        <div class="span" style="margin-left:1.34rem;background:#FF985A"></div>
+        <div class="span">数量(个)</div>
+        <div class="bg" style="width:1.40rem;left:2.7rem;background:rgba(255, 152, 90, 0.14)"></div>
+      </div>
+      <div id="cross" style="width: 7rem;height:5rem;margin:auto"></div>
+      <!-- 2 -->
+      <!-- 普通组织标题 2-->
+      <div class="top-next" style="margin-top:0.2rem" v-if="type==1">
+        <div class="span" :style="status == 1? 'margin-left:2.73rem':'margin-left:1.89rem'">{{status == 1? '每日复工率':status == 2?'较上周重点关注人数对比':'较上月重点关注人数对比'}}</div>
+        <div class="span" v-if="status == 1" style="margin-left:1.5rem;background:#E062AE"></div>
+        <div class="span" v-else style="margin-left:0.54rem;background:#F41818"></div>
+        <div class="span">{{status == 1?'复工率':'数量(人)'}}</div>
+        <div class="bg" v-if="status == 1" style="background:rgba(224, 98, 174, 0.14);width:1.44rem;left:2.68rem"></div>
+        <div class="bg" v-else style="background:rgba(244, 24, 24, 0.14);width:3rem;left:1.8rem"></div>
+      </div>
+      <!-- 高级组织标题 2-->
+      <div class="top-next" v-else>
+        <div class="span" style="margin-left:2.87rem">上报人数</div>
+        <div class="span" style="margin-left:1.34rem;background:#FF985A"></div>
+        <div class="span">数量(个)</div>
+        <div class="bg" style="width:1.16rem;left:2.83rem;background:rgba(255, 152, 90, 0.14)"></div>
+      </div>
+      <div id="cross2" style="width: 7rem;height:5rem;margin:auto"></div>
+      <!-- 3 -->
+      <div class="top-next" style="margin-top:0.2rem" v-if="type==1">
+        <div class="span" :style="status == 1? 'margin-left:2.24rem':'margin-left:1.89rem'">{{status == 1? '每日请假/隔离人数':status == 2?'较上周请假/隔离人次对比':'较上月请假/隔离人次对比'}}</div>
+        <div class="span" v-if="status == 1" style="margin-left:0.85rem;background:#F0C610"></div>
+        <div class="span" v-else style="margin-left:0.28rem;background:#F0C610"></div>
+        <div class="span">{{status == 1?'数量(人)':'数量(人次)'}}</div>
+        <div class="bg" v-if="status == 1" style="background:rgba(240, 198, 16, 0.14);width:2.4rem;left:2.14rem"></div>
+        <div class="bg" v-else style="background:rgba(240, 198, 16, 0.14);width:3.1rem;left:1.82rem"></div>
+      </div>
+      <!-- 高级组织标题 2-->
+      <div class="top-next" v-else style="margin-top:0.2rem">
+        <div class="span" style="margin-left:2.73rem">复工组织数</div>
+        <div class="span" style="margin-left:1.34rem;background:#4CB3EF"></div>
+        <div class="span">数量(个)</div>
+        <div class="bg" style="width:1.46rem;left:2.64rem;background:rgba(76, 179, 239, 0.14)"></div>
+      </div>
+      <div id="cross3" style="width: 7rem;height:5rem;margin:auto"></div>
+      <!-- 4 -->
+      <div class="top-next" style="margin-top:0.2rem" v-if="type==2 || status != 1">
+        <div class="span" :style="type == 1? 'margin-left:2.31rem':'margin-left:2.73rem'">{{type==1 && status == 2? '较上周复工率对比':type==1 && status == 3?'较上月复工率对比':'平均复工率'}}</div>
+        <div class="span" v-if="type == 1" style="margin-left:1.08rem;background:#E062AE"></div>
+        <div class="span" v-else style="margin-left:1.5rem;background:#E062AE"></div>
+        <div class="span">复工率</div>
+        <div class="bg" v-if="type == 1" style="background:rgba(224, 98, 174, 0.14);width:2.24rem;left:2.22rem"></div>
+        <div class="bg" v-else style="background:rgba(224, 98, 174, 0.14);width:1.44rem;left:2.68rem"></div>
+      </div>
+      <div id="cross4" style="width: 7rem;height:5rem;margin:auto" v-if="type==2 ||status != 1"></div>
+      <!-- 5 -->
+      <div class="top-next" v-if="type == 2" style="margin-top:0.2rem">
+        <div class="span" style="margin-left:2.45rem">重点关注组织数</div>
+        <div class="span" style="margin-left:1.06rem;background:#F41818"></div>
+        <div class="span">数量(个)</div>
+        <div class="bg" style="width:1.96rem;left:2.4rem;background:rgba(244, 24, 24, 0.14)"></div>
+      </div>
+      <div id="cross5" style="width: 7rem;height:5rem;margin:auto" v-if="type == 2"></div>
+      <!-- 6 -->
+      <div class="top-next" style="margin-top:0.2rem" v-if="type==2">
+        <div class="span" style="margin-left:2.03rem">重点复工率低的组织数</div>
+        <div class="span" style="margin-left:0.76rem;background:#E062AE"></div>
+        <div class="span">数量(个)</div>
+        <div class="bg" style="background:rgba(224, 98, 174, 0.14);width:2.8rem;left:1.93rem"></div>
+      </div>
+      <div id="cross6" style="width: 7rem;height:5rem;margin:auto" v-if="type == 2"></div>
+    </div>
+  </div>
+</body>
+</html>

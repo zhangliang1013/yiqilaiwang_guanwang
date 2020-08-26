@@ -1,0 +1,272 @@
+<link href="../lib/external/PhotoSwipe/photoswipe.css" rel="stylesheet" type="text/css"/>
+<link href="../lib/external/PhotoSwipe/default-skin/default-skin.css" rel="stylesheet" type="text/css"/>
+<link type="text/css" rel="stylesheet" href="../lib/mobile/mobileDist/styles/chooseParts.css?v=5">
+<link rel="stylesheet" href="../lib/mobile/mobileDist/styles/goodsDetail.css?v=0725"/>
+
+<style>
+    img {
+        max-width: 100%;
+    }
+
+    .desc-contain {
+        min-height: 200px;
+    }
+
+    .desc-contain img {
+        display: none;
+    }
+</style>
+
+<div class="goodsDetail_contain page_wrapper clearfix">
+
+
+    <div class="clearfix page_body" style="top: 0">
+        <div class="back pull-left back-fa his-back" role="button">
+            <i class="fa fa-angle-left"></i>
+        </div>
+
+        <div class="main clearfix">
+            <div class="swiper-nav clearfix" id="swiperShow">
+                <!--轮播图-->
+                <div class="swiper-container my-swipers" id="goodsDetailSwiper">
+                    <div class="swiper-wrapper">
+
+                        <!--<div class="swiper-slide">-->
+                        <!--<img data-src="../lib/assets/images/temp/swiper_1.jpg" data-ind="1" class="swiper-lazy p-img"-->
+                        <!--style="display:block;">-->
+                        <!--<div class="swiper-lazy-preloader"></div>-->
+                        <!--</div>-->
+                    </div>
+
+                </div>
+
+                <div class="swiper-page-contain">
+                    <span class="active-num">0</span>/<span class="all-num">0</span>
+                </div>
+            </div>
+            <!--.swiper-nav end-->
+            <div class="metaInfo-contain clearfix p10">
+                <div class="carName-contain  text-dark f18 fwb" bt-data-bind="name">
+
+                </div>
+                <!--<div class="youhui-contain text-danger">-->
+                    <!--<i class="icon-biaoqian iconfont"></i>-->
+                    <!--<span>赠送 80 积分<span class="text-gray pl10">东莞</span></span>-->
+                <!--</div>-->
+                <div class="carPrice-contain clearfix is-bind">
+                    <div class="ps-r">
+                        <span class="f18">
+                            ¥  <span class="realPrice-contain" bt-data-bind="price_market">--</span>
+                            <span class="text-black f16"> 元/瓶</span>
+                        </span>
+                        <!--<div class="disabled-ele pull-right text-right">-->
+                            <!--商品已下架-->
+                        <!--</div>-->
+                        <div id="curSelContain"
+                             class="number sel-contain text-right pull-right"
+                             data-sel-stock="999999" data-sel-price="" data-sel-connect-tar="">
+                            <button class="cut_num sel-dec">
+                                <i class="iconfont decrease green">&#xe604;</i>
+                            </button>
+                            <span class="commodity_num">
+                                <input type='text' class="sel-num-input green  fwb f16" value="0"/>
+                            </span>
+                            <button class="add_num sel-add">
+                                <i class="iconfont increase green">&#xe60d;</i>
+                            </button>
+                        </div>
+                    </div>
+                    <!--<div class=" pt2 text-gray f12 text-dec-lt price_market">-->
+                    <!--&lt;!&ndash;<span id="price_market">市场价 ￥<span class=" text-dec-lt" bt-data-bind="price_market"></span></span>&ndash;&gt;-->
+
+                    <!--<div class="pull-right pr10">-->
+                    <!--<div class="serNumber f14 text-right">-->
+                    <!--<span class="text-gray f14">销量</span> <span class="sales"></span>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                </div>
+                <div class="carPrice-contain clearfix pt10" bt-data-bind="detail"></div>
+
+            </div>
+            <!--.metaInfo-contain end-->
+
+            <div class="list-item-contain col-xs-12 clearfix my-tab-contain">
+                <div class="item-title-contain clearfix pb0 fix-titile">
+                    <a class="p-title active my-tab-btn" href="javascript:;" data-tab-to=".desc-contain">价格说明</a>
+                    <a class="p-title ml20 my-tab-btn is-bind" href="javascript:;" data-tab-to=".notice-contain">注意事项</a>
+                    <a class="p-title ml20 my-tab-btn no-bind" href="javascript:;" data-tab-to=".notice-contain">温馨提示</a>
+                </div>
+                <div class="my-tab-content">
+                    <div class="item-content my-tab-pane clearfix desc-contain active" bt-data-bind="price_descript">
+
+                    </div>
+                    <div class="item-content my-tab-pane clearfix notice-contain" bt-data-bind="announcement">
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="footer-toolbar col-xs-12 page_footer" style="height: 50px">
+        <input type="hidden" id="goods_id" bt-data-bind="id"/>
+        <div class="disabled-ele col-xs-12 text-center f18">
+            商品已下架
+        </div>
+        <div class="col-xs-5 tool-item pr5 is-bind">
+            <a href="javascript:;" class="fwn text-danger confirmBuyAll" id="buyAll">购买所有 <span
+                    class="circle-num allGdsCntShow text-danger fwb bg-gray">0</span></a>
+        </div>
+        <div class="col-xs-7 tool-item is-bind">
+            <a href="javascript:;" class="red-btn fwn" id="buyCurGoods">购买当前单品 <span
+                    class="circle-num curNum">0</span></a>
+        </div>
+        <div class="col-xs-12 tool-item no-bind">
+            <a href="javascript:;" class="red-btn fwn no-bind-buy">我要下单</a>
+        </div>
+    </div>
+
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+    <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+        <!-- Background of PhotoSwipe.
+             It's a separate element as animating opacity is faster than rgba(). -->
+        <div class="pswp__bg"></div>
+
+        <!-- Slides wrapper with overflow:hidden. -->
+        <div class="pswp__scroll-wrap">
+
+            <!-- Container that holds slides.
+                PhotoSwipe keeps only 3 of them in the DOM to save memory.
+                Don't modify these 3 pswp__item elements, data is added later on. -->
+            <div class="pswp__container">
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+                <div class="pswp__item"></div>
+            </div>
+
+            <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+            <div class="pswp__ui pswp__ui--hidden">
+
+                <div class="pswp__top-bar">
+
+                    <!--  Controls are self-explanatory. Order can be changed. -->
+
+                    <div class="pswp__counter"></div>
+
+                    <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                    <!--                            <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                                                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>-->
+
+                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                    <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                    <!-- element will get class pswp__preloader--active when preloader is running -->
+                    <div class="pswp__preloader">
+                        <div class="pswp__preloader__icn">
+                            <div class="pswp__preloader__cut">
+                                <div class="pswp__preloader__donut"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                    <div class="pswp__share-tooltip"></div>
+                </div>
+
+                <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+                </button>
+
+                <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+                </button>
+
+                <div class="pswp__caption">
+                    <div class="pswp__caption__center"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="chooseParts_content clearfix">
+
+        <section class="choose-parts-contain bg-white">
+            <div class="btn-close">X</div>
+
+            <div id="chooseShow" class="choose-contain">
+
+            </div>
+
+            <div class="confirm"><button id="comfirmChooseParts" class="btn-confirm">确定</button></div>
+        </section>
+
+        <div class="parts-shade"></div>
+
+    </div>
+
+    <div class="chooseParts_content_1 clearfix">
+
+        <section class="choose-parts-contain_1 bg-white">
+
+            <div class="choose-contain_1">
+                是否需要购买直阀瓶专用的减压阀？
+            </div>
+
+            <div class="confirm pt20">
+                <button id="comfirmChooseParts_no_1" class="btn-confirm">不需要</button>
+                <button id="comfirmChooseParts_need_1" class="btn-confirm">需要</button>
+            </div>
+        </section>
+
+        <div class="parts-shade"></div>
+
+    </div>
+
+</div>
+
+<script id="chooseShowTpl" type='text/ractive'>
+
+     <section class="choose-reducing">
+        <div class="part-name">选择减压阀</div>
+        <ul>
+            {{#each type2List:num}}
+                {{#if num == 0}}
+                    <li class="part-item active" data-type-id="{{id}}">{{name}}</li>
+                {{else}}
+                    <li class="part-item" data-type-id="{{id}}">{{name}}</li>
+                {{/if}}
+            {{/each}}
+
+        </ul>
+    </section>
+
+    <section class="choose-fitting">
+        <div class="part-name">选择配件</div>
+        <ul>
+
+            {{#each type3List:num}}
+                {{#if num == 0}}
+                    <li class="part-item active" data-type-id="{{id}}">{{name}}</li>
+                {{else}}
+                    <li class="part-item" data-type-id="{{id}}">{{name}}</li>
+                {{/if}}
+            {{/each}}
+
+        </ul>
+    </section>
+
+ </script>
+<script src="../lib/external/PhotoSwipe/photoswipe.min.js" type="text/javascript"></script>
+<script src="../lib/external/PhotoSwipe/photoswipe-ui-default.min.js" type="text/javascript"></script>
+<!--<script src="../lib/external/fastclick.js" type="text/javascript"></script>-->
+<!--<script src="../lib/external/neatshow.min.js" type="text/javascript"></script>-->
+
+<script type="text/javascript" src="../lib/mobile/mobileDist/js/goodsDetail.js?v=20170721"></script>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="divport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./lib/css/fgdk.css?t=2020120" />
+    <link rel="stylesheet" href="./lib/css/clear.css?t=2020120" />
+    <link rel="shortcut icon" href="./lib/image/fgdk/h5fxtb@2x.png" type="image/x-icon" />
+    <title>一起来往-赋能组织，活力共赢</title>
+    <script type="text/javascript" src="./lib/commonJs/common.js"></script>
+    <script type="text/javascript" src="./lib/commonJs/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script>document.write('<script type="text/javascript" src="./lib/js/fgdk.js?t=' + new Date().getTime() + '"><\/script>')</script>
+    <!-- 谷歌 -->
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=f0a3155420a0352065606d8f81aa67db"></script>
+    <!-- swiper -->
+    <link href="https://cdn.bootcss.com/Swiper/4.4.0/css/swiper.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/Swiper/4.4.0/js/swiper.min.js"></script>
+    <!-- 日期 -->
+    <script src="./lib/commonJs/datePicker.js"></script>
+</head>
+
+<body>
+    <div class="checkSelf" id="index" v-cloak>
+        <!-- 顶部 -->
+        <div class="sd-title" v-show="upload">
+            <div class="sd-title-left">
+                <img src='./lib/image/fgdk/xxtz2@2x.png' alt="" class="sd-title-left-delete" @click="upload=false">
+                <div class="sd-title-left-sign">
+                    <img src="./lib/image/fgdk/h5fxtb@2x.png" alt="" class="sd-title-left-sign-logo">
+                    <div class="sd-title-left-sign-p">
+                        <p>一起来往</p>
+                        <p>赋能组织，活力共赢</p>
+                    </div>
+                </div>
+            </div>
+            <a class="sd-title-right" href="https://www.yiqilaiwang.com/h5openapp2/app.html">下载APP</a>
+        </div>
+        <!-- 活动 -->
+        <!-- v-show="detail && type == 0 && detail.recommendStatus !=2" -->
+        <div class="content" v-show='isTrue' :style="{marginTop:(upload ? '':'0')}">
+            <div class="content-top">
+                <div style="height: 4.17rem;">
+                    <img :src="imgs" style="width: 100%; height: 100%; display: block;" alt="">
+                </div>
+            </div>
+            <div class="org">
+                <img :src='relationUrl' alt="" class=" org-img">
+                <span class="org-title">{{name}}</span>
+            </div>
+            <div class="time">
+                <div class="time-num">{{date}}</div>
+            </div>
+            <div class="info-box">
+                <div class="info-name time-num">
+                    <div class="info-name-left">
+                        <img src="./lib/image/fgdk/yqzc1@2x.png" alt="">
+                        <span>姓名</span>
+                    </div>
+                    <input type="text" maxlength="11" required="required" v-model="tableData.reportName"
+                        class="info-name-input" placeholder="请输入姓名">
+                </div>
+                <div class="info-name time-num">
+                    <div class="info-name-left">
+                        <img src="./lib/image/fgdk/yqzc2@2x.png" alt="">
+                        <span>联系方式</span>
+                    </div>
+                    <input type="number" @input="if(tel.length>11)tel=tel.slice(0,11)" v-model="tel"
+                        class="info-name-input" placeholder="请输入联系方式">
+                </div>
+                <div class="info-name" style="margin-left:0.32rem;">
+                    <div class="info-name-left">
+                        <img src="./lib/image/fgdk/yqzc3@2x.png" alt="">
+                        <span>所在单位或组织</span>
+                    </div>
+                </div>
+            </div>
+            <textarea maxlength="30" v-model='tableData.reportDept' class="box-input"
+                placeholder="请输入单位或组织名称"></textarea>
+            <div class="info-box">
+                <div class="info-name" style="margin-left:0.32rem;">
+                    <div class="info-name-left">
+                        <img src="./lib/image/fgdk/yqzc3@2x.png" alt="">
+                        <span>当前居住地</span>
+                    </div>
+                    <div class="info-address-right">
+                        <span @click='refreshAddress'>点击刷新</span>
+                        <img src="./lib/image/fgdk/yqzc6@2x.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="currentAddress">
+                {{tableData.currentAddress}}
+            </div>
+            <div class="info-box">
+                <div class="info-name" style="margin-left:0.32rem;">
+                    <div class="info-name-left">
+                        <img src="./lib/image/fgdk/yqzc4@2x.png" alt="">
+                        <span>返回日期</span>
+                    </div>
+                    <input type="text" v-model='tableData.backDate' :readonly='true' class="info-name-input time1"
+                        placeholder="点击设置时间">
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-health-title" style=" margin-top: 0.12rem;">
+                    <div class="info-name-left">
+                        <img src="./lib/image/fgdk/yqzc5@2x.png" alt="">
+                        <span>个人健康状况</span>
+                    </div>
+                </div>
+                <div class="info-health-item time-num">
+                    <div class="info-left">
+                        <p class="dot"></p>
+                        <p>体温</p>
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" type="radio" v-model='tableData.isTemperature' name="temperature"
+                            value="1" id="temperature">
+                        <label for="temperature"></label>发烧
+                        <input type="text" class="health-input" maxlength="4"
+                            v-model='tableData.temperature'><span>℃</span>
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" type="radio" v-model='tableData.isTemperature' name="temperature"
+                            value="0" id="temperature1">
+                        <label for="temperature1"></label>正常
+                    </div>
+
+                </div>
+                <div class="info-health-item time-num">
+                    <div class="info-left">
+                        <p class="dot"></p>
+                        <p>咳嗽</p>
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" type="radio" v-model='tableData.isCough' name="cough" value="1"
+                            id="cough"> <label for="cough"></label>有
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" type="radio" v-model='tableData.isCough' name="cough" value="0"
+                            id="cough1"> <label for="cough1"></label>无
+                    </div>
+                </div>
+                <div class="info-health-item" style="padding-left: 0.56rem;">
+                    <div class="info-left">
+                        <p class="dot"></p>
+                        <p>其他症状</p>
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" v-model='tableData.isSymptom' type="radio" name="healthOther"
+                            value="1" id="healthOther"> <label for="healthOther"></label>有
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" v-model='tableData.isSymptom' type="radio" name="healthOther"
+                            value="0" id="healthOther1"><label for="healthOther1"></label>无
+                    </div>
+                </div>
+                <textarea v-if='tableData.isSymptom == 1' maxlength="50" class="box-input" placeholder="请输入症状描述"
+                    v-model='tableData.symptomInfo'></textarea>
+            </div>
+            <div class="info-box">
+                <div class="info-health-title">
+                    <div class="info-name-left">
+                        <img src="./lib/image/fgdk/yqzc5@2x.png" alt="">
+                        <span>共同居住成员健康状况</span>
+                    </div>
+                </div>
+                <div class="health-subTitle time-num">1. 成员情况</div>
+                <div class="info-health-item time-num">
+                    <div class="info-left">
+                        <p class="dot"></p>
+                        <p>人数</p>
+                    </div>
+                    <div>
+                        <input type="number"
+                            @input="if(tableData.familyNumber>9999)tableData.familyNumber=9999;if(tableData.familyNumber.length>4)tableData.familyNumber=tableData.familyNumber.slice(0,4)"
+                            class="health-input" v-model='tableData.familyNumber'><span>人</span>
+                    </div>
+                </div>
+                <div class="info-health-item time-num">
+                    <div class="info-left">
+                        <p class="dot"></p>
+                        <p>关系</p>
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" v-model='tableData.familyRelation' type="radio" name="relation"
+                            value="1" id="relation"> <label for="relation"></label>家人
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" v-model='tableData.familyRelation' type="radio" name="relation"
+                            value="0" id="relation1"> <label for="relation1"></label>其它
+                    </div>
+                </div>
+                <div class="health-subTitle time-num">2. 有无以下症状</div>
+                <div class="info-health-item time-num">
+                    <div class="info-left">
+                        <p class="dot"></p>
+                        <p>体温</p>
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" type="radio" name="animalHeat"
+                            v-model='tableData.familyIsTemperature' value="1" id="animalHeat"> <label
+                            for="animalHeat"></label>发烧
+                        <input type="text" v-model='tableData.familyTemperature' maxlength="4"
+                            class="health-input"><span>℃</span>
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" type="radio" name="animalHeat"
+                            v-model='tableData.familyIsTemperature' value="0" id="animalHeat1"> <label
+                            for="animalHeat1"></label>正常
+                    </div>
+
+                </div>
+                <div class="info-health-item time-num">
+                    <div class="info-left">
+                        <p class="dot"></p>
+                        <p>咳嗽</p>
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" type="radio" v-model='tableData.familyIsCough' name="cough3"
+                            value="1" id="cough3"> <label for="cough3"></label>有
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" type="radio" v-model='tableData.familyIsCough' name="cough3"
+                            value="0" id="cough4"> <label for="cough4"></label>无
+                    </div>
+                </div>
+                <div class="info-health-item time-num">
+                    <div class="info-left">
+                        <p class="dot"></p>
+                        <p>其他症状</p>
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" type="radio" v-model='tableData.familyIsSymptom' name="healthOther3"
+                            value="1" id="healthOther3"> <label for="healthOther3"></label>有
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" type="radio" v-model='tableData.familyIsSymptom' name="healthOther3"
+                            value="0" id="healthOther4"> <label for="healthOther4"></label>无
+                    </div>
+                </div>
+            </div>
+            <textarea v-if='tableData.familyIsSymptom == 1' maxlength="50" class="box-input"
+                v-model='tableData.familySymptomInfo' placeholder="请输入共同居住成员其他症状详情"></textarea>
+            <div class="info-box">
+                <div class="info-city" style="margin-left:0.32rem;">
+                    <div class="info-name-left">
+                        <img src="./lib/image/fgdk/yqzc3@2x.png" alt="">
+                        <span>过去14日内旅居过的城市</span>
+                    </div>
+                    <div class="subTitle">({{date2}}至今)</div>
+                </div>
+
+            </div>
+            <textarea class="box-input" v-model='tableData.liveCity' maxlength="45" placeholder="请输入城市名称，多个城市请用逗号隔开，如：北京，上海，深圳"></textarea>
+            <div class="info-box" style="display: flex;">
+                <div class="info-city" style="margin-left:0.32rem;">
+                    <div class="info-name-left">
+                        <img src="./lib/image/fgdk/yqzc3@2x.png" alt="">
+                        <span>过去14日内是否住过酒店</span>
+                    </div>
+                    <div class="subTitle">({{date2}}至今)</div>
+                </div>
+                <div class="yesOrNO">
+                    <div style="position: relative;">
+                        <input class="health-radio" v-model='tableData.isStayedHotel' type="radio" name="hotel"
+                            value="1" id="hotel"> <label for="hotel"></label>是
+                    </div>
+                    <div style="position: relative;">
+                        <input class="health-radio" v-model='tableData.isStayedHotel' type="radio" name="hotel"
+                            value="0" id="hotel1"> <label for="hotel1"></label>否
+                    </div>
+                </div>
+            </div>
+
+            <div class="textareaBox" v-show='tableData.isStayedHotel == 1'>
+                <div class="textareaItem2">
+                    <div class="text-item" style="border-bottom: 1px solid #EEEEEE;">
+                        <span>日期</span>
+                        <input type="text" v-model='tableData.stayedDate ' style="width:4.5rem;" :readonly='true'
+                            class="info-name-input stayedDate" placeholder="请输入住宿日期">
+                    </div>
+                    <div class="text-item">
+                        <span>酒店名称</span>
+                        <input type="text" v-model='tableData.stayedHotel' maxlength="25" style="width:4.5rem;"
+                            class="info-name-input" placeholder="多个酒店请用逗号隔开，如北京香格里拉，上海和平饭店">
+                    </div>
+                </div>
+            </div>
+            <div class="info-box">
+                <div class="info-city" style="width: 100%; padding-left:0.32rem; border: 1px solid #EEEEEE;">
+                    <div class="info-name-left">
+                        <img src="./lib/image/fgdk/yqzc3@2x.png" alt="">
+                        <span>过去14日旅程内所搭乘过的公共交通工具</span>
+                    </div>
+                    <div class="subTitle">({{date2}}至今)</div>
+                </div>
+                <div class="info-health-item time-num">
+                    <div class="info-left">
+                        <p class="dot"></p>
+                        <p>去程飞机</p>
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio " v-model='tableData.isAirplane' type="radio" name="plane" value="1"
+                            id="plane"> <label for="plane"></label>有
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" v-model='tableData.isAirplane' type="radio" name="plane" value="0"
+                            maxlength="15" id="plane1"> <label for="plane1"></label>无
+                    </div>
+                </div>
+                <div class="textareaBox" v-show='tableData.isAirplane == 1'>
+                    <div class="textareaItem2">
+                        <div class="text-item" style="border-bottom: 1px solid #EEEEEE;">
+                            <span>日期</span>
+                            <input type="text" v-model='tableData.airplaneDate' style="width:4.5rem;" :readonly='true'
+                                class="info-name-input plane" placeholder="请输入日期">
+                        </div>
+                        <div class="text-item">
+                            <span>航班号</span>
+                            <input type="text" v-model='tableData.airplaneNum' style="width:4.5rem;" maxlength="15"
+                                class="info-name-input" placeholder="多次换乘请用逗号隔开">
+                        </div>
+                    </div>
+                </div>
+                <div class="info-health-item time-num">
+                    <div class="info-left">
+                        <p class="dot"></p>
+                        <p>返程飞机</p>
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" v-model='tableData.isTrain' type="radio" name="train" value="1"
+                            id="train"> <label for="train"></label>有
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" v-model='tableData.isTrain' type="radio" name="train" value="0"
+                            id="train1"> <label for="train1"></label>无
+                    </div>
+                </div>
+                <div class="textareaBox" v-show='tableData.isTrain == 1'>
+                    <div class="textareaItem2">
+                        <div class="text-item" style="border-bottom: 1px solid #EEEEEE;">
+                            <span>日期</span>
+                            <input type="text" v-model='tableData.trainDate' style="width:4.5rem;" :readonly='true'
+                                class="info-name-input train" placeholder="请输入日期">
+                        </div>
+                        <div class="text-item">
+                            <span>航班号</span>
+                            <input type="text" v-model='tableData.trainNum' style="width:4.5rem;" maxlength="15"
+                                class="info-name-input" placeholder="多次换乘请用逗号隔开">
+                        </div>
+                    </div>
+                </div>
+                <div class="info-health-item time-num">
+                    <div class="info-left">
+                        <p class="dot"></p>
+                        <p>去程火车</p>
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" v-model='tableData.isSubway' type="radio" name="subway" value="1"
+                            id="subway"> <label for="subway"></label>有
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" v-model='tableData.isSubway' type="radio" name="subway" value="0"
+                            id="subway1"> <label for="subway1"></label>无
+                    </div>
+                </div>
+                <div class="textareaBox" v-show='tableData.isSubway == 1'>
+                    <div class="textareaItem2">
+                        <div class="text-item" style="border-bottom: 1px solid #EEEEEE;">
+                            <span>日期</span>
+                            <input type="text" v-model='tableData.subwayDate' style="width:4.5rem;" :readonly='true'
+                                class="info-name-input subway" placeholder="请输入日期">
+                        </div>
+                        <div class="text-item">
+                            <span>车次</span>
+                            <input type="text" v-model='tableData.subwayNum' style="width:4.5rem;" maxlength="15"
+                                class="info-name-input" placeholder="多次换乘请用逗号隔开">
+                        </div>
+                    </div>
+                </div>
+                <div class="info-health-item time-num">
+                    <div class="info-left">
+                        <p class="dot"></p>
+                        <p>返程火车</p>
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" v-model='tableData.isBus' type="radio" name="bus" value="1"
+                            id="bus"> <label for="bus"></label>有
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" v-model='tableData.isBus' type="radio" name="bus" value="0"
+                            id="bus1"> <label for="bus1"></label>无
+                    </div>
+                </div>
+                <div class="textareaBox" v-show='tableData.isBus == 1'>
+                    <div class="textareaItem2">
+                        <div class="text-item" style="border-bottom: 1px solid #EEEEEE;">
+                            <span>日期</span>
+                            <input type="text" v-model='tableData.busDate' style="width:4.5rem;" :readonly='true'
+                                class="info-name-input bus" placeholder="请输入日期">
+                        </div>
+                        <div class="text-item">
+                            <span>车次</span>
+                            <input type="text" v-model='tableData.busNum' style="width:4.5rem;" class="info-name-input"
+                                maxlength="15" placeholder="多次换乘请用逗号隔开">
+                        </div>
+                    </div>
+                </div>
+                <div class="info-health-item time-num">
+                    <div class="info-left">
+                        <p class="dot"></p>
+                        <p>其他行程</p>
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" v-model='tableData.isOthers' type="radio" name="traffic" value="1"
+                            id="traffic"> <label for="traffic"></label>有
+                    </div>
+                    <div class='health-radio-box'>
+                        <input class="health-radio" v-model='tableData.isOthers' type="radio" name="traffic" value="0"
+                            id="traffic1"> <label for="traffic1"></label>无
+                    </div>
+                </div>
+                <div class="textareaBox" v-show='tableData.isOthers == 1'>
+                    <div class="textareaItem2">
+                        <div class="text-item" style="border-bottom: 1px solid #EEEEEE;">
+                            <span>日期</span>
+                            <input type="text" v-model='tableData.othersDate' style="width:4.5rem;" :readonly='true'
+                                class="info-name-input other" placeholder="请输入日期">
+                        </div>
+                        <div class="text-item">
+                            <span>方式</span>
+                            <input type="text" v-model='tableData.othersNum' style="width:4.5rem;" maxlength="15"
+                                class="info-name-input" placeholder="多次换乘请用逗号隔开 ">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="info-box" style="display: flex; margin-top: 0.12rem;">
+                <div class="info-city" style="margin-left:0.32rem;">
+                    <div class="info-name-left">
+                        <img src="./lib/image/fgdk/yqzc5@2x.png" alt="">
+                        <span>是否自行隔离中</span>
+                    </div>
+                </div>
+                <div class="yesOrNO">
+                    <div style="position: relative;">
+                        <input class="health-radio" v-model='tableData.isQuarantine' type="radio" name="isolation"
+                            value="1" id="isolation"> <label for="isolation"></label>是
+                    </div>
+                    <div style="position: relative;">
+                        <input class="health-radio" v-model='tableData.isQuarantine' type="radio" name="isolation"
+                            value="0" id="isolation1"> <label for="isolation1"></label>否
+                    </div>
+                </div>
+            </div>
+
+            <!-- 打卡 -->
+            <div class="btnBox">
+                <div class="submit" @click=submit>
+                    <img src="./lib/image/fgdk/xxtz2@2x.png" style="width: 0.28rem; height: 0.3rem;" alt=""> &nbsp;打卡
+                </div>
+            </div>
+        </div>
+        <div class="nothing" :style="{marginTop:(upload ? '':'0')}" v-show="!isTrue">
+            <div>
+                <img :src="nothingImg" alt="">
+                <p>此内容正在加载中...</p>
+            </div>
+        </div>
+        <div class="succesBox" v-if='isShow'>
+            <div class="close" @click='close'>
+                <img src="./lib/image/fgdk/close12@3x.png" alt="">
+            </div>
+            <div class="imgBox">
+                <img src="./lib/image/fgdk/success@2x.png" alt="">
+            </div>
+            <div class="closeTitle">打卡成功</div>
+        </div>
+        <div class="isOk" v-if='isOk'>
+            {{message}}
+        </div>
+        <div class="mask" v-if='isShow' @click='close'></div>
+    </div>
+</body>
+
+</html>

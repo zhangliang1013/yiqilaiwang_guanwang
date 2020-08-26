@@ -1,0 +1,61 @@
+<link type="text/css" rel="stylesheet" href="../lib/mobile/mobileDist/styles/integrateExchange.css?v=0.00001">
+
+<div class="integrateExchange_content clearfix page_wrapper">
+
+    <section class="integrateExchange">
+        <div class="header ">
+            <div class="back pull-left back-fa his-back" role="button"><i class="fa fa-angle-left"></i></div>
+            <div class="title-text car_name" bt-data-bind="name">积分兑换</div>
+
+        </div>
+
+        <section class="integrate pl20 pt5 pb5">
+            <p class="">您当前剩余积分：<span class="text-white fwb f20" bt-data-bind = "point"> </span> 积分</p>
+            <!--<p class="">积分兑换的优惠券目前仅限超能气使用</p>
+            <a role="button" href="javascript:;"-->
+            <!--data-to-url="pointDetails" data-tl="积分明细"-->
+            <!--class="in-tip-btn f12" style="text-decoration: underline;">-->
+            <!--积分明细 >-->
+            <!--</a>-->
+        </section>
+        <section id="drawCoupon" style="padding: 16px"></section>
+
+        <script id="myIntegrateTpl" type='text/ractive'>
+        {{#each dataList:i}}
+             <div class="coupon mt15 clearfix {{isPJ ? 'green-bg': (order_use > 0 ? 'yellow-bg':'orange-bg')}}">
+                <div class="col-xs-4 content-left ">
+                    <div class="money pl10 text-white ps-r">
+                        <div>￥<span class="money_number">{{value}}</span></div>
+                        <div class="coupon_title">{{isPJ ? '配件券': (order_use > 0 ? '叠加券':'通用券')}}</div>
+                    </div>
+                </div>
+                <div class="col-xs-4 content-left line-right">
+                    <div class="text-white ps-r">
+                        <div class="unityuan">满{{fee_required}}元起用</div>
+                        <div class="">有效期{{expiry_time/(24*60*60)}}天</div>
+                    </div>
+                </div>
+                <div class="col-xs-4 content-right pt20 pb20 bg-white bdl0">
+                    <div>
+                        <div class="text-center pb5 f14"><span class="f20 txt fwb">{{point_required}} </span>积分</div>
+                        <div class="text-center pt5">
+                            <button class="act-btn bd0 text-white pt5 pb5" on-click="point2Conpon:{{this}}">
+                                立即兑换
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+            {{^dataList}}
+        <div class="text-gray pt20 text-center f20">
+                ╮(╯▽╰)╭
+                <div class="pt5"> 暂无优惠券可兑换</div>
+            </div>
+            {{/dataList}}
+        </script>
+        <div id="myIntegrate"></div>
+    </section>
+
+</div>
+<script type="text/javascript" src="/lib/mobile/mobileDist/js/integrateExchange.js?20200321"></script>

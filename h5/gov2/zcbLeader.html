@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="zh-cn">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <link rel="stylesheet" href="./lib/assets/styles/normalize.min.css" />
+    <link href="./lib/external/sweet-alert/css/sweet-alert.min.css" rel="stylesheet" type="text/css" />
+    <link href="./lib/external/toastr/css/toastr.min.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="./lib/assets/styles/beastBase.css" />
+    <link type="text/css" rel="stylesheet" href="./lib/styles/beastCommon.css">
+    <link type="text/css" rel="stylesheet" href="./lib/styles/zcbLeader.css">
+    <title>机构领导</title>
+</head>
+
+<body>
+    <div class="app-page-head">
+        <div class="app-page-head-hd">
+            <div class="app-page-head-btn">
+                <div class="btn-icon-back" id="page-back-btn" role="button">
+                    <img src="./lib/images/back.png" alt="">
+                </div>
+                <div class="btn-icon-close" id="page-close-btn" role="button">
+                    <img src="./lib/images/close.png" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="app-page-head-bd">
+            <div class="app-page-head-title" id="pageTitle">
+                机构领导
+            </div>
+        </div>
+    </div>
+
+    <div class="p-contain clearfix">
+        <section class="nav-tab-content" id="showContain">
+            <script id="tplContain" type='text/ractive'>
+            <!-- 机构领导 -->
+            {{#if detail}}
+            <section class="nav-tab-panel active" id="#bhjsPanel">
+                <section class="col-xs-12 list-box">
+                    <div class="col-xs-12 b-body pt0">
+                        {{#each detail}}
+                        <div id="bhjsContent" style="font-size: 14px;line-height: 26px;background:#fff">
+                            <div class="top">
+                                <div class="name">{{name}}</div>
+                                <div class="line"></div>
+                                <div class="title">{{position}}</div>
+                            </div>
+                            <div class="branch clear">
+                                <div class="left fl">工作分工</div>    
+                                <div class="right fl">{{work}}</div>    
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </section>
+            </section>
+            {{/if}} 
+            </script>
+        </section>
+
+    </div>
+
+    <script src="./lib/external/jquery1.11.1.min.js"></script>
+    <script src="./lib/external/ractive.min.js"></script>
+    <script src="./lib/external/sweet-alert/sweet-alert.min.js" type="text/javascript"></script>
+    <script src="./lib/external/toastr/toastr.min.js" type="text/javascript"></script>
+
+    <script src="./lib/utils/beastTools.js" type="text/javascript"></script>
+    <script src="./lib/js/beastBase.js"></script>
+    <!-- <script src="./lib/external/fastclick.js" type="text/javascript"></script> -->
+    <!-- <script src="./lib/external/jquery.history.js" type="text/javascript"></script> -->
+
+    <!-- <script src="./lib/external/swiper-3.3.1/swiper-3.3.1.jquery.min.js" type="text/javascript"></script> -->
+
+    <script type="text/javascript" src="./lib/js/zcbLeader.js"></script>
+</body>
+
+</html>

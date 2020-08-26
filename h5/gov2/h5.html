@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>h5</title>
+</head>
+<script type="text/javascript">
+
+	var phoneStateStr="";
+	function phoneState(){
+		// 判断 机型
+	    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) { //判断iPhone|iPad|iPod|iOS
+	      return phoneState = 'ios';
+	    } else if (/(Android)/i.test(navigator.userAgent)) {  //判断Android
+	      return phoneState = 'Android';
+	    } else { 
+	    //pc
+	    return "";
+	    }
+	}
+
+	//关闭按钮
+	function btnClick1() {
+		phoneStateStr = phoneState();
+		// js调用app
+	 	if (phoneStateStr == 'Android') {
+	         window.android.closePage()
+	    } else if (phoneStateStr == 'ios') {
+	         window.webkit.messageHandlers.closePage.postMessage(null);
+	    }
+	}
+
+	// 回首页
+	function btnClick2() {
+		var phoneStateStr = phoneState();
+		// js调用app
+	 	if (phoneStateStr == 'Android') {
+	         window.android.backHome()
+	    } else if (phoneStateStr == 'ios') {
+	         window.webkit.messageHandlers.backHome.postMessage(null);
+	    }
+	}
+
+	// 分享
+	function btnClick3() {
+		var phoneStateStr = phoneState();
+		// js调用app
+	 	if (phoneStateStr == 'Android') {
+	         window.android.share('13', '分享的标题','https://www.baidu.com/');
+	    } else if (phoneStateStr == 'ios') {
+	         window.webkit.messageHandlers.share.postMessage(['13', '分享的标题','https://www.baidu.com/']);
+	    }
+	}
+
+	// 洽谈
+	function btnClick4() {
+		var phoneStateStr = phoneState();
+		// js调用app
+	 	if (phoneStateStr == 'Android') {
+	         window.android.negotiate('魏景辉', 'https://img.yiqilaiwang.com/FjUALdM691q1pPurUKQGyhT41wQo','588cf0f2aded11e99d3100163e05ff66');
+	    } else if (phoneStateStr == 'ios') {
+	         window.webkit.messageHandlers.negotiate.postMessage(['魏景辉', 'https://img.yiqilaiwang.com/FjUALdM691q1pPurUKQGyhT41wQo','588cf0f2aded11e99d3100163e05ff66']);
+	    }
+	}
+
+	// 图片预览
+	function btnClick5() {
+		var phoneStateStr = phoneState();
+		// js调用app
+	 	if (phoneStateStr == 'Android') {
+	         window.android.picturePreview ('https://img.yiqilaiwang.com/e1323223-3318-4db3-ad21-ff3ba8ed2fca.png', 
+	        	[
+	        	'https://img.yiqilaiwang.com/e1323223-3318-4db3-ad21-ff3ba8ed2fca.png',
+	        	'https://img.yiqilaiwang.com/fec71317-0711-446d-9fda-0fbf5fbee471.png',
+	        	'https://img.yiqilaiwang.com/1d0dbfd2-b58f-4f69-9d87-a30976b20363.png'
+	        	]);
+	    } else if (phoneStateStr == 'ios') {
+	         window.webkit.messageHandlers.picturePreview.postMessage(['https://img.yiqilaiwang.com/e1323223-3318-4db3-ad21-ff3ba8ed2fca.png', [
+	        	'https://img.yiqilaiwang.com/e1323223-3318-4db3-ad21-ff3ba8ed2fca.png',
+	        	'https://img.yiqilaiwang.com/fec71317-0711-446d-9fda-0fbf5fbee471.png',
+	        	'https://img.yiqilaiwang.com/1d0dbfd2-b58f-4f69-9d87-a30976b20363.png'
+	        	]]);
+	    }
+	}
+
+	// 下载
+	function btnClick6() {
+		var phoneStateStr = phoneState();
+		// js调用app
+	 	if (phoneStateStr == 'Android') {
+	         window.android.fileDownload ('https://img.yiqilaiwang.com/e1323223-3318-4db3-ad21-ff3ba8ed2fca.png', '123.png');
+	    } else if (phoneStateStr == 'ios') {
+	         window.webkit.messageHandlers.fileDownload.postMessage(['https://img.yiqilaiwang.com/e1323223-3318-4db3-ad21-ff3ba8ed2fca.png', '123.png']);
+	    }
+	}
+
+	// 回登录界面  token过期时调用
+	function btnClick7() {
+		var phoneStateStr = phoneState();
+		// js调用app
+	 	if (phoneStateStr == 'Android') {
+	         window.android.login()
+	    } else if (phoneStateStr == 'ios') {
+	         window.webkit.messageHandlers.login.postMessage(null);
+	    }
+	}
+
+	// 组织成员 
+	function btnClick8() {
+		var phoneStateStr = phoneState();
+		// js调用app
+	 	if (phoneStateStr == 'Android') {
+	         window.android.orgMember('8a04f08b0c3111ea995200163e05ff66','1');
+	    } else if (phoneStateStr == 'ios') {
+	         window.webkit.messageHandlers.orgMember.postMessage(['8a04f08b0c3111ea995200163e05ff66','1']);
+	    }
+	}
+
+	// 举报
+	function btnClick9() {
+		var phoneStateStr = phoneState();
+		// js调用app
+	 	if (phoneStateStr == 'Android') {
+	         window.android.report('006023d5045111ea945200163e05ff66', '4');
+	    } else if (phoneStateStr == 'ios') {
+	         window.webkit.messageHandlers.report.postMessage(['006023d5045111ea945200163e05ff66', '4']);
+	    }
+	}
+
+	// 上传
+	function btnClick10() {
+		var phoneStateStr = phoneState();
+		// js调用app
+	 	if (phoneStateStr == 'Android') {
+	         window.android.fileUpload();
+	    } else if (phoneStateStr == 'ios') {
+	         window.webkit.messageHandlers.fileUpload.postMessage(null);
+	    }
+	}
+
+</script>
+<body>
+<a href="javascript:void(0)" onclick="btnClick1()">关闭按钮</a>
+<br />
+<a href="javascript:void(0)" onclick="btnClick2()">回首页</a>
+<br />
+<a href="javascript:void(0)" onclick="btnClick3()">分享</a>
+<br />
+<a href="javascript:void(0)" onclick="btnClick4()">洽谈</a>
+<br />
+<a href="javascript:void(0)" onclick="btnClick5()">图片预览</a>
+<br />
+<a href="javascript:void(0)" onclick="btnClick6()">下载</a>
+<br />
+<a href="javascript:void(0)" onclick="btnClick7()">回登录界面  token过期时调用</a>
+<br />
+<a href="javascript:void(0)" onclick="btnClick8()">组织成员</a>
+<br />
+<a href="javascript:void(0)" onclick="btnClick9()">举报</a>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<link type="text/css" rel="stylesheet" href="../lib/mobile/mobileDist/styles/myCoupon.css?v=2020032401">
+
+<div class="myCoupon_content page_wrapper clearfix">
+
+    <div class="header page_header">
+        <div class="clearfix" style="border-bottom: 1px solid #eee">
+            <div class="back pull-left back-fa his-back" role="button"><i class="fa fa-angle-left"></i></div>
+            <div class="title-text car_name" bt-data-bind="name">我的优惠券</div>
+        </div>
+        <section class="integrate pl20 pt5 pb5">
+            <p class="">您当前剩余积分：<span class="text-white fwb f20" id="cpPointShow"> </span> 积分</p>
+        </section>
+        <div class="act-item-contain clearfix">
+
+            <div class=" text-center bill-status-search clearfix">
+                <div class="col-xs-4 status-item active" data-type="1">
+                    <span class="">未使用</span>
+                </div>
+                <div class="col-xs-4 status-item" data-type="0">
+                    <span class="">已使用</span>
+                </div>
+                <div class="col-xs-4 status-item" data-type="-1">
+                    <span class="">已过期</span>
+                </div>
+            </div>
+        </div><!--act-item-contain end-->
+
+    </div>
+
+    <section class="myCoupon page_body clearfix " id="couponListShowBody" style="top: 123px">
+        <section id="myCoupon_drawCoupon" style="padding: 16px"></section>
+
+        <div class="coupon-list sys-list bg-white-light pb50" id="couponListShow">
+
+        </div>
+
+        <script id="couponListTpl" type='text/ractive'>
+            {{#each dealTable(tableList):ti}}
+            {{#if coupon_show ==1}}
+            <div class="coupon-item clearfix ps-r {{from_type != 'scc' ?real_amount < fee_required ? 'cannot-use':'':''}} "
+                 data-couponid="{{coupon_id}}"
+                 data-id="{{coupon_num}}"
+                 data-type="{{from_type == 'scc'?'scc':'wechat'}}"
+                 data-price="{{value}}"
+                 data-orderuse="{{order_use}}"
+                 >
+                <section class="coupon {{statusO.en || 'coupon_notused'}} mt15 clearfix ps-r {{isPJ ? 'green-bg': (order_use > 0 ? 'yellow-bg':'orange-bg')}}">
+                    <div class="col-xs-8 content-left line-right" style="height: 100%;padding: 6px 10px 0 10px;">
+                        <div class="col-xs-5">
+                            <div class="money text-white ps-r">
+                                <div>￥<span class="money_number coupon-price">{{value}}</span></div>
+
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="text-white ps-r text-right">
+                                <div class="unityuan">
+                                {{#if from_type == 'scc'}}
+                                    总数：{{qty}} 已用：{{used_qty}}
+                                {{else}}
+                                    满{{fee_required}}元可使用
+                                {{/if}}
+                                </div>
+                                <div>有效期至
+                                {{from_type !='scc'?formatTime(parseFloat(parseFloat(add_time)+parseFloat(expiry_time))):formatTime(expiry_time)}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12" style="border-top: 1px solid #fff;padding:3px 0;line-height: 24px;">
+                            <div class="col-xs-4 text-left">
+                                {{isPJ ? '配件券': (order_use > 0 ? '叠加券':'通用券')}}
+                            </div>
+                            <div class="col-xs-8 text-right" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+                                {{name}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 content-right bg-white">
+                        <div>
+                            {{#if '未使用' !== statusO.cn}}
+                            <button class="act-btn bd0 text-white pt5 pb5">
+                                {{statusO.cn}}
+                            </button>
+                            {{/if}}
+                            {{#if isShow>0 && ifChooseCoupon == false&&from_type!='scc'&&can_give}}
+                                <button class="act-btn bd0 text-white pt5 pb5 changeCoupon"
+                                        data-attr-id="{{id}}"
+                                        data-attr-number="{{coupon_num}}">去转赠</button>
+                            {{/if}}
+                            {{#if '未使用' === statusO.cn}}
+                            <a role="button" href="./index.html"  class="act-btn bd0 text-white pt5 pb5 g-details dis-no shiyong">去使用</a>
+                            {{/if}}
+                            {{#if ifChooseCoupon}}
+                                <button class="act-btn bd0 text-white pt5 pb5 select-status noselected">
+                                    立即使用
+                                </button>
+                                <button class="act-btn bd0 text-white pt5 pb5 select-status selected">
+                                    已选择
+                                </button>
+                            {{/if}}
+                        </div>
+                        <div class="ps-a selectableIcon">
+                            <img src="../lib/assets/images/rcm40/gou.png" alt="">
+                        </div>
+                    </div>
+                </section>
+            </div>
+            {{/if}}
+
+            {{/each}}
+
+            <div class="text-gray pt20 text-center f20">
+            {{^tableList}}
+                ╮(╯▽╰)╭
+                <div class="pt5"> 暂无{{ifChooseCoupon?"可用":""}}优惠券</div>
+            {{/tableList}}
+                <button role="button" class="act-btn text-active p5 pl30 pr30 mt10" id="exchangeCouponBtn">立即兑换优惠券 &gt;&gt;</button>
+
+            <div style="padding: 20px 30px;">
+                <p> <span style="color: red">*</span>部分优惠券因活动推广性质所限而不可赠送, 活动一切解释权归<span class="opco_name">喜威燃气</span>所有.</p>
+            </div>
+
+            </div>
+
+        </script>
+    </section>
+
+
+
+    <div class="clearfix page_footer" style="padding: 0 15px 10px;background: #fff;">
+        <button class="btn bg-white" id="noUseCoupon">不使用优惠券</button>
+        <button class="btn bg-active" id="confirmCoupon">确认</button>
+    </div>
+
+</div>
+
+<div class="page-forChange">
+    <div class="forChange">
+        <h3 class="text-center" style="color:#F18101">请输入手机号</h3>
+        <input type="number" class="in-float2" id="user_phone">
+        <div class="forChangeBtn">
+            <button class="confirmChange" style="float:left;background:#F18101;">确认</button>
+            <button class="cancelCoupon" style="float:right;background:#F18101;">取消</button>
+        </div>
+    </div>
+</div>
+
+<script src="../lib/utils/scrollPageInfo.js" type="text/javascript"></script>
+<script type="text/javascript" src="../lib/mobile/mobileDist/js/myCoupon.js?v=2020032707"></script>

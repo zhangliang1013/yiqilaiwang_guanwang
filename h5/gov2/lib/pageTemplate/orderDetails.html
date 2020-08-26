@@ -1,0 +1,301 @@
+<link href="../lib/mobile/mobileDist/styles/orderDetails.css" rel="stylesheet" type="text/css"/>
+
+<div class="orderDetail_content page_wrapper clearfix" id="">
+    <!--<p class="p20 text-center pt50">加载中...</p>-->
+
+
+    <div class="header page_header">
+        <div class="back pull-left back-fa his-back" role="button"><i class="fa fa-angle-left"></i></div>
+        <div class="title-text car_name" bt-data-bind="name">订单详情</div>
+    </div>
+
+    <div id="orderDetailShow">
+
+    </div>
+
+    <script id="orderDetailTpl" type='text/ractive'>
+
+    <div class="page_body">
+        {{#detailMsg}}
+        <div id="odIscroller" class="clearfix pb20">
+
+            <div class="detail-item clearfix">
+                <div class="title-contain">
+                    <span class="title-text">订单号：<span>{{number}}</span></span>
+                    <span class="title-status text-active fwb order_status ">
+                        {{#if status == 0 && pay_mode == 0 }}
+                                    已受理
+                                {{else }}
+
+                                    {{formatStatus(status)}}
+                                {{/if}}
+                    </span>
+                </div>
+                <div class="detail-contain clearfix">
+                    <div class="detail-row col-xs-12 pt15 pb10">
+                        感谢您在喜威订气，欢迎再次光临
+                    </div>
+                </div>
+            </div><!--/.detail-item end -->
+
+            <section class="personal_info">
+                <p class="info">
+                    <i class="iconfont">&#xe601;</i>
+                    <span class="info-name dis-ib">{{address.CUSTOMERDESC}}</span>
+                    <span class="info-number dis-ib">{{address.OFFICETEL}}</span>
+                </p>
+                <p class="address">{{address.ADDRESS1_0}}</p>
+                {{#if receive_phone}}
+                <p class="p10 pt5">
+                    收货手机号：<span id="rePhoneShow">{{receive_phone}}</span>
+                </p>
+                {{/if}}
+            </section>
+
+            <div class="detail-item clearfix">
+                <div class="title-contain">
+                    <span class="title-text">订单信息</span>
+                    <span class="title-status text-gray pr0">{{formatTime(add_time)}}</span>
+                </div>
+                <div class="goods-list col-xs-12">
+
+                {{#orderGoodsList}}
+
+                    <a class="commodity col-xs-12" href="javascript:;"
+                       role="button" data-id="1">
+                        <div class="col-xs-3 pl10">
+                            <div class=' commodity-pic'>
+                                <img src="{{advpic}}"/>
+                            </div>
+                        </div>
+                        <div class="col-xs-9 commodity-msg pt10">
+                            <div class="col-xs-12 commodity-title">{{name}}</div>
+                            <div class="col-xs-4 commodity-price">￥ {{unit_price}}</div>
+                            <div class="col-xs-8 commodity-number text-right">
+                                <span class="">x{{quantity}}</span>
+                            </div>
+                        </div>
+                    </a><!--commodity end-->
+
+                {{/orderGoodsList}}
+
+                </div>
+                <div class="detail-contain bdb1 col-xs-12 pt10">
+                    <div class="detail-row col-xs-12">
+                        <span class="left-tip col-xs-3">配送方式</span>
+                        <span class="right-msg col-xs-9">{{isselft == 1 ? '客户自提':'送气上门'}}</span>
+                    </div>
+                    <div class="detail-row col-xs-12 pt10">
+                        <span class="left-tip col-xs-3">送气时间</span>
+                        <span class="right-msg col-xs-9">
+                        {{formatTime1('yyyy-MM-dd', book_date)}}
+                        {{#if start_hour > 0 || end_hour > 0}}
+                         {{start_hour < 10 ? '0' + start_hour : start_hour}}:{{start_minute < 10 ? '0' + start_minute : start_minute}}
+                         ~
+                         {{end_hour < 10 ? '0' + end_hour : end_hour}}:{{end_minute < 10 ? '0' + end_minute : end_minute}}
+                        {{/if}}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="detail-contain bdb1 col-xs-12">
+                    <div class="detail-title-contain col-xs-12">
+                        <span class="detail-tl green">支付方式</span>
+                        <span class="detail-tl-right green">{{pay_mode == 1? '微信支付':'货到付款'}}</span>
+                    </div>
+                    {{#if pay_mode == 1}}
+                    <div class="detail-row col-xs-12">
+                        <span class="left-tip col-xs-3">支付时间</span>
+                        <span class="right-msg col-xs-9 text-right text-gray">{{pay_time > 0 ? formatTime(pay_time):'未支付'}}</span>
+                    </div>
+                    {{/if}}
+                </div>
+                {{#if voucher && voucher.length > 0}}
+                <div class="detail-contain bdb1 col-xs-12">
+                    <div class="detail-title-contain col-xs-12">
+                        <span class="detail-tl">发票信息</span>
+                        <span class="detail-tl-right text-gray">纸质发票</span>
+                    </div>
+                    <div class="detail-row col-xs-12">
+                        <span class="left-tip col-xs-3">发票抬头</span>
+                        <span class="right-msg col-xs-9">{{voucher[0].title}}</span>
+                    </div>
+                    <div class="detail-row col-xs-12">
+                        <span class="left-tip col-xs-3">发票内容</span>
+                        <span class="right-msg col-xs-9">明细</span>
+                    </div>
+                </div>
+                {{/if}}
+                <div class="detail-contain col-xs-12">
+                    <div class="detail-title-contain col-xs-12">
+                        <span class="detail-tl">订单留言</span>
+                    </div>
+                    <div class="detail-row col-xs-12 text-gray pb10">
+                        {{descript}}
+                    </div>
+                </div>
+            </div><!--/.detail-item end -->
+
+            <div class="detail-item clearfix">
+                <div class="title-contain">
+                    <span class="title-text">价格信息</span>
+                </div>
+                <div class="detail-contain clearfix">
+                    <div class="detail-row col-xs-12">
+                        <span class="left-tip col-xs-3">气价</span>
+                        <span class="right-msg col-xs-9 text-right text-active">￥{{total_base_amount}} </span>
+                    </div>
+                    <div class="detail-row col-xs-12 pb5">
+                        <span class="left-tip col-xs-3">送气费</span>
+                        <span class="right-msg col-xs-9 text-right">￥{{total_route_amount}}</span>
+                    </div>
+                    <div class="detail-row col-xs-12 pb5">
+                        <span class="left-tip col-xs-3">楼层费</span>
+                        <span class="right-msg col-xs-9 text-right">￥{{total_floor_amount}}</span>
+                    </div>
+                    <div class="detail-row col-xs-12 pb5">
+                        <span class="left-tip col-xs-3">钢瓶使用费</span>
+                        <span class="right-msg col-xs-9 text-right">￥{{total_rent_amount?total_rent_amount:0}}</span>
+                    </div>
+                    {{#if parseFloat(total_favour_amount) > 0}}
+                    <div class="detail-row col-xs-12 pb5">
+                        <span class="left-tip col-xs-3">会员优惠</span>
+                        <span class="right-msg col-xs-9 text-right">- ￥{{total_favour_amount}}</span>
+                    </div>
+                    {{/if}}
+                    {{#if parseFloat(total_coupon_amount) > 0}}
+                    <div class="detail-row col-xs-12 pb5">
+                        <span class="left-tip col-xs-3">优惠券</span>
+                        <span class="right-msg col-xs-9 text-right">- ￥{{total_coupon_amount}}</span>
+                    </div>
+                    {{/if}}
+                    {{#if parseFloat(total_action_amount) > 0}}
+                    <div class="detail-row col-xs-12 pb5">
+                        <span class="left-tip col-xs-3">活动优惠</span>
+                        <span class="right-msg col-xs-9 text-right">- ￥{{total_action_amount}}</span>
+                    </div>
+                    {{/if}}
+                   <!-- {{#if parseFloat(total_discount_amount) > 0}}
+                    <div class="detail-row col-xs-12 pb5">
+                        <span class="left-tip col-xs-3">积分抵扣</span>
+                        <span class="right-msg col-xs-9 text-right">- ￥{{total_discount_amount}}</span>
+                    </div>
+                    {{/if}}-->
+                    <div class="detail-row col-xs-12 bdt1 text-right pt10 pb5">
+                        <span class="">实付金额：</span>
+                        <span class="text-active f16">￥ {{total_real_amount}} </span>
+                    </div>
+                </div>
+            </div><!--/.detail-item end -->
+
+            {{#if commented == 1 && commentList.length > 0}}
+            <div class="detail-item clearfix order-comment-contain status_acts status_wc">
+                <div class="title-contain">
+                    <span class="title-text">我的评论</span>
+                </div>
+                {{#commentList[0]}}
+                <div class="detail-contain clearfix">
+                    <div class="detail-row col-xs-12">
+                        <span class="left-tip col-xs-3">送气速度</span>
+                        <span class="right-msg col-xs-9">
+                            <div class="oc-star-n">
+                                <ul class="star{{speed}}">
+                                    <li> <a  val="1" href="javascript:;" role="button">star1 </a></li>
+                                    <li> <a val="2" href="javascript:;" role="button"> star2 </a></li>
+                                    <li> <a val="3" href="javascript:;" role="button"> star3  </a></li>
+                                    <li> <a val="4" href="javascript:;" role="button"> star4  </a></li>
+                                    <li> <a val="5" href="javascript:;" role="button"> star5  </a></li>
+                                </ul>
+                            </div>
+                        </span>
+                    </div>
+                    <div class="detail-row col-xs-12">
+                        <span class="left-tip col-xs-3">服务态度</span>
+                        <span class="right-msg col-xs-9">
+                            <div class="oc-star-n">
+                                <ul class="star{{attitude}}">
+                                    <li> <a  val="1" href="javascript:;" role="button">star1 </a></li>
+                                    <li> <a val="2" href="javascript:;" role="button"> star2 </a></li>
+                                    <li> <a val="3" href="javascript:;" role="button"> star3  </a></li>
+                                    <li> <a val="4" href="javascript:;" role="button"> star4  </a></li>
+                                    <li> <a val="5" href="javascript:;" role="button"> star5  </a></li>
+                                </ul>
+                            </div>
+                        </span>
+                    </div>
+                    <div class="detail-row col-xs-12">
+                        <span class="left-tip col-xs-3">产品质量</span>
+                        <span class="right-msg col-xs-9">
+                            <div class="oc-star-n">
+                                <ul class="star{{quality}}">
+                                    <li> <a  val="1" href="javascript:;" role="button">star1 </a></li>
+                                    <li> <a val="2" href="javascript:;" role="button"> star2 </a></li>
+                                    <li> <a val="3" href="javascript:;" role="button"> star3  </a></li>
+                                    <li> <a val="4" href="javascript:;" role="button"> star4  </a></li>
+                                    <li> <a val="5" href="javascript:;" role="button"> star5  </a></li>
+                                </ul>
+                            </div>
+                        </span>
+                    </div>
+                    <div class="detail-row col-xs-12">
+                        <span class="left-tip col-xs-3">售后安检</span>
+                        <span class="right-msg col-xs-9">{{check?'是':'否'}}</span>
+                    </div>
+                    <div class="detail-row col-xs-12">
+                        <span class="left-tip col-xs-3">评论内容</span>
+                        <span class="right-msg col-xs-9">{{content}}</span>
+                    </div>
+                </div>
+                {{#if reply}}
+
+                <div class="detail-contain clearfix mt10 p10 pt5 bg-gray">
+                    <div class="detail-row col-xs-12">
+                        <span class="left-tip col-xs-2">回复：</span>
+                        <span class="right-msg col-xs-10">{{reply}}</span>
+                    </div>
+                </div>
+                {{/if}}
+                {{/commentList}}
+            </div><!--/.detail-item end -->
+            {{/if}}
+
+        </div>
+        {{/detailMsg}}
+    </div>
+
+    <div class="page_footer clearfix">
+        <div class="pull-left footer-price">实付：
+            <span class="text-active f16">
+            ￥ {{detailMsg.total_real_amount}} </span>
+        </div>
+        <div class="status_acts active">
+
+            {{#if detailMsg.isCanComment > 0}}
+                <button class=" act-btn red pull-right ml10" on-click="commentOrder">我要评论</button>
+            {{/if}}
+
+            {{#if detailMsg.isCanCall > 0 }}
+                <button class=" act-btn red pull-right ml10" on-click="pressOrder">我要催单</button>
+            {{/if }}
+
+            {{#if detailMsg.isCanCancel > 0 }}
+                <button class=" act-btn  pull-right ml10" on-click="cancelOrder">取消订单</button>
+            {{/if}}
+
+            {{#if detailMsg.pay_mode==1 && detailMsg.status == 0 }}
+                <button class=" act-btn orange pull-right ml10" on-click="payOrder">立即支付</button>
+            {{/if}}
+             {{#if detailMsg.isTake > 0 }}
+                <button class=" act-btn orange pull-right ml10" on-click="orderOk:{{this}}">确认收货</button>
+             {{/if}}
+
+        </div>
+
+    </div>
+
+
+
+    </script>
+</div>
+
+<script src="../lib/mobile/mobileDist/js/orderDetails.js?v=6" type="text/javascript"></script>

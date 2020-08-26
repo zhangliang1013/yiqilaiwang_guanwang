@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="divport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<!-- <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"> -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="format-detection" content="telephone=yes">
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+
+  <link rel="stylesheet" href="./lib/css/appDp.css?t=2020122"/>
+  <title>一起来往-赋能组织，活力共赢</title>
+  <script type="text/javascript" src="./lib/commonJs/common.js"></script>
+  <script type="text/javascript" src="./lib/commonJs/vue.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./lib/commonJs/echarts.js"></script>
+	<script src="./lib/commonJs/echartsGL@1.1.1.js"></script>
+	<script type="text/javascript" src="./lib/commonJs/layer_mobile/layer.js"></script>
+  <script>document.write('<script type="text/javascript" src="./lib/js/appDP.js?=' + new Date().getTime() + '"><\/script>')</script>
+</head>
+<body>
+  <div id="index" v-cloak>
+		<div class="echart" style="min-height: 800px;width: 100%;margin: 0 auto;">
+			<div style="background:#0C0B34" class="container-fluid office-efficiency-index">
+				<!-- <div id="main" style="width:500px;height:500px"></div> -->
+				<div class="row  office-header-content clear">
+					<div class="col-md-4 pd clear">
+						<div  class="col-info row" :style="{'height': type==1?'700':'700' + 'px'}">
+							<!-- 头部标题 -->
+							<!-- <ul class="clear title" v-if="geoJson">
+								<li class="fl clear">
+									<p class="fl">已上线{{type==1?'企业':'商会'}}数量</p>
+								</li>
+								<li class="fr clear" style="cursor:pointer" @click="toPage('/memberList/1')"> 
+									<p class="fl circle"></p><p class="fl">{{type==1?'企业':'商会'}}数量</p>
+									<div class="fl" v-if="type!=1">
+										<p class="fl title-left" style="color:#02CCFE">查看详情</p>
+										<img class="fl icon"  src="./img/gslsjdp1@3x.png" alt="">
+									</div>
+								</li>
+							</ul> -->
+							<div class="content base-info col-md-12 pd" id="main" ></div>
+						</div>
+						<!-- <div  class="col-info row" :style="{'height': type==1?'270':'400' + 'px'}"> -->
+							<div  class="col-info row" >
+							<div class="content base-info  col-md-12 pd" id="main5" ></div>
+						</div>
+						<div  v-show="type==1" :class="type==1?'col-info row':'' ">
+							<div class="content base-info col-md-12 pd" id="main2" ></div>
+						</div>
+					</div>
+					<!-- 2列 -->
+					<div class="col-md-4 pd row" v-if="type">
+							<div class="height-map" :class="{'height-map1':type==2}" id="main6"></div>
+							<div class="bar clear" :style="{'margin-left':type==2?'100':'0'+ 'px'}">
+								<div class='height1' :class="{ 'height2' : type==2}" style="padding:0 20px">
+									<div class="fl item" style="height:100%;width:49%;" id="main7" v-show="type==1"></div>
+									<div class="fl item" style="height:100%;width:49%;" id="main8" ></div>
+								</div>
+							</div>
+					</div>
+					<!-- 3列 -->
+					<div class="col-md-4 pd clear">
+						<div  class="col-info row" :style="{'height': type==1?'27':'700' + 'px'}">
+							<!-- <ul class="clear title" v-if="geoJson">
+								<li class="fl clear">
+									<p class="fl">已上线协会数量</p>
+								</li>
+								<li class="fr clear" style="cursor:pointer" @click="toPage('/memberList/2')"> 
+									<p class="fl circle"></p><p class="fl">协会数量</p>
+									<div class="fl" v-if="type!=1">
+										<p class="fl title-left" style="color:#02CCFE">查看详情</p>
+										<img class="fl icon"  src="./img/gslsjdp1@3x.png" alt="">
+									</div>
+								</li>
+							</ul> -->
+							<div class="content base-info col-sm-12 col-md-12 pd" id="main1" ></div>
+						</div>
+						<div  class="col-info row" :style="{'height': type==1?'27':'700' + 'px'}">
+
+							<div class="content base-info col-sm-12 col-md-12 pd" id="main4" ></div>
+						</div>
+						<div  :class="type==1?'col-info row':'' " v-show="type==1">
+						<!-- <div class="content base-info" id="main1" style="width:616px;height:340px"></div> -->
+							<div class="content base-info col-sm-12 col-md-12 pd" id="main3" ></div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<!-- <div class="layer" v-if="layer == 1">
+			<div class="layer-box">
+				<div class="layer-content">当前组织未认证</div>
+				<div @click="toLayer" class="layer-btn">点击返回</div>
+			</div>
+		</div> -->
+	</div>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="divport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./lib/css/fgEchartsOld.css"/>
+  <title>一起来往-赋能组织，活力共赢</title>
+  <script type="text/javascript" src="./lib/commonJs/common.js"></script>
+  <script type="text/javascript" src="./lib/commonJs/vue.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./lib/commonJs/echarts.js"></script>
+  <script>document.write('<script type="text/javascript" src="./lib/js/fgEchartsOld.js?t=' + new Date().getTime() + '"><\/script>')</script>
+</head>
+<body>
+  <div id="index" v-cloak>
+    <div class="top" v-if="type ==1">
+      <div class="top-title">
+        <div class="top-title-l">{{status ==3 ?'本月动态数据总览': status !=2? '今日统计数据':'本周动态数据总览'}}</div>
+        <div class="top-title-r">
+          <div class="btn" @click="change(1)">{{status ==1? '查看本周':''}}{{status ==2 || status ==3? '查看本日':''}}</div>
+          <div class="btn" @click="change(2)">{{status ==1 || status ==2? '查看本月':''}}{{status ==3? '查看本周':''}}</div>
+        </div>
+      </div>
+      <div class="day" v-show="status == 1">
+        <div class="pie-box">
+          <div id="pie" style="width: 3.26rem;height:2.8rem;"></div>
+          <div class="pie-right" style="padding:0">
+            <div class="pie-title">
+              <div class="pie-icon"></div>
+              <div class="pie-txt">状态正常(人)</div>
+              <div class="pie-num">{{detail.todayNomalPerson || 0}}</div>
+            </div>
+            <div class="pie-title">
+              <div class="pie-icon" style="background: #F41818;"></div>
+              <div class="pie-txt">重点关注(人)</div>
+              <div class="pie-num" style="color: #F41818;">{{detail.todayFocusOnPerson || 0}}</div>
+            </div>
+            <div class="pie-title">
+              <div class="pie-icon" style="background: #cccccc;"></div>
+              <div class="pie-txt">未打卡(人)</div>
+              <div class="pie-num" style="color: #cccccc;">{{detail.unsignPerson || 0}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom">
+          <div class="num">
+            <div class="num1"></div>
+            <div class="num-txt">打卡人数(人)</div>
+            <div class="number">{{detail.todayTotalSignPerson || 0}}</div>
+          </div>
+          <div class="num">
+            <div class="num1"></div>
+            <div class="num-txt">打卡人次(人次)</div>
+            <div class="number">{{detail.todayTotalSignCount || 0}}</div>
+          </div>
+          <div class="num">
+            <div class="num1" style="background: #E062AE;"></div>
+            <div class="num-txt">自我隔离(人)</div>
+            <div class="number" style="color: #E062AE;">{{detail.todayQuarantine || 0}}</div>
+          </div>
+          <div class="num">
+            <div class="num1" style="background:#F0C610;"></div>
+            <div class="num-txt">今日返程(人)</div>
+            <div class="number" style="color:#F0C610;">{{detail.todayReturnPerson || 0}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="weeek" v-show="status == 2 || status == 3">
+        <div class="pie-right">
+          <div class="pie-title pie-title1">
+            <div class="pie-icon" style="background: #4CB3EF;"></div>
+            <div class="pie-txt pie-txt1">打卡人次</div>
+            <div class="pie-num" style="color:#4CB3EF;">&nbsp;{{status == 2? detail.signPersonTime || 0:detail.signPersonTime || 0}}&nbsp;</div>
+            <div>人次</div>
+          </div>
+          <div class="pie-title pie-title1">
+            <div class="pie-icon" style="background: #F41818;"></div>
+            <div class="pie-txt pie-txt1">需重点关注</div>
+            <div class="pie-num" style="color: #F41818;">&nbsp;{{status == 2? detail.focusOnPersonTime || 0:detail.focusOnPersonTime || 0}}&nbsp;</div>
+            <div>人次</div>
+          </div>
+           <div class="pie-title pie-title1">
+            <div class="pie-icon" style="background: #E062AE;"></div>
+            <div class="pie-txt pie-txt1">自行隔离</div>
+            <div class="pie-num" style="color: #E062AE;">&nbsp;{{status == 2? detail.quarantinePersonTime || 0:detail.quarantinePersonTime || 0}}&nbsp;</div>
+            <div>人次</div>
+          </div>
+          <div class="pie-title pie-title1">
+            <div class="pie-icon" style="background: #F0C610;"></div>
+            <div class="pie-txt pie-txt1">本{{status == 2?'周':'月'}}共返程</div>
+            <div class="pie-num" style="color: #F0C610;">&nbsp;{{status == 2? detail.returnPerson || 0:detail.returnPerson || 0}}&nbsp;</div>
+            <div>人</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="top" v-if="type == 2">
+      <div class="top-title">
+        <div class="top-title-l">今日动态数据总览</div>
+      </div>
+      <div class="weeek">
+        <div class="pie-right">
+          <div class="pie-title pie-title1">
+            <div class="pie-icon" style="background: #FF985A;"></div>
+            <div class="pie-txt pie-txt1">已上报组织</div>
+            <div class="pie-num" style="color:#FF985A;">&nbsp;{{detail.orgNum || 0}}&nbsp;</div>
+            <div>个</div>
+          </div>
+          <div class="pie-title pie-title1">
+            <div class="pie-icon" style="background: #4CB3EF;"></div>
+            <div class="pie-txt pie-txt1">共打卡</div>
+            <div class="pie-num" style="color: #4CB3EF;">&nbsp;{{detail.signPerson || 0}}&nbsp;</div>
+            <div>人</div>
+          </div>
+          <div class="pie-title pie-title1">
+            <div class="pie-icon" style="background: #4CB3EF;"></div>
+            <div class="pie-txt pie-txt1">打卡人次</div>
+            <div class="pie-num" style="color: #4CB3EF;">&nbsp;{{detail.signPersonTime || 0}}&nbsp;</div>
+            <div>人次</div>
+          </div>
+          <div class="pie-title pie-title1">
+            <div class="pie-icon" style="background: #F41818;"></div>
+            <div class="pie-txt pie-txt1">需重点关注</div>
+            <div class="pie-num" style="color: #F41818;">&nbsp;{{detail.focusOnPerson || 0}}&nbsp;</div>
+            <div>人</div>
+          </div>
+          <div class="pie-title pie-title1">
+            <div class="pie-icon" style="background: #E062AE;"></div>
+            <div class="pie-txt pie-txt1">自行隔离</div>
+            <div class="pie-num" style="color: #E062AE;">&nbsp;{{detail.quarantinePerson || 0}}&nbsp;</div>
+            <div>人</div>
+          </div>
+          <div class="pie-title pie-title1">
+            <div class="pie-icon" style="background: #F0C610;"></div>
+            <div class="pie-txt pie-txt1">今日返程</div>
+            <div class="pie-num" style="color: #F0C610;">&nbsp;{{detail.returnPerson || 0}}&nbsp;</div>
+            <div>人</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bot">
+      <div class="top-title">
+        <div class="top-title-l" v-if="type==1">{{status == 1? '本周每日数据统计':status == 2?'较上周数据对比':'较上月数据对比'}}</div>
+        <div class="top-title-l" v-if="type==2">{{typeSeve?'7':'14'}}日数据统计对比</div>
+        <div class="top-title-r" v-if="type==2">
+          <div class="btn" style="margin-right:0" @click="changeOrg">{{typeSeve?'14':'7'}}日数据对比</div>
+        </div>
+      </div>
+      <div class="top-next" v-if="type==1">
+        <div class="span" :style="status == 1? '':'margin-left:2.17rem'" >{{status == 1? '每日打卡总人数':status == 2?'较上周打卡人次对比':'较上月打卡人次对比'}}</div>
+        <div class="span" :style="status == 1? '':'margin-left:0.55rem'"></div>
+        <div class="span">数量(人{{status != 1?'次':''}})</div>
+        <div class="bg" :style="status == 1?'': 'width:2.5rem;left:2.08rem'"></div>
+      </div>
+      <div class="top-next" v-else>
+        <div class="span" style="margin-left:2.87rem">打卡人数</div>
+        <div class="span" style="margin-left:1.48rem"></div>
+        <div class="span">数量(人)</div>
+        <div class="bg" style="width:1.16rem;left:2.83rem"></div>
+      </div>
+      <div id="cross" style="width: 7rem;height:5rem;margin:auto"></div>
+      <div class="top-next" style="margin-top:0.2rem" v-if="type==1">
+        <div class="span" :style="status == 1? 'margin-left:2.31rem':status == 2? 'margin-left:1.89rem':'margin-left:2.17rem' ">{{status == 1? '每日自我隔离人数':status == 2?'较上周重点关注人次对比':'较上月返程人数对比'}}</div>
+        <div class="span" v-if="status == 1" style="margin-left:0.92rem;background:#E062AE"></div>
+        <div class="span" v-if="status == 2" style="margin-left:0.27rem;background:#F41818"></div>
+        <div class="span" v-if="status == 3" style="margin-left:0.79rem;background:#F0C610"></div>
+        <div class="span">数量(人{{status == 2?'次':''}})</div>
+        <div class="bg" v-if="status == 1" style="background:rgba(224, 98, 174, 0.14);width:2.22rem;left:2.25rem"></div>
+        <div class="bg" v-if="status == 2" style="background:rgba(244, 24, 24, 0.14);width:3rem;left:1.8rem"></div>
+        <div class="bg" v-if="status == 3" style="background:rgba(240, 198, 16, 0.14);width:2.5rem;left:2.1rem"></div>
+      </div>
+      <div class="top-next" v-else>
+        <div class="span" style="margin-left:2.87rem">打卡人次</div>
+        <div class="span" style="margin-left:1.34rem;background:#FF985A"></div>
+        <div class="span">数量(人次)</div>
+        <div class="bg" style="width:1.16rem;left:2.83rem;background:rgba(255, 152, 90, 0.14)"></div>
+      </div>
+      <div id="cross2" style="width: 7rem;height:5rem;margin:auto"></div>
+    </div>
+  </div>
+</body>
+</html>

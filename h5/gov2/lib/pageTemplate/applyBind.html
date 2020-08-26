@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=yes">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <!--<link rel="stylesheet" href="../lib/assets/styles/normalize.min.css"/>-->
+    <!--<link href="../lib/external/sweet-alert/css/sweet-alert.min.css" rel="stylesheet" type="text/css"/>-->
+    <!--<link href="../lib/external/toastr/css/toastr.min.css" rel="stylesheet" type="text/css"/>-->
+
+    <!--<link type="text/css" rel="stylesheet" href="../lib/assets/styles/iconfont.css">-->
+    <!--<link type="text/css" rel="stylesheet" href="../lib/assets/styles/font-awesome.min.css">-->
+    <!--<link type="text/css" rel="stylesheet" href="../lib/assets/styles/beastBase.css">-->
+    <!--<link type="text/css" rel="stylesheet" href="../lib/mobile/mobileDist/styles/beastCommon.css">-->
+
+    <!-- 轮播器插件 -->
+    <!--<link type="text/css" rel="stylesheet" href="../lib/external/swiper-3.3.1/swiper-3.3.1.min.css">-->
+
+    <link type="text/css" rel="stylesheet" href="../lib/mobile/mobileDist/styles/applyBind.css?v=13">
+    <script src="../lib/external/jquery1.11.1.min.js"></script>
+
+    <title>「喜威」燃气开户有奖</title>
+</head>
+<body>
+
+<div class="loading-contain" style="display: block;">
+    <img src="../lib/mobile/mobileDist/styles/loading-bubbles.svg" fill="blue">
+    <div class="loading-tip">加载中 ...</div>
+</div>
+
+<div class="clearfix">
+
+    <div class="apply-bind-content clearfix">
+        <!-- banner轮播图 -->
+        <section class="swiper-container" id="indexSwiper">
+            <div class="swiper-wrapper" id="carousel">
+
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination" id="indexSwiperPg"></div>
+        </section>
+
+        <section class="apply-bind-order bg-white">
+            <!--<h3 class="orange text-center fwb cancel-order-title mt0 f16">申请开户</h3>-->
+            <div class="reason-list">
+
+                <p class="cancel-reason mb10">
+                    <input type="text" id="applyName" class="p10 cancel-reason-input needsclick" placeholder="姓名">
+                </p>
+                <p class="cancel-reason mb10">
+                    <input type="text" id="applyPhone" class="p10 cancel-reason-input needsclick" placeholder="手机号">
+                </p>
+
+                <div style="overflow: hidden">
+                    <p class="cancel-reason mb10" style="height: 40px;line-height: 40px;float: left; width: 43%">
+                        <i class="iconfont">&#xe601;</i><label id="city_name">...</label>
+                    </p>
+                    <p class="cancel-reason mb10 bd0" style="float: right; width: 55%" id="areaListShow">
+                    </p>
+                </div>
+                <p class="cancel-reason mb10">
+                    <input type="text" id="applyAddress" class="p10 cancel-reason-input needsclick" placeholder="地址">
+                </p>
+                <p class="cancel-reason mb10 remd-phone dis-no">
+                    <input type="text" id="remdPhone" class="p10 cancel-reason-input needsclick remd_phone" placeholder="推荐人手机号">
+                </p>
+                <p class="mb10">
+                    <a href="javascript:;" class="my-checkbox title-tip dis-b p5 pl0">
+                        <i class="fa fa-square-o no-check f20"></i>
+                        <i class="fa fa-check-square had-checked f20"></i>
+                        <span class="text-black is-have"> 是否带有喜威瓶</span>
+                        <input id="applyHaveBottle" type="hidden" class="check-val" value="0" />
+                    </a>
+                </p>
+                <p class="mb10 text-gray">
+                    本人已阅读并同意
+                    <a href="javascript:;" id="showAgreement" class="fwb" style="text-decoration: underline;">
+                        《隐私声明》中的条款
+                    </a>
+                </p>
+            </div>
+
+            <p class="submit">
+                <button id="confrimApplyBtn" type="button" class="mt10 p10 f16 orange-bg btn fwb">同意条款并提交申请</button>
+            </p>
+
+            <p class="bindAccount_input pb10 mt10">
+                <button type="button" class="btn applyBindBtn">账户绑定</button>
+            </p>
+
+            <!--<p class="text-center mt10"><a href="tel:96917" class="a_contact">联系客服</a></p>-->
+        </section>
+    </div>
+</div>
+
+<div class="foot-company-msg">技术支持：艾网信息</div>
+
+<!--<script type="text/javascript" src="../lib/external/ractive.min.js"></script>-->
+<!--<script type="text/javascript" src="../lib/external/sweet-alert/sweet-alert.min.js" ></script>-->
+<!--<script type="text/javascript" src="../lib/external/toastr/toastr.min.js" ></script>-->
+<!--<script type="text/javascript" src="../lib/mobile/mobileDist/js/beastBase.js"></script>-->
+<!--<script type="text/javascript" src="../lib/utils/beastTools.js" ></script>-->
+<!--<script type="text/javascript" src="../lib/utils/backToTop.js" ></script>-->
+
+<!--<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>-->
+<!--<script src="../lib/appDist/js/wechatConfig.js?v=1"></script>-->
+<!--<script type="text/javascript" src="../lib/external/fastclick.js"></script>-->
+<!--<script type="text/javascript" src="../lib/external/jquery.history.js" ></script>-->
+<!--<script type="text/javascript" src="../lib/utils/singlePage.js?v=5" ></script>-->
+<!--<script type="text/javascript" src="../lib/external/swiper-3.3.1/swiper-3.3.1.jquery.min.js" ></script>-->
+<script type="text/javascript" src="/lib/mobile/mobileDist/js/applyBind.js?v=0.00003"></script>
+<script id="areaListTpl" type='text/ractive'>
+    <select id="applyArea"
+            class="pl10 cancel-reason-input needsclick"
+            style="background-color: #fff;outline: none;border: 1px solid #ddd;height: 40px;line-height:40px">
+        <option value="0">行政区</option>
+        {{#each tableList}}
+            <option value="{{id}}">{{name}}</option>
+         {{/each}}
+    </select>
+</script>
+</body>
+</html>

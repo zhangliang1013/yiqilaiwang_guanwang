@@ -1,0 +1,168 @@
+.container {
+    padding: 10px 10px 10px;
+}
+
+.container .title {
+    padding: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.record {
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 3px;
+    display: block;
+}
+
+.record .record-head {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+}
+
+.record .record-head .add-time {
+    color: #B2B3BB;
+    font-size: 13px;
+    flex: 1;
+    -webkit-flex: 1;
+    line-height: 23px;
+    height: 23px;
+}
+
+.record .record-head .add-time .tag {
+    color: #5800EC;
+    background-color: #EFE7FE;
+    padding: 0 15px;
+    border-radius: 3px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 13px;
+    margin-right: 5px;
+    font-style: italic
+}
+
+.record .record-head .to-detail {
+    width: 30%;
+    line-height: 23px;
+    height: 23px;
+    flex-direction: row;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-align: right;
+}
+
+.record .record-head .to-detail a {
+    font-size: 13px;
+    /*padding: 3px;*/
+    color: #0071E9;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.record-head .to-detail .arrows-right {
+    display: inline-block;
+    width: 10px;
+    height: 15px;
+    position: relative;
+    top: 2px;
+}
+
+.to-detail .arrows-right img {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
+.record .record-body {}
+
+.record .record-body .record-title {
+    width: 100%;
+    color: #151515;
+    font-size: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    padding: 10px 0;
+    font-weight: 400;
+}
+
+.record .record-footer {
+    display: flex;
+    flex-direction: row;
+}
+
+.record-footer .record-plan {
+    font-size: 13px;
+    color: #9B9B9B;
+    width: 70%;
+}
+
+.record-plan span {
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 23px;
+    height: 23px;
+}
+
+.record-plan span.blue {
+    color: #3680EA;
+}
+
+.record-plan span.green {
+    color: #36AF66;
+}
+
+.record-plan span.red {
+    color: #EC7E7F
+}
+
+.record-footer .record-status {
+    flex: 1;
+    -webkit-flex: 1;
+    text-align: right;
+}
+
+.record-footer .record-status span {
+    background-color: #286CE7;
+    padding: 0px 15px;
+    font-size: 12px;
+    text-align: center;
+    color: #ffffff;
+    border-radius: 10px;
+    display: inline-block;
+    line-height: 24px;
+    height: 23px;
+}
+
+.list {
+    padding-bottom: 50px;
+}
+
+.page-fixed-footer {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.page-fixed-footer .add {
+    background-color: #276CE7;
+    color: #ffffff;
+    border-radius: 20px;
+    font-size: 14px;
+    padding: 8px 0;
+    width: 55%;
+    margin: 0 auto;
+}
+
+.add:active {
+    background-color: #185cd6;
+}

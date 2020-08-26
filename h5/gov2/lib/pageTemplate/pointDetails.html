@@ -1,0 +1,41 @@
+<link type="text/css" rel="stylesheet" href="../lib/mobile/mobileDist/styles/myClient.css">
+<script src="/lib/mobile/mobileDist/js/pointDetails.js" type="text/javascript"></script>
+<div class="pointDetails_contain page_wrapper clearfix">
+    <div class="header">
+        <div class="back pull-left back-fa his-back" role="button"><i class="fa fa-angle-left"></i></div>
+        <div class="title-text car_name" bt-data-bind="name">积分明细</div>
+    </div>
+    <div class="clients-list" style="top: 0;bottom: 0;" id="pointDetailsShow">
+        <div class="pt20 pb20 empty-contain">
+            <div class="empty-tip">加载中...</div>
+        </div>
+    </div>
+    <script id="pointDetailsTpl" type='text/ractive'>
+        {{#if pageInfo && pageInfo.dataSize > 0 }}
+        <div class="text-gray p10 pl20">
+            以下是您的积分明细，共有<span class="fwb"> {{pageInfo && pageInfo.dataSize > 0 ? pageInfo.dataSize : 0}} </span>条记录
+        </div>
+        {{/if}}
+        {{#each dataList:ind}}
+        <section class="client p10 bg-white clearfix">
+            <div class="client-info col-xs-12 pl10">
+                <div class="clearfix pb5">
+                    <div class="name col-xs-7 ">{{fromType[type]}}</div>
+                    <div class="datetime col-xs-5 text-right text-gray">{{formatDate(add_time)}}</div>
+                </div>
+                <div class="integration orange"><span class="fwb f16">{{amount > 0 ? '+'+amount:amount}}</span> 积分</div>
+            </div>
+        </section>
+        {{/each}}
+        {{^dataList}}
+            <div class="text-gray pt20 text-center f20">
+                ╮(╯▽╰)╭
+                <div class="pt5"> 暂无数据</div>
+            </div>
+        {{/dataList}}
+
+
+
+
+    </script>
+</div>

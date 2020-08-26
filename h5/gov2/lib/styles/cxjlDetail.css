@@ -1,0 +1,146 @@
+.container{}
+.details,.plan,
+.accessory{
+    background-color: #ffffff;
+}
+.details{
+    padding: 10px;
+}
+.details .add-time{
+    color: #B2B3BB;
+    font-size: 13px;
+    flex: 1;
+    -webkit-flex: 1;
+    line-height: 23px;
+    height: 23px;
+    /*font-style:italic*/
+}
+.details .add-time .tag{
+    color: #5800EC;
+    background-color: #EFE7FE;
+    padding: 0 15px;
+    border-radius: 3px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 13px;
+    margin-right: 5px;
+    font-style:italic
+}
+.details .title,.organ{
+    width: 100%;
+    color: #151515;
+    font-size: 16px;
+    padding: 10px 0;
+    font-weight: 400;
+}
+
+.details .organ-title{
+    color: #B2B3BB;
+    font-size: 14px;
+}
+.details .organ{
+    padding: 5px 0!important;
+}
+.plan{
+    padding: 10px;
+}
+
+.plan .plan-rows{
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    padding: 5px 0;
+}
+.plan .plan-rows .plan-column{
+    flex: 1;
+    -webkit-flex: 1;
+}
+.plan-column.plans{
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 23px;
+    height: 23px;
+}
+.plan-column.time{
+    line-height: 23px;
+    height: 23px;
+}
+.plan-rows .plan-column.blue{color: #3680EA;}
+.plan-rows .plan-column.green{color: #36AF66;}
+.plan-rows .plan-column.red{color: #EC7E7F}
+
+.plan .plan-desc{
+   padding: 10px 0;
+}
+.plan .plan-desc span,.accessory .plan-desc span{
+    background-color: #286CE7;
+    padding: 0px 15px;
+    font-size: 12px;
+    text-align: center;
+    color: #ffffff;
+    border-radius: 10px;
+    display: inline-block;
+    line-height: 24px;
+    height: 23px;
+    width: 90px;
+}
+.plan .plan-desc span:active,
+.accessory .plan-desc span:active{
+    background-color: #185cd6;
+}
+
+.accessory{}
+.accessory .head{}
+.accessory .body{}
+.accessory .body .folder{
+    padding: 10px;
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: row;
+    position: relative;
+    border-bottom: 1px solid #dedede;
+}
+/*.accessory .body .folder:after{*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    right: 0;*/
+/*    left: 0;*/
+/*    height: 1px;*/
+/*    content: '';*/
+/*    -webkit-transform: scaleY(.5);*/
+/*    transform: scaleY(.5);*/
+/*    background-color: #dedede;*/
+/*}*/
+.accessory .body .folder:last-child{
+    border-bottom: none!important;
+}
+.accessory .body .folder .file{
+    width: 80%;
+    display: flex;
+    display: -webkit-flex;
+}
+.file span{
+    align-items: center;
+    -webkit-align-items: center;
+    display: inline-block;
+    line-height: 32px;
+    height: 32px;
+}
+.file span.icon{
+    width: 29px;
+    margin-right: 5px;
+}
+.file span.icon img{
+    width: 100%;
+}
+.accessory .body .folder .download{
+    flex: 1;
+    -webkit-flex: 1;
+    line-height: 32px;
+    height: 32px;
+    text-align: right;
+    color: #2A6EE8;
+}
+.accessory .footer{}
+

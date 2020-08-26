@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+</head>
+<body>
+
+    <a id="bu" href="" style="display: none">打开APP</a>
+
+
+    <script type="text/javascript" src="js/link.js?v=102"></script>
+
+    <script>
+        // 判断是不是pc浏览器
+        function IsPC() {
+            var userAgentInfo = navigator.userAgent;
+            var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+            var flag = true;
+            for (var v = 0; v < Agents.length; v++) {
+                if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+        if ( IsPC() ) { // 如果是PC端就跳转到首页
+            window.location.href="/";
+        } else { // 如果不是PC段就打开应用市场
+            new Link({
+                button: document.querySelector("a#bu"),// 按钮
+                androidLink: "yiqilaiwang://www.yiqilaiwang.com/open",// 安卓的打开链接
+                androidDownloadUrl: "https://mobile.baidu.com/item?docid=26311429&source=pc",// 安卓的下载链接
+                androidYyb: true,// android 是否开启应用宝下载
+                iosLink: "https://apps.apple.com/cn/app/id1473793767",// ios 打开链接
+                ios9Link: "https://apps.apple.com/cn/app/id1473793767",// ios 的Universal Link
+                iosDownloadUrl: "https://apps.apple.com/cn/app/id1473793767", // ios 的下载链接
+                iosUniversalLinkEnabled: true, // 是否开启 Universal Link
+                iosYyb: false,// ios 是否开启应用宝下载
+                //yybDownloadUrl: "http://a.app.qq.com/o/simple.jsp?pkgname=com.luojilab.player&ckey=CK1369314671247",// 应用宝下载链接
+                yybDownloadUrl: "http://app.mi.com/details?id=com.yiqilaiwang",
+                autoLaunchApp: true, // 是否打开页面就唤起APP
+                autoRedirectToDownloadUrl: true,// 是否自动跳转到下载页面
+            })
+            document.getElementById("bu").click();
+        }
+    </script>
+
+</body>
+</html>

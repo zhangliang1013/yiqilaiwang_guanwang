@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="divport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=0.5, maximum-scale=0.5"/>
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="./lib/css/shareActivity.css?t=2020129"/>
+	<link rel="stylesheet" href="./lib/css/clear.css?t=2020120"/>
+	<link rel="shortcut icon" href="./lib/image/shareActivity/h5fxtb@2x.png" type="image/x-icon" />
+	<title>一起来往-赋能组织，活力共赢</title>
+	<script type="text/javascript" src="./lib/commonJs/common.js"></script>
+	<script type="text/javascript" src="./lib/commonJs/vue.min.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+	<script type="text/javascript" src="./lib/commonJs/layer_mobile/layer.js"></script>
+	<script>document.write('<script type="text/javascript" src="./lib/js/shareActivity.js?t=' + new Date().getTime() + '"><\/script>')</script>
+</head>
+<body>
+	<div class="shareActivity" id="index" v-cloak>
+		<!-- 顶部 -->
+		<div class="sd-title" v-show="upload">
+			<div class="sd-title-left">
+					<img src='./lib/image/shareDetails/xxtz2@2x.png' alt="" class="sd-title-left-delete" @click="upload=false">
+					<div class="sd-title-left-sign">
+							<img src="./lib/image/shareDetails/h5fxtb@2x.png" alt="" class="sd-title-left-sign-logo">
+							<div class="sd-title-left-sign-p">
+									<p>一起来往</p>
+									<p>赋能组织，活力共赢</p>
+							</div>
+					</div>
+			</div>
+			<a class="sd-title-right" href="https://www.yiqilaiwang.com/h5openapp2/app.html">下载APP</a>
+		</div>
+		<!-- 活动 -->
+		<div class="content" v-show="detail" :style="{marginTop:(upload ? '':'0')}">
+			<div class="c-banner">
+				<img :src="detail.actPoster" alt="" class="banner-bg">
+				<div class="banner-info">
+					<h3 class="banner-info-h3">{{detail.topic}}</h3>
+					<div class="banner-info-intro" v-html="detail.activityProcess"></div>
+					<div class="banner-info-remark">
+						<div class="item" v-if="detail.actStartTime">
+							<img src="./lib/image/shareActivity/sytj1.10@3x.png" alt="">
+							<span>{{detail.actStartTime}}</span>&nbsp;&nbsp;&nbsp;
+						</div>
+						<div class="item" v-if="detail.address">
+							<img src="./lib/image/shareActivity/sytj1.11@3x.png" alt="">
+							<span>{{detail.address}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="c-user">
+				<div class="c-user-avar"><img :src="detail.orgActType==1? detail.createAvatarUrl:detail.orgUrl" alt=""></div>
+				<div class="c-user-title">
+					<!-- <h4>{{detail.orgActType==1? detail.realName: detail.orgName}}</h4> -->
+					<h4>{{detail.realName}}</h4>
+					<h5>{{detail.actClass==1? '':detail.orgName}}</h5>
+				</div>
+			</div>
+			<div class="c-member">
+				<div class="c-member-left">
+					<div class="c-member-left-img">
+						<img :src="item" alt="" v-for="(item,index) in detail.memberHeadImgs" :key="index">
+					</div>
+					<div class="c-member-left-hy">活跃&nbsp;{{detail.memberCount}}</div>
+				</div>
+				<!-- <div class="c-member-submit" @click='tolayer(1)'>报名</div> -->
+				<div class="c-member-submit" @click='apply'>{{detail.isJoin==1?'已':''}}报名</div>
+			</div>
+			<div class="c-more" :style="{'padding':detail.activityProcess?'0.37rem 0.4rem 0.25rem':'0.37rem 0.95rem 0.25rem'}">
+				<div class="c-more-content" v-if="!detail.activityProcess">
+					<span style="color:#2168EB !important;font-size:34px;" v-if="">{{detail.orgActType==1?detail.realName:detail.orgName}}&nbsp;</span>
+					诚邀你参加于{{detail.actStartTime? detail.actStartTime.substring(0,11):''}}举行的“{{detail.topic?detail.topic:'活动'}}”,热烈期盼您的莅临！
+				</div>
+				<div style="position:relative;width:100%" v-if="detail.activityProcess">
+					<div ref="intro" :class="[{'ellipsis':!isShow},'c-more-content']"   v-html='detail.activityProcess'>
+					</div>
+					<div class="lg-cover" v-if='!isShow && isMore'></div>
+				</div>
+				<img v-if='!isShow && isMore' class="c-more-content-more" @click='isShow = true' v-if='detail.activityProcess' src="./lib/image/shareActivity/zkkkk23kk@3x.png" alt="">
+				<a class="c-more-App" href="https://www.yiqilaiwang.com/h5openapp2/app.html" target='_blank'>打开APP参加活动</a>
+			</div>
+					
+			<div class="c-hot">
+				<h5>热门推荐</h5>
+				<!-- <div style="width: 100px;height: 200px;background: #ff0000;">
+					<wx-open-launch-app
+						id="launch-btn"
+						@error="handleErrorFn"
+						@launch="handleLaunchFn"
+						appid="wx8737e94836340f56"
+						extinfo="yqlw://yilaiwang.com/openDetail?jumpType=0&serviceId=c36f6c94e0ef11eaa31200163e05ff66&type=&orgId=xxx&content="
+						>
+						<script type="text/wxtag-template">
+							<style>
+								.btn {
+									width: 200px;
+									height: 45px;
+								}
+							</style>
+							<div class="btn">App内查看</div>
+						</script>
+					</wx-open-launch-app>
+				</div> -->
+				<div class="c-hot-item" v-for="(item,index) in detail.hotRecommendActDtoList" @click='toApp'>
+					<img :src="item.orgUrl" alt="">
+					<div class="c-hot-item-right">
+						<h5>{{item.actName}}</h5>
+						<h6>主办：{{item.orgName}}</h6>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 报名 -->
+		<!-- <div class="layer" v-if="layer==1">
+			<div class="mask" @click="tolayer(0)"></div>
+			<div class="layer-content">
+				<div class="close" @click="tolayer(0)"><img src="./lib/image/shareActivity/close12@3x.png" alt=""></div>
+				<div class="info">
+					<h3>填写报名信息</h3>
+					<input type="text" placeholder="姓名" v-model='formdate.name'>
+					<input type="text" placeholder="手机号" v-model='formdate.telphone' maxlength="11">
+					<div class="verification-code">
+						<input type="text" placeholder="验证码" class="verification-code"  v-model='formdate.verificationCode' maxlength="6">
+						<div class="code" @click="getCode">{{isGetting?time+'s':'获取验证码'}}</div>
+					</div>
+					<div class="btn" @click='submit'>提交</div>
+				</div>
+			</div>
+		</div> -->
+		<!-- 自愿缴费 -->
+		<div class="layer" v-if="layer==1">
+			<div class="mask"></div>
+			<div class="layer-content" style="width: 472px;padding: 0 34px;">
+				<!-- <div class="close" @click="tolayer(0)"><img src="./lib/image/shareActivity/close12@3x.png" alt=""></div> -->
+				<div class="info">
+					<h3 style="font-size:38px;">自愿缴费</h3>
+					<div class="txt">
+						我自愿缴费
+						<input class="charge" type="text" placeholder="" v-model='formdate.perCapita'>
+						元
+					</div>
+					<div class="btn-box">
+						<div class="btn btn1" @click='isNext = true;submit()'>跳过</div>
+						<div class="btn" @click='toPay'>确认</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 绑定手机号 -->
+		<div class="layer" v-if="layer==3">
+			<div class="mask"></div>
+			<div class="layer-content">
+				<div class="close" @touchend="tolayer(0)"><img src="./lib/image/shareActivity/xxtz2@2x.png" alt=""></div>
+				<div class="info">
+					<h3>请输入报名信息</h3>
+					<!-- <input type="text" placeholder="姓名" v-model='formdate.name'> -->
+					<div class="verification-code">
+						<input type="text" placeholder="手机号" v-model='formdate.telphone' maxlength="11">
+						<div class="code" @touchend="getCode">{{isGetting?time+'s':'获取验证码'}}</div>
+					</div>
+					<input type="text" style="z-index:1000" placeholder="验证码" class="verification-code"  v-model='formdate.verificationCode' maxlength="6">
+					<div class="btn" @touchend='bindTel'>立即报名</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- 成功 -->
+		<div class="layer" v-if="layer==2">
+			<div class="mask" @click="tolayer(0)"></div>
+			<div class="layer-content" style="width:450px">
+				<div class="close" @click="tolayer(0)"><img src="./lib/image/shareActivity/xxtz2@2x.png" alt=""></div>
+				<div class="info">
+					<div style="position:relative">
+						<img class="info-code" src="https://www.yiqilaiwang.com/img/wx_qrcode.7b48a346.png" alt="">
+					</div>
+					<h3 style="margin:20px 0">报名成功</h3>
+					<h4>扫码关注公众号获取更多信息～</h4>
+				</div>
+			</div>
+		</div>
+		<div class="nothing" :style="{marginTop:(upload ? '':'0')}" v-show="!detail || detail.recommendStatus ==2">
+			<div>
+				<img :src="nothingImg" alt="">
+				<p v-show="detail&&detail.recommendStatus ==2">此内容已被平台下架</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

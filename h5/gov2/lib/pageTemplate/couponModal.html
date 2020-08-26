@@ -1,0 +1,304 @@
+<style>
+    .coupon-modal {
+        position: fixed;
+        background: rgba(0, 0, 0, .6);
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 999999;
+    }
+
+    .cm-mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .cm-box {
+        position: relative;
+        margin: 0 auto;
+        margin-top: 20%;
+        width: 275px;
+        height: auto;
+    }
+
+    .cm-box-panel {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .cm-logo-name {
+        position: absolute;
+        left: 58px;
+        top: 41px;
+        font-size: 12px;
+        /* font-weight: bold; */
+        color: #fff;
+        transform: scale(0.7);
+        -webkit-transform: scale(0.7);
+    }
+
+    .cm-list-contain {
+        position: absolute;
+        top: 139px;
+        left: 50%;
+        /* right: 40px; */
+        bottom: 75px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        /* border: 1px solid #000; */
+        width: 245px;
+        margin-left: -108px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 55px;
+        -webkit-border-top-left-radius: 10px;
+        -webkit-border-top-right-radius: 55px;
+    }
+
+    .cm-list-item {
+        position: relative;
+        margin-bottom: 1px;
+    }
+
+    .cm-list-item,
+    .cm-list-item>img {
+        display: block;
+        width: 215px;
+        height: auto;
+    }
+
+    .cm-list-item>img {}
+
+    .c-panel-logo-name {
+        position: absolute;
+        top: 24px;
+        font-size: 12px;
+        right: 10px;
+        color: #ee7b25;
+        transform: scale(0.5);
+        -webkit-transform: scale(0.5);
+    }
+
+    .c-msg-contain {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flexbox;
+        display: flex;
+        justify-content: center;
+        -webkit-justify-content: center;
+        align-items: center;
+        -webkit-align-items: center;
+        height: 100%;
+        width: 100%;
+        flex-direction: row;
+        -webkit-flex-direction: row;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .c-money {
+        width: 30%;
+        display: -webkit-box;
+        /* Chrome 4+, Safari 3.1, iOS Safari 3.2+ */
+        display: -moz-box;
+        /* Firefox 17- */
+        display: -webkit-flex;
+        /* Chrome 21+, Safari 6.1+, iOS Safari 7+, Opera 15/16 */
+        display: -moz-flex;
+        /* Firefox 18+ */
+        display: -ms-flexbox;
+        /* IE 10 */
+        display: flex;
+        /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4+ */
+        justify-content: flex-start;
+        -webkit-justify-content: flex-start;
+        align-items: flex-end;
+        -webkit-align-items: flex-end;
+        flex-direction: row;
+        -webkit-flex-direction: row;
+        color: #fff;
+        padding-left: 2px;
+    }
+
+    .c-money-label {
+        font-size: 22px;
+        padding-bottom: 1px;
+    }
+
+    .c-money-num {
+        font-size: 28px;
+    }
+
+    .c-msg-contain .c-text {
+        padding-left: 5px;
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        -webkit-flex: 1;
+        flex: 1;
+    }
+
+    .c-tl {
+        font-size: 15px;
+        font-weight: bold;
+        color: rgb(148, 28, 31);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 140px;
+        margin-bottom: 2px;
+    }
+
+    .c-sub-tl {
+        position: relative;
+        background: url(../lib/assets/images/coupon/sub-bg.png) no-repeat;
+        font-size: 12px;
+        background-position: center;
+        /* font-weight: bold; */
+        background-size: cover;
+        color: #fff;
+        /* position: absolute; */
+        top: 0;
+        padding: 1px 3px;
+        display: inline-block;
+        border-radius: 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 115px;
+    }
+
+    .c-desc {
+        font-size: 12px;
+        font-weight: lighter;
+        color: rgb(148, 28, 31);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 140px;
+    }
+
+    .cm-btn {
+        position: absolute;
+        bottom: 12px;
+        width: 90px;
+        margin-left: -45px;
+        left: 50%;
+        cursor: pointer;
+        animation: mymove 1s infinite;
+        -webkit-animation: mymove 1s infinite;
+        /* Safari 和 Chrome */
+    }
+
+    @keyframes mymove {
+        0% {
+            transform: scale(0.9);
+            -webkit-transform: scale(0.9);
+        }
+
+        50% {
+            transform: scale(1.05);
+            -webkit-transform: scale(1.05);
+        }
+
+        100% {
+            transform: scale(0.9);
+            -webkit-transform: scale(0.9);
+        }
+    }
+
+    @-webkit-keyframes mymove {
+        0% {
+            transform: scale(0.9);
+            -webkit-transform: scale(0.9);
+        }
+
+        50% {
+            transform: scale(1.05);
+            -webkit-transform: scale(1.05);
+        }
+
+        100% {
+            transform: scale(0.9);
+            -webkit-transform: scale(0.9);
+        }
+    }
+</style>
+
+<div class="coupon-modal" id="couponModal">
+    <div class="cm-mask"></div>
+    <div class="cm-wrap">
+        <div class="cm-box">
+            <img class="cm-box-panel" src="../lib/assets/images/coupon/panel.png" alt="" />
+            <div class="cm-logo-name">喜威</div>
+            <div class="cm-list-contain">
+
+            </div>
+            <img class="cm-btn" src="../lib/assets/images/coupon/btn.png" alt="" />
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var list = [
+            {
+                "value": "5.0", // 面值
+                "expiry_time": 1900800, // 过期时间（秒）
+                "name": "优惠券名称",
+                descript: '优惠券描述'
+            }
+        ];
+
+        window.couponModalObj = {
+            show: function (list) {
+                if (null === list || 'undefined' == typeof list) list = [];
+                var html = '';
+                for (var i = 0; i < list.length; i++) {
+                    var item = list[i];
+                    var expiryDay = item.expiry_time > 0 ? parseFloat(item.expiry_time / (24 * 3600)) : 0;
+                    html += '<div class="cm-list-item">' +
+                        '<img src="../lib/assets/images/coupon/c-panel.png" alt="" />' +
+                        '<span class="c-panel-logo-name">' + window.TITLE + '</span>' +
+                        '<div class="c-msg-contain">' +
+                        '<div class="c-money">' +
+                        '<span class="c-money-label">￥</span>' +
+                        '<span class="c-money-num">' + (parseInt(item.value) || 0) + '</span>' +
+                        '</div>' +
+                        '<div class="c-text">' +
+                        '<div class="c-tl">' + item.name + '</div>' +
+                        '<div class="c-sub-tl">' +
+                        (item.descript ? item.descript : '专享优惠') +
+                        '</div>' +
+                        '<div class="c-desc">自领取日起' + expiryDay + '天内有效</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+                }
+                $('.cm-logo-name').text(window.TITLE);
+                $('#couponModal .cm-list-contain').html(html);
+                $('#couponModal').fadeIn(300);
+            },
+            hide: function () {
+                $('#couponModal').fadeOut(150);
+            }
+        };
+        $('#couponModal .cm-mask').unbind('click');
+        $('#couponModal .cm-mask').on('click', function (e) {
+            window.couponModalObj.hide();
+        });
+
+        $('#couponModal .cm-btn').unbind('click');
+        $('#couponModal .cm-btn').on('click', function (e) {
+            window.location.href = "./personalCenter.html?page=myCoupon";
+        });
+    });
+</script>
